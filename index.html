@@ -278,7 +278,7 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
   <nav class="drawer-nav">
     <button type="button" data-go="inicio"><span data-t="menuInicio"></span></button>
     <button type="button" data-go="config"><span data-t="menuConfig"></span></button>
-    <button type="button"><span data-t="menuCodigo"></span>
+    <button type="button" id="codigoFonte" data-href="https://github.com/RussoViller/RussoViller-WebPage"><span data-t="menuCodigo"></span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
     </button>
   </nav>
@@ -1031,6 +1031,10 @@ menuBtn.addEventListener("click", () => { menuIdioma(false); menuLateral(true); 
 document.getElementById("menuClose").addEventListener("click", () => menuLateral(false));
 scrim.addEventListener("click", () => menuLateral(false));
 drawer.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => menuLateral(false)));
+document.getElementById("codigoFonte").addEventListener("click", e => {
+  window.open(e.currentTarget.dataset.href, "_blank", "noopener");
+  menuLateral(false);
+});
 
 /* ============ ZALITH LAUNCHER 2 (dados direto do GitHub) ============ */
 const ZL_API = "https://api.github.com/repos/ZalithLauncher/ZalithLauncher2/releases/latest";
