@@ -1675,17 +1675,20 @@ async function visitasBuscar(url){
     return n;
   } finally { clearTimeout(t); }
 }
+const VIS_MIN = 0, VIS_MAX = 10000000;
+const visLimite = n => Math.min(VIS_MAX, Math.max(VIS_MIN, Math.floor(Number(n)) || 0));
 async function visitasCarregar(){
-  let contar = true;
-  try { contar = !sessionStorage.getItem("visitou"); } catch (e) {}
+  /* sobe a cada entrada e a cada atualização da página */
   for (const a of VIS_APIS){
-    try{
-      visitas = await visitasBuscar(contar ? a.up : a.get);
-      if (contar) { try { sessionStorage.setItem("visitou", "1"); } catch (e) {} }
-      break;
-    }catch(e){}
+    try{ visitas = visLimite(await visitasBuscar(a.up)); break; }catch(e){}
   }
-  if (visitas === null) visFalhou = true;
+  if (visitas === null){
+    /* sem resposta dos contadores online: continua de onde parou, neste aparelho */
+    let ult = 0;
+    try { ult = parseInt(localStorage.getItem("visitas"), 10) || 0; } catch (e) {}
+    visitas = visLimite(ult + 1);
+  }
+  try { localStorage.setItem("visitas", visitas); } catch (e) {}
   visitasRender();
 }
 
