@@ -1665,12 +1665,37 @@ function visitasRender(){
   const n = visitas !== null ? visitas.toLocaleString(HTMLLANG[lang]) : (visFalhou ? "—" : "…");
   el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>' + n + '</b><span>' + esc(T[lang].visitasLabel) + '</span>';
 }
+/* >>> Firebase (Realtime Database): cole aqui a URL do seu banco. Vazio = usa Supabase (se preenchido) ou Abacus. <<< */
+const FIREBASE_URL = "";
+const usaFb = !!FIREBASE_URL;
+/* >>> Supabase (opcional): URL do projeto e chave "publishable" (ou "anon"). <<< */
+const SUPABASE_URL = "https://knecfrlrnosjehvrhqot.supabase.co";
+const SUPABASE_KEY = "sb_publishable_mojeFGK6e5Gk3RjYM-iVbg_6K7dkGsg";
+const usaSb = !!(SUPABASE_URL && SUPABASE_KEY);
 async function visitasBuscar(){
-  const c = new AbortController(), t = setTimeout(() => c.abort(), 4000);
+  const c = new AbortController(), t = setTimeout(() => c.abort(), 5000);
+  const o = { signal: c.signal, cache: "no-store" };
   try{
-    const r = await fetch(VIS_URL, { signal: c.signal, cache: "no-store" });
-    if (!r.ok) throw new Error(r.status);
-    const n = Number((await r.json()).value);
+    let j;
+    if (usaFb){
+      const u = FIREBASE_URL.replace(/\/+$/, "") + "/visitas.json";
+      const r = await fetch(u, { ...o, method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ".sv": { increment: 1 } }) });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      j = await r.json();
+      if (typeof j !== "number"){
+        const g = await fetch(u, o);
+        if (!g.ok) throw new Error("HTTP " + g.status);
+        j = await g.json();
+      }
+    } else {
+      const r = usaSb
+        ? await fetch(SUPABASE_URL.replace(/\/+$/, "") + "/rest/v1/rpc/hit_visitas", { ...o, method: "POST", headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json" }, body: "{}" })
+        : await fetch(VIS_URL, o);
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      j = await r.json();
+    }
+    if (Array.isArray(j)) j = j[0];
+    const n = Number(j !== null && typeof j === "object" ? (j.value != null ? j.value : j.hit_visitas) : j);
     if (!isFinite(n)) throw new Error("formato");
     return visLimite(n);
   } finally { clearTimeout(t); }
@@ -1681,7 +1706,7 @@ async function visitasCarregar(){
       visitas = await visitasBuscar();
       try { localStorage.setItem("visitasGlobal", visitas); } catch (e) {}
       break;
-    }catch(e){ await new Promise(r => setTimeout(r, 1200)); }
+    }catch(e){ console.warn("Contador de visitas:", e); await new Promise(r => setTimeout(r, 1200)); }
   }
   visFalhou = visitas === null;
   visitasRender();
