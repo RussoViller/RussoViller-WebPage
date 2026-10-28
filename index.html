@@ -237,6 +237,9 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
 .about p{color:#f3dede;font-size:1rem;line-height:1.65;max-width:56ch;margin:0 auto}
 .about p b{font-weight:800;background:linear-gradient(100deg,#ff6a55,#ffb36b);-webkit-background-clip:text;background-clip:text;color:transparent}
 
+.zl-ficon.mgf{font:700 .9rem var(--display);color:#ff7a6a}
+.zl-menu small.pill{display:inline-block;margin-left:0;color:#ff9585}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -383,6 +386,10 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
         <div class="icon zlicon" id="icZl2" aria-hidden="true">ZL</div>
         <div class="info"><h3>ZALITH LAUNCHER 2</h3><p data-t="zl2Desc"></p></div>
       </button>
+      <button class="card" data-go="mg">
+        <div class="icon zlicon" id="icMg" aria-hidden="true">MG</div>
+        <div class="info"><h3>MOBILEGLUES</h3><p data-t="mgDesc"></p></div>
+      </button>
     </div>
     <button class="back" data-go="downloads" data-t="voltar"></button>
   </section>
@@ -392,6 +399,13 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
     <p class="sub" data-t="zl2Sub"></p>
     <div class="zl-card" id="zlCard"></div>
     <a class="btn" href="https://www.zalithlauncher.cn/download" target="_blank" rel="noopener" data-t="zlOfficial"></a>
+    <button class="back" data-go="zalith" data-t="voltar"></button>
+  </section>
+  <section id="mg" class="view">
+    <h2>MOBILEGLUES</h2>
+    <p class="sub" data-t="mgSub"></p>
+    <div class="zl-card" id="mgCard"></div>
+    <a class="btn" href="https://github.com/MobileGL-Dev/MobileGlues-release/releases" target="_blank" rel="noopener" data-t="mgOfficial"></a>
     <button class="back" data-go="zalith" data-t="voltar"></button>
   </section>
   <section id="setas" class="view">
@@ -535,7 +549,7 @@ const T = {
     yt:"YouTube", ytDesc:"Meu canal no YouTube.",
     avatares:"Fotos de perfil via",
     menuInicio:"INÍCIO", menuConfig:"CONFIGURAÇÕES", menuCodigo:"CÓDIGO FONTE",
-    zalithSub:"Escolha uma versão do launcher.", zl2Desc:"Baixar a versão mais recente direto do GitHub.", zl2Sub:"Sempre a última versão oficial, direto do GitHub.",
+    zalithSub:"Launchers e o MobileGlues para instalar.", zl2Desc:"Baixar a versão mais recente direto do GitHub.", zl2Sub:"Sempre a última versão oficial, direto do GitHub.",
     zlArch:"ARQUITETURA DO DISPOSITIVO", zlSource:"FONTE DE INSTALAÇÃO", zlGithub:"GitHub Oficial",
     zlFiles:"Lista de arquivos baixados", zlGet:"Baixe agora", zlPub:"Publicado em", zlOfficial:"SITE OFICIAL DO ZALITH LAUNCHER",
     zlLoading:"Buscando a versão mais recente no GitHub…", zlError:"Não foi possível carregar os dados do GitHub agora.", zlRetry:"TENTAR DE NOVO", zlNone:"Nenhum arquivo disponível para esta arquitetura.", zlDl:"DOWNLOADS",
@@ -563,7 +577,14 @@ const T = {
     fadeTest:"TESTAR EFEITO",
     fadeReset:"Restaurar padrão (1)",
     aboutTitle:"Esse site é do RussoViller!",
-    aboutText:"Olá, eu me chamo <b>RussoViller</b> e esse é o meu Website para ajudar e facilitar a sua vida na hora de instalar o Launcher que eu uso ou alguma outra coisa. Fique à vontade, explore e baixe o que quiser!"
+    aboutText:"Olá, eu me chamo <b>RussoViller</b> e esse é o meu Website para ajudar e facilitar a sua vida na hora de instalar o Launcher que eu uso ou alguma outra coisa. Fique à vontade, explore e baixe o que quiser!",
+    mgDesc:"Baixe a versão mais recente ou escolha outra versão.",
+    mgSub:"Sempre atualizado automaticamente com o GitHub oficial. Escolha a versão e baixe.",
+    mgVersion:"VERSÃO DO MOBILEGLUES",
+    mgLatest:"Mais recente",
+    mgPre:"Pré-lançamento",
+    mgOfficial:"SITE OFICIAL DO MOBILEGLUES",
+    mgLoading:"Buscando as versões no GitHub…"
   },
   en: {
     idioma:"Language", inicio:"Home", tagline:"My downloads and links, all in one place.",
@@ -586,7 +607,7 @@ const T = {
     yt:"YouTube", ytDesc:"My YouTube channel.",
     avatares:"Profile pictures via",
     menuInicio:"HOME", menuConfig:"SETTINGS", menuCodigo:"SOURCE CODE",
-    zalithSub:"Choose a launcher version.", zl2Desc:"Download the latest version straight from GitHub.", zl2Sub:"Always the latest official release, straight from GitHub.",
+    zalithSub:"Launchers and MobileGlues to install.", zl2Desc:"Download the latest version straight from GitHub.", zl2Sub:"Always the latest official release, straight from GitHub.",
     zlArch:"DEVICE ARCHITECTURE", zlSource:"INSTALL SOURCE", zlGithub:"Official GitHub",
     zlFiles:"Downloadable files", zlGet:"Download now", zlPub:"Published on", zlOfficial:"ZALITH LAUNCHER OFFICIAL SITE",
     zlLoading:"Fetching the latest version from GitHub…", zlError:"Couldn’t load the data from GitHub right now.", zlRetry:"TRY AGAIN", zlNone:"No files available for this architecture.", zlDl:"DOWNLOADS",
@@ -614,7 +635,14 @@ const T = {
     fadeTest:"TEST EFFECT",
     fadeReset:"Restore default (1)",
     aboutTitle:"This site belongs to RussoViller!",
-    aboutText:"Hi, my name is <b>RussoViller</b> and this is my website, made to help and make your life easier when installing the Launcher I use, or anything else. Make yourself at home, explore and download whatever you like!"
+    aboutText:"Hi, my name is <b>RussoViller</b> and this is my website, made to help and make your life easier when installing the Launcher I use, or anything else. Make yourself at home, explore and download whatever you like!",
+    mgDesc:"Download the latest version or pick another one.",
+    mgSub:"Always updated automatically from the official GitHub. Pick a version and download.",
+    mgVersion:"MOBILEGLUES VERSION",
+    mgLatest:"Latest",
+    mgPre:"Pre-release",
+    mgOfficial:"MOBILEGLUES OFFICIAL SITE",
+    mgLoading:"Fetching the versions from GitHub…"
   },
   es: {
     idioma:"Idioma", inicio:"Inicio", tagline:"Mis descargas y enlaces, en un solo lugar.",
@@ -637,7 +665,7 @@ const T = {
     yt:"YouTube", ytDesc:"Mi canal de YouTube.",
     avatares:"Fotos de perfil vía",
     menuInicio:"INICIO", menuConfig:"CONFIGURACIÓN", menuCodigo:"CÓDIGO FUENTE",
-    zalithSub:"Elige una versión del launcher.", zl2Desc:"Descargar la versión más reciente directo desde GitHub.", zl2Sub:"Siempre la última versión oficial, directo desde GitHub.",
+    zalithSub:"Launchers y MobileGlues para instalar.", zl2Desc:"Descargar la versión más reciente directo desde GitHub.", zl2Sub:"Siempre la última versión oficial, directo desde GitHub.",
     zlArch:"ARQUITECTURA DEL DISPOSITIVO", zlSource:"FUENTE DE INSTALACIÓN", zlGithub:"GitHub Oficial",
     zlFiles:"Lista de archivos descargables", zlGet:"Descargar ahora", zlPub:"Publicado el", zlOfficial:"SITIO OFICIAL DE ZALITH LAUNCHER",
     zlLoading:"Buscando la última versión en GitHub…", zlError:"No se pudieron cargar los datos de GitHub ahora.", zlRetry:"INTENTAR DE NUEVO", zlNone:"No hay archivos disponibles para esta arquitectura.", zlDl:"DESCARGAS",
@@ -665,7 +693,14 @@ const T = {
     fadeTest:"PROBAR EFECTO",
     fadeReset:"Restaurar predeterminado (1)",
     aboutTitle:"¡Este sitio es de RussoViller!",
-    aboutText:"Hola, me llamo <b>RussoViller</b> y este es mi sitio web para ayudarte y facilitarte la vida a la hora de instalar el Launcher que uso o cualquier otra cosa. ¡Siéntete como en casa, explora y descarga lo que quieras!"
+    aboutText:"Hola, me llamo <b>RussoViller</b> y este es mi sitio web para ayudarte y facilitarte la vida a la hora de instalar el Launcher que uso o cualquier otra cosa. ¡Siéntete como en casa, explora y descarga lo que quieras!",
+    mgDesc:"Descarga la versión más reciente o elige otra.",
+    mgSub:"Siempre actualizado automáticamente desde el GitHub oficial. Elige la versión y descarga.",
+    mgVersion:"VERSIÓN DE MOBILEGLUES",
+    mgLatest:"Más reciente",
+    mgPre:"Versión preliminar",
+    mgOfficial:"SITIO OFICIAL DE MOBILEGLUES",
+    mgLoading:"Buscando las versiones en GitHub…"
   },
   id: {
     idioma:"Bahasa", inicio:"Beranda", tagline:"Unduhan dan tautan saya, semua di satu tempat.",
@@ -688,7 +723,7 @@ const T = {
     yt:"YouTube", ytDesc:"Kanal YouTube saya.",
     avatares:"Foto profil melalui",
     menuInicio:"BERANDA", menuConfig:"PENGATURAN", menuCodigo:"KODE SUMBER",
-    zalithSub:"Pilih versi launcher.", zl2Desc:"Unduh versi terbaru langsung dari GitHub.", zl2Sub:"Selalu rilis resmi terbaru, langsung dari GitHub.",
+    zalithSub:"Launcher dan MobileGlues untuk dipasang.", zl2Desc:"Unduh versi terbaru langsung dari GitHub.", zl2Sub:"Selalu rilis resmi terbaru, langsung dari GitHub.",
     zlArch:"ARSITEKTUR PERANGKAT", zlSource:"SUMBER INSTALASI", zlGithub:"GitHub Resmi",
     zlFiles:"File yang dapat diunduh", zlGet:"Unduh sekarang", zlPub:"Dipublikasikan pada", zlOfficial:"SITUS RESMI ZALITH LAUNCHER",
     zlLoading:"Mengambil versi terbaru dari GitHub…", zlError:"Tidak dapat memuat data dari GitHub saat ini.", zlRetry:"COBA LAGI", zlNone:"Tidak ada file untuk arsitektur ini.", zlDl:"UNDUHAN",
@@ -716,7 +751,14 @@ const T = {
     fadeTest:"COBA EFEK",
     fadeReset:"Kembalikan bawaan (1)",
     aboutTitle:"Situs ini milik RussoViller!",
-    aboutText:"Halo, namaku <b>RussoViller</b> dan ini adalah situs web milikku untuk membantu dan mempermudah kamu saat memasang Launcher yang aku pakai atau hal lainnya. Silakan jelajahi dan unduh apa pun yang kamu suka!"
+    aboutText:"Halo, namaku <b>RussoViller</b> dan ini adalah situs web milikku untuk membantu dan mempermudah kamu saat memasang Launcher yang aku pakai atau hal lainnya. Silakan jelajahi dan unduh apa pun yang kamu suka!",
+    mgDesc:"Unduh versi terbaru atau pilih versi lain.",
+    mgSub:"Selalu diperbarui otomatis dari GitHub resmi. Pilih versi lalu unduh.",
+    mgVersion:"VERSI MOBILEGLUES",
+    mgLatest:"Terbaru",
+    mgPre:"Pra-rilis",
+    mgOfficial:"SITUS RESMI MOBILEGLUES",
+    mgLoading:"Mengambil daftar versi dari GitHub…"
   },
   ru: {
     idioma:"Язык", inicio:"Главная", tagline:"Мои загрузки и ссылки в одном месте.",
@@ -739,7 +781,7 @@ const T = {
     yt:"YouTube", ytDesc:"Мой канал на YouTube.",
     avatares:"Фото профиля через",
     menuInicio:"ГЛАВНАЯ", menuConfig:"НАСТРОЙКИ", menuCodigo:"ИСХОДНЫЙ КОД",
-    zalithSub:"Выберите версию лаунчера.", zl2Desc:"Скачайте последнюю версию прямо с GitHub.", zl2Sub:"Всегда последний официальный релиз, прямо с GitHub.",
+    zalithSub:"Лаунчеры и MobileGlues для установки.", zl2Desc:"Скачайте последнюю версию прямо с GitHub.", zl2Sub:"Всегда последний официальный релиз, прямо с GitHub.",
     zlArch:"АРХИТЕКТУРА УСТРОЙСТВА", zlSource:"ИСТОЧНИК УСТАНОВКИ", zlGithub:"Официальный GitHub",
     zlFiles:"Файлы для загрузки", zlGet:"Скачать", zlPub:"Опубликовано", zlOfficial:"ОФИЦИАЛЬНЫЙ САЙТ ZALITH LAUNCHER",
     zlLoading:"Получаем последнюю версию с GitHub…", zlError:"Сейчас не удалось загрузить данные с GitHub.", zlRetry:"ПОВТОРИТЬ", zlNone:"Для этой архитектуры нет файлов.", zlDl:"ЗАГРУЗОК",
@@ -767,7 +809,14 @@ const T = {
     fadeTest:"ПРОВЕРИТЬ ЭФФЕКТ",
     fadeReset:"Сбросить (1)",
     aboutTitle:"Этот сайт принадлежит RussoViller!",
-    aboutText:"Привет, меня зовут <b>RussoViller</b>, и это мой сайт, который помогает и упрощает установку лаунчера, которым я пользуюсь, и не только. Заглядывайте, изучайте и скачивайте что угодно!"
+    aboutText:"Привет, меня зовут <b>RussoViller</b>, и это мой сайт, который помогает и упрощает установку лаунчера, которым я пользуюсь, и не только. Заглядывайте, изучайте и скачивайте что угодно!",
+    mgDesc:"Скачайте последнюю версию или выберите другую.",
+    mgSub:"Всегда обновляется автоматически с официального GitHub. Выберите версию и скачайте.",
+    mgVersion:"ВЕРСИЯ MOBILEGLUES",
+    mgLatest:"Последняя",
+    mgPre:"Пре-релиз",
+    mgOfficial:"ОФИЦИАЛЬНЫЙ САЙТ MOBILEGLUES",
+    mgLoading:"Получаем список версий с GitHub…"
   }
 };
 
@@ -874,6 +923,7 @@ function traduzir(){
   stRender();
   wlRender();
   hdRender();
+  mgRender();
 }
 function menuIdioma(abrir){
   langMenu.hidden = !abrir;
@@ -901,6 +951,7 @@ function ir(id, rapido){
   if (id === "setas") stCarregar();
   if (id === "wall") wlCarregar();
   if (id === "hud") hdCarregar();
+  if (id === "mg") mgCarregar();
   const mostrar = () => {
     views.forEach(v => v.classList.remove("saindo"));
     views.forEach(v => v.classList.toggle("active", v === novo));
@@ -1410,6 +1461,100 @@ document.getElementById("hdCard").addEventListener("click", e => {
   if (e.target.closest('[data-act="retry"]')) hdCarregar(true);
 });
 
+
+/* ============ MOBILEGLUES (versões direto do GitHub oficial, sempre atualizadas) ============ */
+const MG_API = "https://api.github.com/repos/MobileGL-Dev/MobileGlues-release/releases?per_page=100";
+const MG_LOGO = "https://avatars.githubusercontent.com/u/203398288?s=128";
+IC.tag = '<svg class="ic" viewBox="0 0 24 24"><path d="M3 12.5V4h8.5L21 13.5 13.5 21z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg>';
+const mg = { rels: null, carregando: false, t: 0, sel: null, open: false, manual: false, foto: "" };
+
+function mgIco(){ return mg.foto ? '<img src="' + esc(mg.foto) + '" alt="">' : "MG"; }
+function mgUltima(){ return mg.rels.find(r => !r.pre) || mg.rels[0]; }
+
+function mgRender(){
+  const el = document.getElementById("mgCard");
+  if (!el) return;
+  const t = T[lang];
+  if (!mg.rels){
+    el.innerHTML = mg.carregando
+      ? '<p class="zl-msg">' + esc(t.mgLoading) + '</p>'
+      : '<p class="zl-msg">' + esc(t.zlError) + '</p><button type="button" class="btn" data-act="retry">' + esc(t.zlRetry) + '</button>';
+    return;
+  }
+  const ultima = mgUltima();
+  /* sem escolha manual, sempre mostra a versão estável mais recente */
+  if (!mg.manual || !mg.rels.some(r => r.tag === mg.sel)) mg.sel = ultima.tag;
+  const r = mg.rels.find(x => x.tag === mg.sel);
+  const fl = HTMLLANG[lang];
+  const data = r.date ? new Date(r.date).toLocaleDateString(fl, { day: "2-digit", month: "2-digit", year: "numeric" }) : "";
+  const selo = x => x.tag === ultima.tag ? t.mgLatest : (x.pre ? t.mgPre : "");
+  const menu = mg.rels.map(x => '<button type="button" role="option" data-act="pick" data-id="' + esc(x.tag) + '" aria-selected="' + (x.tag === mg.sel) + '"><span><b>' + esc(x.nome) + '</b>' + (selo(x) ? '<small class="pill">' + esc(selo(x)) + '</small>' : '') + '</span>' + (x.tag === mg.sel ? IC.ok : '') + '</button>').join("");
+  const arquivos = r.files.map(f => {
+    const mb = (f.size / 1048576).toLocaleString(fl, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return '<div class="zl-file"><div class="zl-ftop"><div class="zl-ficon mgf' + (mg.foto ? ' tem-foto' : '') + '">' + mgIco() + '</div><div><div class="zl-fname">' + esc(f.name) + '</div><div class="zl-meta"><span>' + mb + ' MB</span><span>' + Number(f.dl || 0).toLocaleString(fl) + ' ' + esc(t.zlDl) + '</span></div></div></div>'
+      + '<a class="zl-get" href="' + esc(f.url) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
+  }).join("") || '<p class="zl-msg">' + esc(t.zlNone) + '</p>';
+  el.innerHTML =
+    '<div class="zl-ver">' + esc(r.nome) + '</div>' +
+    '<div class="zl-date">' + esc(t.zlPub) + ' ' + esc(data) + (selo(r) ? ' · ' + esc(selo(r)) : '') + '</div>' +
+    '<span class="zl-lab">' + esc(t.mgVersion) + '</span>' +
+    '<div class="zl-dd"><button type="button" data-act="open" aria-expanded="' + mg.open + '">' + IC.tag + '<span>' + esc(r.nome) + '</span><i class="chev"></i></button>' +
+      (mg.open ? '<div class="zl-menu" role="listbox">' + menu + '</div>' : '') + '</div>' +
+    '<div class="zl-ftitle">' + IC.down + '<span>' + esc(t.zlFiles) + '</span></div>' + arquivos;
+  menuRolar(el);
+}
+
+async function mgCarregar(forcar){
+  if (mg.carregando) return;
+  if (mg.rels && !forcar && Date.now() - mg.t < 300000) return;
+  mg.carregando = true; mgRender();
+  try{
+    const r = await fetch(MG_API, { headers: { Accept: "application/vnd.github+json" } });
+    if (!r.ok) throw new Error(r.status);
+    const lista = (await r.json()).filter(x => !x.draft);
+    const rels = lista.map(x => {
+      let as = x.assets || [];
+      const apks = as.filter(a => /\.apk$/i.test(a.name));
+      if (apks.length) as = apks;
+      const tag = String(x.tag_name || "");
+      return {
+        tag: tag,
+        nome: "MobileGlues " + tag.replace(/^v/i, "").replace(/\.RC(\d+)/i, " RC $1"),
+        date: x.published_at,
+        pre: !!x.prerelease,
+        files: as.map(a => ({ name: a.name, size: a.size, dl: a.download_count, url: a.browser_download_url }))
+      };
+    });
+    if (!rels.length) throw new Error("vazio");
+    mg.rels = rels; mg.t = Date.now();
+  }catch(e){}
+  mg.carregando = false; mgRender();
+}
+document.getElementById("mgCard").addEventListener("click", e => {
+  const b = e.target.closest("[data-act]");
+  if (!b) return;
+  const a = b.dataset.act;
+  if (a === "retry"){ mgCarregar(true); return; }
+  if (a === "open") mg.open = !mg.open;
+  else if (a === "pick"){
+    mg.sel = b.dataset.id; mg.open = false;
+    mg.manual = !!mg.rels && b.dataset.id !== mgUltima().tag;
+  }
+  mgRender();
+});
+document.addEventListener("click", e => {
+  if (mg.open && !clicouNoMenu(e, "mgCard")){ mg.open = false; mgRender(); }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && mg.open){ mg.open = false; mgRender(); } });
+
+/* logo do MobileGlues no botão e nos arquivos (ou um arquivo seu: mobileglues.png) */
+carregarImg([MG_LOGO].concat(EXTS.map(e => "mobileglues." + e))).then(im => {
+  if (!im) return;
+  mg.foto = im.src;
+  const ic = document.getElementById("icMg");
+  ic.classList.add("tem-foto"); ic.innerHTML = mgIco();
+  mgRender();
+});
 
 /* ============ CONFIGURAÇÕES: força do Fade in (padrão 1, máximo 5) ============ */
 const FADE_PADRAO = 1, FADE_MAX = 5;
