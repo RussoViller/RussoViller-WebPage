@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0506">
+<title>RussoViller WebPage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0506; --line:rgba(255,255,255,.1); --glass:rgba(255,255,255,.05); --glass2:rgba(255,255,255,.09);
+  --text:#fbefef; --muted:#c3a4a7; --red:#ff3b3b;
+  --grad:linear-gradient(120deg,#d90f2b 0%,#ff3b3b 52%,#ff7a2f 100%);
+  --display:"Unbounded","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg)}
+body{color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid #ff7a6a;outline-offset:3px}
+
+/* Fundo: duas luzes que derivam devagar */
+body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);pointer-events:none}
+body::before{width:62vmax;height:62vmax;left:-22vmax;top:-26vmax;background:#d90f2b;opacity:.38;animation:drift 22s ease-in-out infinite alternate}
+body::after{width:50vmax;height:50vmax;right:-18vmax;bottom:-22vmax;background:#ff6a1a;opacity:.2;animation:drift 28s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+header{
+  position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 20px;background:rgba(10,5,6,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.lang{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.88rem}
+.lang select{font:inherit;color:var(--text);background:var(--glass2);border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
+.lang select option{background:#1a0b0d;color:#fff}
+.home{
+  border:0;background:var(--grad);color:#fff;font:600 .85rem var(--display);
+  padding:10px 22px;border-radius:999px;cursor:pointer;box-shadow:0 6px 22px rgba(255,50,50,.35);transition:transform .15s,box-shadow .2s;
+}
+.home:hover{box-shadow:0 8px 28px rgba(255,70,50,.55)}
+.home:active{transform:scale(.96)}
+
+main{max-width:760px;margin:0 auto;padding:0 20px 72px}
+.view{display:none}
+.view.active{display:block}
+
+/* Início */
+.hero{text-align:center;padding:64px 0 24px}
+.logo{position:relative;width:112px;height:112px;margin:0 auto 28px;border-radius:50%;display:grid;place-items:center}
+.logo::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(#d90f2b,#ff7a2f,#ff3b3b,#4a0010,#d90f2b);animation:spin 7s linear infinite;filter:drop-shadow(0 0 26px rgba(255,50,50,.65))}
+.logo span{position:relative;width:92%;height:92%;border-radius:50%;background:#0d0607;display:grid;place-items:center;font:800 2.8rem/1 var(--display);color:#ff5a3c;text-shadow:0 0 22px rgba(255,70,50,.7)}
+.logo span{overflow:hidden}
+.logo span img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}
+.logo span img.on{opacity:1}
+.logo.tem-foto span{color:transparent;text-shadow:none}
+.hero h1{font:800 clamp(1.9rem,7.5vw,3.2rem)/1.08 var(--display);letter-spacing:-.02em;
+  background:linear-gradient(100deg,#fff 10%,#ffc4ba 55%,#ff6a55);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:40ch;margin:18px auto 0;font-size:1.05rem}
+.cta{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:36px}
+.btn{
+  width:min(320px,100%);padding:17px 28px;border-radius:999px;border:1px solid transparent;
+  font:600 .9rem var(--display);letter-spacing:.02em;color:#fff;cursor:pointer;
+  background:var(--grad);box-shadow:0 10px 30px rgba(255,50,50,.35);transition:transform .15s,box-shadow .2s,border-color .2s,background .2s;
+}
+.btn:hover{box-shadow:0 12px 38px rgba(255,80,50,.55)}
+.btn:active{transform:scale(.97)}
+.btn.glass{background:var(--glass);border-color:var(--line);box-shadow:none;backdrop-filter:blur(10px)}
+.btn.glass:hover{background:var(--glass2);border-color:var(--red);box-shadow:0 0 28px rgba(255,59,59,.25)}
+
+#inicio.active .hero>*{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+#inicio.active .hero>:nth-child(2){animation-delay:.08s}
+#inicio.active .hero>:nth-child(3){animation-delay:.16s}
+#inicio.active .hero>:nth-child(4){animation-delay:.26s}
+
+/* Páginas internas */
+h2{font:800 1.6rem/1.2 var(--display);margin:40px 0 8px;letter-spacing:-.01em;
+  background:linear-gradient(100deg,#fff,#ff8a7a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin-bottom:26px}
+.back{margin-top:28px;border:1px solid var(--line);background:var(--glass);color:var(--muted);font:inherit;font-size:.9rem;padding:8px 18px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
+.back:hover{color:var(--text);border-color:var(--red)}
+.list{display:grid;gap:12px}
+.card{
+  display:flex;align-items:center;gap:16px;width:100%;text-align:left;padding:16px 18px;
+  background:var(--glass);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(10px);
+  font:inherit;color:inherit;cursor:pointer;transition:transform .18s,border-color .2s,background .2s,box-shadow .2s;
+}
+.card:hover{transform:translateY(-2px);border-color:rgba(255,59,59,.7);background:var(--glass2);box-shadow:0 10px 34px rgba(255,40,40,.18)}
+.card .icon{overflow:hidden;flex:none;width:54px;height:54px;border-radius:16px;background:var(--grad);display:grid;place-items:center;font:700 .85rem var(--display);color:#fff;box-shadow:0 6px 18px rgba(255,50,50,.3)}
+.card .icon img{width:100%;height:100%;object-fit:cover;display:block}
+.card .info{flex:1;min-width:0}
+.card h3{font-size:1.05rem;font-weight:700}
+.card p{color:var(--muted);font-size:.88rem}
+.card::after{content:"›";flex:none;font-size:1.8rem;color:var(--red);line-height:1}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <label class="lang"><span data-t="idioma">Idioma</span>
+    <select id="idioma">
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+    </select>
+  </label>
+  <button class="home" data-go="inicio" data-t="inicio">Início</button>
+</header>
+
+<main>
+  <section id="inicio" class="view">
+    <div class="hero">
+      <div class="logo"><span id="logoFoto">R</span></div>
+      <h1>RussoViller WebPage</h1>
+      <p data-t="tagline"></p>
+      <div class="cta">
+        <button class="btn" data-go="downloads" data-t="downloadsBtn"></button>
+        <button class="btn glass" data-go="discord" data-t="discordBtn"></button>
+        <button class="btn glass" data-go="social" data-t="socialBtn"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="downloads" class="view">
+    <h2 data-t="dlTitle"></h2>
+    <p class="sub" data-t="dlSub"></p>
+    <div class="list">
+      <button class="card" data-go="github">
+        <div class="icon" aria-hidden="true">GH</div>
+        <div class="info"><h3 data-t="github"></h3><p data-t="githubDesc"></p></div>
+      </button>
+      <button class="card" data-go="outros">
+        <div class="icon" aria-hidden="true">+</div>
+        <div class="info"><h3 data-t="outros"></h3><p data-t="outrosDesc"></p></div>
+      </button>
+    </div>
+  </section>
+
+  <section id="github" class="view">
+    <h2 data-t="github"></h2>
+    <p class="sub" data-t="ghSub"></p>
+    <div class="list" id="lista-github"></div>
+    <button class="back" data-go="downloads" data-t="voltar"></button>
+  </section>
+
+  <section id="discord" class="view">
+    <h2 data-t="discordTitle"></h2>
+    <p class="sub" data-t="discordSub"></p>
+    <div class="list" id="lista-discord"></div>
+    <button class="back" data-go="inicio" data-t="voltar"></button>
+  </section>
+
+  <section id="social" class="view">
+    <h2 data-t="socialTitle"></h2>
+    <p class="sub" data-t="socialSub"></p>
+    <div class="list" id="lista-social"></div>
+    <button class="back" data-go="inicio" data-t="voltar"></button>
+  </section>
+
+  <section id="outros" class="view">
+    <h2 data-t="outros"></h2>
+    <p class="sub" data-t="outrosSub"></p>
+    <div class="list" id="lista-outros"></div>
+    <button class="back" data-go="downloads" data-t="voltar"></button>
+  </section>
+</main>
+
+<script>
+/* ============ LINKS ============ */
+const GITHUB = [
+  { t: "setas", d: "setasDesc", icone: "➤", url: "https://github.com/RussoViller/Setinhas-Animadas/releases/tag/Jinhsi" },
+  { t: "wall",  d: "wallDesc",  icone: "▣", url: "https://github.com/RussoViller/Wallpapers-For-ZL2" }
+];
+const OUTROS = [
+  { t: "curse", d: "curseDesc", icone: "CF", url: "https://www.curseforge.com/members/russoviller/projects" },
+  { t: "mod",   d: "modDesc",   icone: "MR", url: "https://modrinth.com/user/RussoViller_" },
+  { t: "zl",    d: "zlDesc",    icone: "ZL", url: "https://www.zalithlauncher.cn/download" }
+];
+const DISCORD = [
+  { t: "srvRusso", d: "srvRussoDesc", icone: "💬", code: "63brwP8wpS", url: "https://discord.gg/63brwP8wpS" },
+  { t: "srvYuira", d: "srvYuiraDesc", icone: "💬", code: "xP2t2STGRS", url: "https://discord.gg/xP2t2STGRS" }
+];
+const SOCIAL = [
+  { t: "ttMc",   d: "ttMcDesc",   icone: "TT", url: "https://www.tiktok.com/@russoviller.mc?_r=1&_t=ZS-9Av0Sc7ZwN3" },
+  { t: "ttBlox", d: "ttBloxDesc", icone: "TT", url: "https://www.tiktok.com/@russoviller.blox?_r=1&_t=ZS-9Av0SiVs657" },
+  { t: "bili",   d: "biliDesc",   icone: "BB", url: "https://b23.tv/fxuTdJs" },
+  { t: "yt",     d: "ytDesc",     icone: "YT", url: "https://youtube.com/@russoviller?si=6CBQGB-vl8JMzw8w" }
+];
+
+/* ============ TEXTOS ============ */
+const T = {
+  pt: {
+    idioma:"Idioma", inicio:"Início", tagline:"Meus downloads e links, num só lugar.",
+    downloadsBtn:"DOWNLOADS", dlTitle:"Downloads", dlSub:"Escolha uma categoria.",
+    github:"Github do Russo", githubDesc:"Setas e wallpapers animados.", ghSub:"Projetos publicados no GitHub.",
+    outros:"Outros Links", outrosDesc:"Meus perfis e o site do Zalith.", outrosSub:"Meus perfis e o site oficial do Zalith Launcher.",
+    setas:"Setas Animadas", setasDesc:"Abrir a página de download no GitHub.",
+    wall:"Wallpapers animados", wallDesc:"Abrir o repositório no GitHub.",
+    curse:"Russo Curseforge", curseDesc:"Meu perfil no CurseForge com todos os projetos.",
+    mod:"Russo Modrinth", modDesc:"Meu perfil no Modrinth com todos os projetos.",
+    zl:"Zalith Launcher 2", zlDesc:"Site oficial do Zalith Launcher.",
+    discordBtn:"Server do Discord", discordTitle:"Server do Discord", discordSub:"Entre nos servidores do Discord.",
+    srvRusso:"Server do RussoViller", srvRussoDesc:"Entrar no servidor do RussoViller.",
+    srvYuira:"Server da Yuira", srvYuiraDesc:"Entrar no servidor da Yuira.",
+    socialBtn:"Redes Sociais", socialTitle:"Redes Sociais", socialSub:"Me acompanhe nas redes.",
+    ttMc:"Tiktok Minecraft", ttMcDesc:"Vídeos de Minecraft no TikTok.",
+    ttBlox:"Tiktok Roblox", ttBloxDesc:"Vídeos de Roblox no TikTok.",
+    bili:"BiliBili", biliDesc:"Meu canal no BiliBili.",
+    yt:"YouTube", ytDesc:"Meu canal no YouTube.",
+    voltar:"Voltar"
+  },
+  en: {
+    idioma:"Language", inicio:"Home", tagline:"My downloads and links, all in one place.",
+    downloadsBtn:"DOWNLOADS", dlTitle:"Downloads", dlSub:"Pick a category.",
+    github:"Russo’s GitHub", githubDesc:"Animated arrows and wallpapers.", ghSub:"Projects published on GitHub.",
+    outros:"Other Links", outrosDesc:"My profiles and the Zalith site.", outrosSub:"My profiles and the official Zalith Launcher site.",
+    setas:"Animated Arrows", setasDesc:"Open the download page on GitHub.",
+    wall:"Animated Wallpapers", wallDesc:"Open the repository on GitHub.",
+    curse:"Russo CurseForge", curseDesc:"My CurseForge profile with all my projects.",
+    mod:"Russo Modrinth", modDesc:"My Modrinth profile with all my projects.",
+    zl:"Zalith Launcher 2", zlDesc:"Official Zalith Launcher site.",
+    discordBtn:"Discord Servers", discordTitle:"Discord Servers", discordSub:"Join the Discord servers.",
+    srvRusso:"RussoViller’s Server", srvRussoDesc:"Join RussoViller’s server.",
+    srvYuira:"Yuira’s Server", srvYuiraDesc:"Join Yuira’s server.",
+    socialBtn:"Social Media", socialTitle:"Social Media", socialSub:"Follow me on social media.",
+    ttMc:"Tiktok Minecraft", ttMcDesc:"Minecraft videos on TikTok.",
+    ttBlox:"Tiktok Roblox", ttBloxDesc:"Roblox videos on TikTok.",
+    bili:"BiliBili", biliDesc:"My BiliBili channel.",
+    yt:"YouTube", ytDesc:"My YouTube channel.",
+    voltar:"Back"
+  }
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* Foto do servidor pela API pública de convites do Discord.
+   Se falhar (sem internet, convite expirado), fica o ícone padrão. */
+async function carregarIcone(code, box){
+  try{
+    const r = await fetch("https://discord.com/api/v9/invites/" + encodeURIComponent(code));
+    if (!r.ok) return;
+    const g = (await r.json()).guild;
+    if (!g || !g.icon) return;
+    const ext = g.icon.startsWith("a_") ? "gif" : "png";
+    const img = new Image();
+    img.alt = "";
+    img.onload = () => { box.textContent = ""; box.appendChild(img); };
+    img.src = "https://cdn.discordapp.com/icons/" + g.id + "/" + g.icon + "." + ext + "?size=128";
+  }catch(e){}
+}
+
+function montar(id, itens){
+  const box = document.getElementById(id);
+  itens.forEach(i => {
+    const a = document.createElement("a");
+    a.className = "card"; a.href = i.url; a.target = "_blank"; a.rel = "noopener";
+    a.innerHTML = `<div class="icon" aria-hidden="true">${esc(i.icone)}</div>
+      <div class="info"><h3 data-t="${i.t}"></h3><p data-t="${i.d}"></p></div>`;
+    box.appendChild(a);
+    if (i.code) carregarIcone(i.code, a.querySelector(".icon"));
+  });
+}
+montar("lista-github", GITHUB);
+montar("lista-outros", OUTROS);
+montar("lista-discord", DISCORD);
+montar("lista-social", SOCIAL);
+
+let lang = "pt";
+try { const s = localStorage.getItem("lang"); if (s === "pt" || s === "en") lang = s; } catch (e) {}
+
+function traduzir(){
+  document.querySelectorAll("[data-t]").forEach(e => { e.textContent = T[lang][e.dataset.t] || ""; });
+  document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+  document.getElementById("idioma").value = lang;
+}
+document.getElementById("idioma").addEventListener("change", e => {
+  lang = e.target.value;
+  try { localStorage.setItem("lang", lang); } catch (err) {}
+  traduzir();
+});
+
+function ir(id){
+  if (!document.getElementById(id)) id = "inicio";
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
+  history.replaceState(null, "", "#" + id);
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => ir(b.dataset.go)));
+
+/* ============ FOTO DO LOGO ============
+   Coloque as fotos na mesma pasta do index.html, com estes nomes:
+   minecraft.jpg e roblox.jpg (também aceita png, jpeg ou webp).
+   Se nenhuma for encontrada, continua aparecendo a letra R. */
+const FOTOS = ["minecraft", "roblox"];
+const EXTS = ["jpg", "png", "jpeg", "webp"];
+const INTERVALO = 30000; /* 30 segundos */
+
+function achar(nome){
+  return new Promise(res => {
+    let i = 0;
+    (function tentar(){
+      if (i >= EXTS.length) return res(null);
+      const img = new Image();
+      img.onload = () => res(img);
+      img.onerror = () => { i++; tentar(); };
+      img.src = nome + "." + EXTS[i];
+    })();
+  });
+}
+async function iniciarFotos(){
+  const box = document.getElementById("logoFoto");
+  const imgs = (await Promise.all(FOTOS.map(achar))).filter(Boolean);
+  if (!imgs.length) return;
+  imgs.forEach((img, k) => { img.alt = ""; if (k === 0) img.className = "on"; box.appendChild(img); });
+  box.parentElement.classList.add("tem-foto");
+  if (imgs.length < 2) return;
+  let atual = 0;
+  setInterval(() => {
+    imgs[atual].classList.remove("on");
+    atual = (atual + 1) % imgs.length;
+    imgs[atual].classList.add("on");
+  }, INTERVALO);
+}
+iniciarFotos();
+
+traduzir();
+ir(location.hash.slice(1) || "inicio");
+</script>
+</body>
+</html>
