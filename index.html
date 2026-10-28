@@ -214,14 +214,31 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
 /* Configurações: força do Fade in */
 .fade-row{display:flex;align-items:center;gap:18px}
 .fade-row output{min-width:2ch;text-align:center;font:800 2rem/1 var(--display);color:#ff7a6a;text-shadow:0 0 22px rgba(255,70,50,.6)}
-#fadeRange{flex:1;min-width:0;-webkit-appearance:none;appearance:none;height:10px;border-radius:999px;cursor:pointer;
+#fadeRange,#volRange{flex:1;min-width:0;-webkit-appearance:none;appearance:none;height:10px;border-radius:999px;cursor:pointer;
   background:linear-gradient(90deg,#d90f2b,#ff3b3b var(--p,0%),rgba(255,255,255,.14) var(--p,0%))}
-#fadeRange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:5px solid #ff3b3b;box-shadow:0 0 20px rgba(255,59,59,.75)}
-#fadeRange::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid #ff3b3b;box-shadow:0 0 20px rgba(255,59,59,.75)}
-#fadeRange::-moz-range-track{background:transparent}
+#fadeRange::-webkit-slider-thumb,#volRange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:5px solid #ff3b3b;box-shadow:0 0 20px rgba(255,59,59,.75)}
+#fadeRange::-moz-range-thumb,#volRange::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid #ff3b3b;box-shadow:0 0 20px rgba(255,59,59,.75)}
+#fadeRange::-moz-range-track,#volRange::-moz-range-track{background:transparent}
 .fade-scale{display:flex;justify-content:space-between;margin:12px 52px 0 0;padding:0 4px;color:var(--muted);font:600 .8rem var(--display)}
 .fade-btns{display:grid;gap:10px;margin-top:22px}
 .fade-btns .btn{width:100%}
+
+/* Configurações: seções, áudio e contador de visitas */
+.cfg-h{display:flex;align-items:center;gap:12px;margin:30px 0 14px;font:800 .95rem var(--display);color:var(--text)}
+.cfg-h:first-of-type{margin-top:4px}
+.cfg-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.aud-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.sw{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--glass2);color:var(--text);font:700 .8rem var(--display);padding:6px 8px 6px 16px;border-radius:999px;cursor:pointer;transition:border-color .2s}
+.sw i{position:relative;width:44px;height:24px;border-radius:999px;background:rgba(255,255,255,.18);transition:background .2s}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw[aria-checked="true"]{border-color:rgba(255,59,59,.65)}
+.sw[aria-checked="true"] i{background:var(--grad)}
+.sw[aria-checked="true"] i::after{transform:translateX(20px)}
+#volOut{min-width:4.2ch;font-size:1.5rem}
+.visitas{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;background:var(--glass);color:var(--muted);font-size:.85rem}
+.visitas[hidden]{display:none}
+.visitas svg{width:16px;height:16px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.visitas b{color:var(--text);font:700 .95rem var(--display)}
 
 /* Mensagem do rodapé */
 .about{position:relative;overflow:hidden;width:calc(100% - 40px);max-width:720px;margin:8px auto 26px;padding:28px 22px 26px;text-align:center;border-radius:28px;
@@ -295,6 +312,7 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
         <button class="btn glass" data-go="discord" data-t="discordBtn"></button>
         <button class="btn glass" data-go="social" data-t="socialBtn"></button>
       </div>
+      <div class="visitas" id="visitas" hidden></div>
     </div>
   </section>
 
@@ -362,6 +380,7 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
   <section id="config" class="view">
     <h2 data-t="cfgTitle"></h2>
     <p class="sub" data-t="cfgSub"></p>
+    <h3 class="cfg-h" data-t="cfgInterface"></h3>
     <div class="zl-card">
       <span class="zl-lab" id="fadeLabel" data-t="fadeLabel" style="margin-top:0"></span>
       <div class="fade-row">
@@ -374,6 +393,20 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
         <button type="button" class="btn" id="fadeTest" data-t="fadeTest"></button>
         <button type="button" class="btn glass" id="fadeReset" data-t="fadeReset"></button>
       </div>
+    </div>
+
+    <h3 class="cfg-h" data-t="cfgAudio"></h3>
+    <div class="zl-card">
+      <div class="aud-row">
+        <span class="zl-lab" id="musicaLabel" data-t="audMusic" style="margin:0"></span>
+        <button type="button" class="sw" id="musicaBtn" role="switch" aria-checked="true" aria-labelledby="musicaLabel"><span id="musicaTxt">ON</span><i></i></button>
+      </div>
+      <span class="zl-lab" id="volLabel" data-t="audVol" style="margin-top:24px"></span>
+      <div class="fade-row">
+        <input type="range" id="volRange" min="10" max="100" step="1" value="60" aria-labelledby="volLabel">
+        <output id="volOut" for="volRange">60%</output>
+      </div>
+      <p class="st-note" data-t="audDesc"></p>
     </div>
     <button class="back" data-go="inicio" data-t="voltar"></button>
   </section>
@@ -576,6 +609,12 @@ const T = {
     fadeDesc:"Controla o quanto as telas aparecem com efeito de entrada. Padrão: 1 · Máximo: 5.",
     fadeTest:"TESTAR EFEITO",
     fadeReset:"Restaurar padrão (1)",
+    cfgInterface:"Interface",
+    cfgAudio:"Áudio",
+    audMusic:"MÚSICA DE FUNDO",
+    audVol:"VOLUME",
+    audDesc:"Música ambiente suave. Volume padrão: 60% · Mínimo: 10% · Máximo: 100%.",
+    visitasLabel:"visitas",
     aboutTitle:"Esse site é do RussoViller!",
     aboutText:"Olá, eu me chamo <b>RussoViller</b> e esse é o meu Website para ajudar e facilitar a sua vida na hora de instalar o Launcher que eu uso ou alguma outra coisa. Fique à vontade, explore e baixe o que quiser!",
     mgDesc:"Baixe a versão mais recente ou escolha outra versão.",
@@ -634,6 +673,12 @@ const T = {
     fadeDesc:"Controls how strongly screens fade in when they appear. Default: 1 · Max: 5.",
     fadeTest:"TEST EFFECT",
     fadeReset:"Restore default (1)",
+    cfgInterface:"Interface",
+    cfgAudio:"Audio",
+    audMusic:"BACKGROUND MUSIC",
+    audVol:"VOLUME",
+    audDesc:"Soft ambient music. Default volume: 60% · Min: 10% · Max: 100%.",
+    visitasLabel:"visits",
     aboutTitle:"This site belongs to RussoViller!",
     aboutText:"Hi, my name is <b>RussoViller</b> and this is my website, made to help and make your life easier when installing the Launcher I use, or anything else. Make yourself at home, explore and download whatever you like!",
     mgDesc:"Download the latest version or pick another one.",
@@ -692,6 +737,12 @@ const T = {
     fadeDesc:"Controla qué tan fuerte aparecen las pantallas con efecto de entrada. Predeterminado: 1 · Máximo: 5.",
     fadeTest:"PROBAR EFECTO",
     fadeReset:"Restaurar predeterminado (1)",
+    cfgInterface:"Interfaz",
+    cfgAudio:"Audio",
+    audMusic:"MÚSICA DE FONDO",
+    audVol:"VOLUMEN",
+    audDesc:"Música ambiental suave. Volumen predeterminado: 60% · Mínimo: 10% · Máximo: 100%.",
+    visitasLabel:"visitas",
     aboutTitle:"¡Este sitio es de RussoViller!",
     aboutText:"Hola, me llamo <b>RussoViller</b> y este es mi sitio web para ayudarte y facilitarte la vida a la hora de instalar el Launcher que uso o cualquier otra cosa. ¡Siéntete como en casa, explora y descarga lo que quieras!",
     mgDesc:"Descarga la versión más reciente o elige otra.",
@@ -750,6 +801,12 @@ const T = {
     fadeDesc:"Mengatur seberapa kuat efek muncul pada setiap layar. Bawaan: 1 · Maks: 5.",
     fadeTest:"COBA EFEK",
     fadeReset:"Kembalikan bawaan (1)",
+    cfgInterface:"Antarmuka",
+    cfgAudio:"Audio",
+    audMusic:"MUSIK LATAR",
+    audVol:"VOLUME",
+    audDesc:"Musik ambient yang lembut. Volume bawaan: 60% · Minimum: 10% · Maksimum: 100%.",
+    visitasLabel:"kunjungan",
     aboutTitle:"Situs ini milik RussoViller!",
     aboutText:"Halo, namaku <b>RussoViller</b> dan ini adalah situs web milikku untuk membantu dan mempermudah kamu saat memasang Launcher yang aku pakai atau hal lainnya. Silakan jelajahi dan unduh apa pun yang kamu suka!",
     mgDesc:"Unduh versi terbaru atau pilih versi lain.",
@@ -808,6 +865,12 @@ const T = {
     fadeDesc:"Определяет, насколько сильно экраны появляются с эффектом. По умолчанию: 1 · Максимум: 5.",
     fadeTest:"ПРОВЕРИТЬ ЭФФЕКТ",
     fadeReset:"Сбросить (1)",
+    cfgInterface:"Интерфейс",
+    cfgAudio:"Аудио",
+    audMusic:"ФОНОВАЯ МУЗЫКА",
+    audVol:"ГРОМКОСТЬ",
+    audDesc:"Мягкая фоновая музыка. Громкость по умолчанию: 60% · Мин.: 10% · Макс.: 100%.",
+    visitasLabel:"посещений",
     aboutTitle:"Этот сайт принадлежит RussoViller!",
     aboutText:"Привет, меня зовут <b>RussoViller</b>, и это мой сайт, который помогает и упрощает установку лаунчера, которым я пользуюсь, и не только. Заглядывайте, изучайте и скачивайте что угодно!",
     mgDesc:"Скачайте последнюю версию или выберите другую.",
@@ -924,6 +987,7 @@ function traduzir(){
   wlRender();
   hdRender();
   mgRender();
+  visitasRender();
 }
 function menuIdioma(abrir){
   langMenu.hidden = !abrir;
@@ -1586,6 +1650,139 @@ fadeRange.addEventListener("change", repetirFade);
 document.getElementById("fadeTest").addEventListener("click", repetirFade);
 document.getElementById("fadeReset").addEventListener("click", () => { aplicarFade(FADE_PADRAO); guardarFade(); repetirFade(); });
 aplicarFade(fade);
+
+/* ============ VISITAS (contador público: counterapi.dev) ============ */
+const VIS_NS = "russoviller-webpage", VIS_KEY = "visitas";
+let visitas = null;
+function visitasRender(){
+  const el = document.getElementById("visitas");
+  if (!el) return;
+  if (visitas === null){ el.hidden = true; return; }
+  el.hidden = false;
+  el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>' + visitas.toLocaleString(HTMLLANG[lang]) + '</b><span>' + esc(T[lang].visitasLabel) + '</span>';
+}
+async function visitasCarregar(){
+  let contar = true;
+  try { contar = !sessionStorage.getItem("visitou"); } catch (e) {}
+  try{
+    const r = await fetch("https://api.counterapi.dev/v1/" + VIS_NS + "/" + VIS_KEY + (contar ? "/up" : ""));
+    if (!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    const n = Number(j.count != null ? j.count : (j.value != null ? j.value : (j.data && j.data.up_count)));
+    if (!isFinite(n)) throw new Error("formato");
+    visitas = n;
+    if (contar) { try { sessionStorage.setItem("visitou", "1"); } catch (e) {} }
+  }catch(e){}
+  visitasRender();
+}
+
+/* ============ ÁUDIO: música ambiente suave (gerada no navegador) ============ */
+const VOL_PADRAO = 60, VOL_MIN = 10, VOL_MAX = 100;
+let musicaOn = true, vol = VOL_PADRAO;
+try {
+  musicaOn = localStorage.getItem("musica") !== "off";
+  const v = parseInt(localStorage.getItem("vol"), 10);
+  if (v >= VOL_MIN && v <= VOL_MAX) vol = v;
+} catch (e) {}
+const ACORDES = [[48,55,59,64,67],[45,52,60,64,67],[41,48,57,60,64],[43,50,59,62,64]]; /* Cmaj7 · Am7 · Fmaj7 · G6 */
+const BELLS = [72,74,76,79,81];
+let ac = null, master = null, eco = null, acordeI = 0, relogio = null;
+const hz = n => 440 * Math.pow(2, (n - 69) / 12);
+const ganho = () => Math.pow(vol / 100, 2);
+
+function nota(freq, t, dur, pico, destino, tipo){
+  const g = ac.createGain();
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(pico, t + dur * .35);
+  g.gain.linearRampToValueAtTime(0, t + dur);
+  g.connect(destino);
+  [-4, 4].forEach(c => {
+    const o = ac.createOscillator();
+    o.type = tipo; o.frequency.value = freq; o.detune.value = c;
+    o.connect(g); o.start(t); o.stop(t + dur + .1);
+  });
+}
+function acorde(){
+  if (!ac || ac.state !== "running") return;
+  const t = ac.currentTime + .05;
+  ACORDES[acordeI % ACORDES.length].forEach((n, i) => nota(hz(n), t + i * .25, 11, .028, master, i < 2 ? "sine" : "triangle"));
+  const b = ac.createGain(); b.gain.value = 1; b.connect(master); b.connect(eco);
+  for (let k = 0; k < 2; k++){
+    const n = BELLS[Math.floor(Math.random() * BELLS.length)];
+    const tt = t + 1.5 + k * 3.2 + Math.random() * 1.5;
+    const g = ac.createGain();
+    g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(.05, tt + .03); g.gain.exponentialRampToValueAtTime(.0005, tt + 4);
+    g.connect(b);
+    const o = ac.createOscillator(); o.type = "sine"; o.frequency.value = hz(n);
+    o.connect(g); o.start(tt); o.stop(tt + 4.2);
+  }
+  acordeI++;
+}
+function musicaIniciar(){
+  if (!musicaOn) return;
+  try{
+    if (!ac){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      ac = new AC();
+      master = ac.createGain(); master.gain.value = 0;
+      const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1400;
+      master.connect(lp); lp.connect(ac.destination);
+      eco = ac.createDelay(1); eco.delayTime.value = .55;
+      const fb = ac.createGain(); fb.gain.value = .45;
+      eco.connect(fb); fb.connect(eco); eco.connect(master);
+    }
+    ac.resume().then(() => {
+      master.gain.cancelScheduledValues(ac.currentTime);
+      master.gain.setTargetAtTime(ganho(), ac.currentTime, 1.2);
+      if (!relogio){ acorde(); relogio = setInterval(acorde, 8000); }
+    }).catch(() => {});
+  }catch(e){}
+}
+function musicaParar(){
+  if (!ac) return;
+  master.gain.cancelScheduledValues(ac.currentTime);
+  master.gain.setTargetAtTime(0, ac.currentTime, .35);
+  setTimeout(() => { if (!musicaOn && ac) ac.suspend(); }, 1600);
+}
+const musicaBtn = document.getElementById("musicaBtn");
+const volRange = document.getElementById("volRange");
+const volOut = document.getElementById("volOut");
+function aplicarMusicaUI(){
+  musicaBtn.setAttribute("aria-checked", musicaOn);
+  document.getElementById("musicaTxt").textContent = musicaOn ? "ON" : "OFF";
+}
+function aplicarVol(n){
+  vol = Math.min(VOL_MAX, Math.max(VOL_MIN, Math.round(Number(n)) || VOL_PADRAO));
+  volRange.value = vol;
+  volRange.style.setProperty("--p", ((vol - VOL_MIN) / (VOL_MAX - VOL_MIN) * 100) + "%");
+  volOut.textContent = vol + "%";
+  volRange.setAttribute("aria-valuetext", vol + "%");
+  if (ac && musicaOn) master.gain.setTargetAtTime(ganho(), ac.currentTime, .05);
+}
+musicaBtn.addEventListener("click", () => {
+  musicaOn = !musicaOn;
+  try { localStorage.setItem("musica", musicaOn ? "on" : "off"); } catch (e) {}
+  aplicarMusicaUI();
+  musicaOn ? musicaIniciar() : musicaParar();
+});
+volRange.addEventListener("input", () => {
+  aplicarVol(volRange.value);
+  try { localStorage.setItem("vol", vol); } catch (e) {}
+});
+document.addEventListener("visibilitychange", () => {
+  if (!ac) return;
+  if (document.hidden) ac.suspend(); else if (musicaOn) ac.resume();
+});
+/* navegadores só liberam áudio depois de um toque/clique: começa na primeira interação */
+function destravar(){
+  ["pointerdown","keydown","touchend"].forEach(ev => document.removeEventListener(ev, destravar, true));
+  musicaIniciar();
+}
+["pointerdown","keydown","touchend"].forEach(ev => document.addEventListener(ev, destravar, true));
+aplicarMusicaUI();
+aplicarVol(vol);
+visitasCarregar();
 
 traduzir();
 ir(location.hash.slice(1) || "inicio", true);
