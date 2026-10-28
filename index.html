@@ -312,7 +312,7 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
         <button class="btn glass" data-go="discord" data-t="discordBtn"></button>
         <button class="btn glass" data-go="social" data-t="socialBtn"></button>
       </div>
-      <div class="visitas" id="visitas" hidden></div>
+      <div class="visitas" id="visitas"></div>
     </div>
   </section>
 
@@ -1653,26 +1653,39 @@ aplicarFade(fade);
 
 /* ============ VISITAS (contador público: counterapi.dev) ============ */
 const VIS_NS = "russoviller-webpage", VIS_KEY = "visitas";
-let visitas = null;
+let visitas = null, visFalhou = false;
+const VIS_APIS = [
+  { up: "https://abacus.jasoncameron.dev/hit/" + VIS_NS + "/" + VIS_KEY, get: "https://abacus.jasoncameron.dev/get/" + VIS_NS + "/" + VIS_KEY },
+  { up: "https://api.counterapi.dev/v1/" + VIS_NS + "/" + VIS_KEY + "/up", get: "https://api.counterapi.dev/v1/" + VIS_NS + "/" + VIS_KEY }
+];
 function visitasRender(){
   const el = document.getElementById("visitas");
   if (!el) return;
-  if (visitas === null){ el.hidden = true; return; }
-  el.hidden = false;
-  el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>' + visitas.toLocaleString(HTMLLANG[lang]) + '</b><span>' + esc(T[lang].visitasLabel) + '</span>';
+  const n = visitas !== null ? visitas.toLocaleString(HTMLLANG[lang]) : (visFalhou ? "—" : "…");
+  el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>' + n + '</b><span>' + esc(T[lang].visitasLabel) + '</span>';
+}
+async function visitasBuscar(url){
+  const c = new AbortController(), t = setTimeout(() => c.abort(), 7000);
+  try{
+    const r = await fetch(url, { signal: c.signal });
+    if (!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    const n = Number(j.value != null ? j.value : (j.count != null ? j.count : (j.data && j.data.up_count)));
+    if (!isFinite(n)) throw new Error("formato");
+    return n;
+  } finally { clearTimeout(t); }
 }
 async function visitasCarregar(){
   let contar = true;
   try { contar = !sessionStorage.getItem("visitou"); } catch (e) {}
-  try{
-    const r = await fetch("https://api.counterapi.dev/v1/" + VIS_NS + "/" + VIS_KEY + (contar ? "/up" : ""));
-    if (!r.ok) throw new Error(r.status);
-    const j = await r.json();
-    const n = Number(j.count != null ? j.count : (j.value != null ? j.value : (j.data && j.data.up_count)));
-    if (!isFinite(n)) throw new Error("formato");
-    visitas = n;
-    if (contar) { try { sessionStorage.setItem("visitou", "1"); } catch (e) {} }
-  }catch(e){}
+  for (const a of VIS_APIS){
+    try{
+      visitas = await visitasBuscar(contar ? a.up : a.get);
+      if (contar) { try { sessionStorage.setItem("visitou", "1"); } catch (e) {} }
+      break;
+    }catch(e){}
+  }
+  if (visitas === null) visFalhou = true;
   visitasRender();
 }
 
@@ -1690,13 +1703,13 @@ let ac = null, master = null, eco = null, acordeI = 0, relogio = null;
 const hz = n => 440 * Math.pow(2, (n - 69) / 12);
 const ganho = () => Math.pow(vol / 100, 2);
 
-function nota(freq, t, dur, pico, destino, tipo){
+function nota(freq, t, dur, pico, destino, tipo, ataque){
   const g = ac.createGain();
   g.gain.setValueAtTime(0, t);
-  g.gain.linearRampToValueAtTime(pico, t + dur * .35);
+  g.gain.linearRampToValueAtTime(pico, t + (ataque || dur * .35));
   g.gain.linearRampToValueAtTime(0, t + dur);
   g.connect(destino);
-  [-4, 4].forEach(c => {
+  [-3, 3].forEach(c => {
     const o = ac.createOscillator();
     o.type = tipo; o.frequency.value = freq; o.detune.value = c;
     o.connect(g); o.start(t); o.stop(t + dur + .1);
@@ -1705,38 +1718,43 @@ function nota(freq, t, dur, pico, destino, tipo){
 function acorde(){
   if (!ac || ac.state !== "running") return;
   const t = ac.currentTime + .05;
-  ACORDES[acordeI % ACORDES.length].forEach((n, i) => nota(hz(n), t + i * .25, 11, .028, master, i < 2 ? "sine" : "triangle"));
+  const prim = acordeI === 0; /* primeiro acorde entra rápido; os demais, bem devagar */
+  ACORDES[acordeI % ACORDES.length].forEach((n, i) => nota(hz(n), t + (prim ? 0 : i * .4), 16, .022, master, "sine", prim ? 1 : 5));
   const b = ac.createGain(); b.gain.value = 1; b.connect(master); b.connect(eco);
-  for (let k = 0; k < 2; k++){
+  {
     const n = BELLS[Math.floor(Math.random() * BELLS.length)];
-    const tt = t + 1.5 + k * 3.2 + Math.random() * 1.5;
+    const tt = t + 4 + Math.random() * 3;
     const g = ac.createGain();
-    g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(.05, tt + .03); g.gain.exponentialRampToValueAtTime(.0005, tt + 4);
+    g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(.028, tt + .6); g.gain.exponentialRampToValueAtTime(.0005, tt + 7);
     g.connect(b);
     const o = ac.createOscillator(); o.type = "sine"; o.frequency.value = hz(n);
-    o.connect(g); o.start(tt); o.stop(tt + 4.2);
+    o.connect(g); o.start(tt); o.stop(tt + 7.2);
   }
   acordeI++;
+}
+function criarCtx(){
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) throw new Error("sem áudio");
+  ac = new AC();
+  master = ac.createGain(); master.gain.value = 0;
+  const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 950;
+  master.connect(lp); lp.connect(ac.destination);
+  eco = ac.createDelay(1); eco.delayTime.value = .7;
+  const fb = ac.createGain(); fb.gain.value = .4;
+  eco.connect(fb); fb.connect(eco); eco.connect(master);
+}
+function ligar(){
+  if (!musicaOn || !ac || ac.state !== "running") return;
+  master.gain.cancelScheduledValues(ac.currentTime);
+  master.gain.setTargetAtTime(ganho(), ac.currentTime, .4);
+  if (!relogio){ acorde(); relogio = setInterval(acorde, 12000); }
+  EVT_AUDIO.forEach(ev => document.removeEventListener(ev, destravar, true));
 }
 function musicaIniciar(){
   if (!musicaOn) return;
   try{
-    if (!ac){
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return;
-      ac = new AC();
-      master = ac.createGain(); master.gain.value = 0;
-      const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1400;
-      master.connect(lp); lp.connect(ac.destination);
-      eco = ac.createDelay(1); eco.delayTime.value = .55;
-      const fb = ac.createGain(); fb.gain.value = .45;
-      eco.connect(fb); fb.connect(eco); eco.connect(master);
-    }
-    ac.resume().then(() => {
-      master.gain.cancelScheduledValues(ac.currentTime);
-      master.gain.setTargetAtTime(ganho(), ac.currentTime, 1.2);
-      if (!relogio){ acorde(); relogio = setInterval(acorde, 8000); }
-    }).catch(() => {});
+    if (!ac || ac.state === "closed") criarCtx();
+    if (ac.state === "running") ligar(); else ac.resume().then(ligar).catch(() => {});
   }catch(e){}
 }
 function musicaParar(){
@@ -1775,11 +1793,15 @@ document.addEventListener("visibilitychange", () => {
   if (document.hidden) ac.suspend(); else if (musicaOn) ac.resume();
 });
 /* navegadores só liberam áudio depois de um toque/clique: começa na primeira interação */
-function destravar(){
-  ["pointerdown","keydown","touchend"].forEach(ev => document.removeEventListener(ev, destravar, true));
-  musicaIniciar();
-}
-["pointerdown","keydown","touchend"].forEach(ev => document.addEventListener(ev, destravar, true));
+const EVT_AUDIO = ["pointerdown","pointerup","click","keydown","touchend"];
+function destravar(){ musicaIniciar(); }
+EVT_AUDIO.forEach(ev => document.addEventListener(ev, destravar, true));
+/* tenta tocar assim que a página abre; se o navegador bloquear, descarta e toca no primeiro toque/clique/tecla */
+try{
+  criarCtx();
+  ac.resume().then(ligar).catch(() => {});
+  setTimeout(() => { if (ac && ac.state !== "running"){ try { ac.close(); } catch (e) {} ac = null; master = null; eco = null; } }, 500);
+}catch(e){}
 aplicarMusicaUI();
 aplicarVol(vol);
 visitasCarregar();
