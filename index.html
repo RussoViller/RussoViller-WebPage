@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#140909">
+<title>RussoViller WebPage</title>
+<style>
+:root{
+  --bg:#140909; --surface:#1f0f0f; --surface2:#2a1414; --line:#3a1c1c;
+  --red:#e31c1c; --red-hover:#ff3b3b; --text:#f6ecec; --muted:#b59a9a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(900px 420px at 50% -120px,rgba(227,28,28,.28),transparent 70%);
+  background-repeat:no-repeat;
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red-hover);outline-offset:3px}
+
+header{
+  position:sticky;top:0;z-index:5;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 20px;background:rgba(20,9,9,.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.lang{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.9rem}
+.lang select{
+  font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--line);
+  border-radius:999px;padding:7px 12px;cursor:pointer;
+}
+.home{
+  border:0;background:var(--red);color:#fff;font:inherit;font-size:.92rem;font-weight:600;
+  padding:8px 20px;border-radius:999px;cursor:pointer;transition:background .2s;
+}
+.home:hover{background:var(--red-hover)}
+
+.cta{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:32px}
+.cta .btn{margin-top:0;width:min(300px,100%)}
+
+main{max-width:760px;margin:0 auto;padding:0 20px 64px}
+.view{display:none}
+.view.active{display:block}
+
+.logo{width:92px;height:92px;border-radius:26px;background:var(--red);display:grid;place-items:center;font-size:2.6rem;font-weight:800;color:#fff;margin:0 auto 24px;box-shadow:0 0 60px rgba(227,28,28,.55)}
+.hero{text-align:center;padding:72px 0 40px}
+.hero h1{font-size:clamp(2.1rem,8vw,3.4rem);line-height:1.05;letter-spacing:-.02em}
+.hero p{color:var(--muted);max-width:42ch;margin:16px auto 0;font-size:1.05rem}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:32px;padding:16px 48px;border-radius:999px;font:inherit;font-weight:700;font-size:1.05rem;letter-spacing:.04em;cursor:pointer;
+  border:2px solid var(--red);background:var(--red);color:#fff;transition:background .2s,transform .15s;
+}
+.btn:hover{background:var(--red-hover);border-color:var(--red-hover)}
+.btn:active{transform:scale(.97)}
+
+h2{font-size:1.7rem;margin:40px 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin-bottom:24px}
+.back{
+  margin-top:28px;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  font:inherit;font-size:.9rem;padding:7px 16px;border-radius:999px;cursor:pointer;
+}
+.back:hover{color:var(--text);border-color:var(--red)}
+.list{display:grid;gap:12px}
+.card{
+  display:flex;align-items:center;gap:16px;width:100%;text-align:left;
+  padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  font:inherit;color:inherit;cursor:pointer;transition:border-color .2s,background .2s;
+}
+.card:hover{border-color:var(--red);background:var(--surface2)}
+.card .icon{overflow:hidden;flex:none;width:52px;height:52px;border-radius:14px;background:var(--surface2);display:grid;place-items:center;font-size:1.5rem;color:var(--red-hover)}
+.card .icon img{width:100%;height:100%;object-fit:cover;display:block}
+.card .info{flex:1;min-width:0}
+.card h3{font-size:1.1rem}
+.card p{color:var(--muted);font-size:.9rem}
+.card::after{content:"›";flex:none;font-size:1.8rem;color:var(--red-hover);line-height:1}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <label class="lang"><span data-t="idioma">Idioma</span>
+    <select id="idioma">
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+    </select>
+  </label>
+  <button class="home" data-go="inicio" data-t="inicio">Início</button>
+</header>
+
+<main>
+  <section id="inicio" class="view">
+    <div class="hero">
+      <div class="logo">R</div>
+      <h1>RussoViller WebPage</h1>
+      <p data-t="tagline"></p>
+      <div class="cta">
+        <button class="btn" data-go="downloads" data-t="downloadsBtn"></button>
+        <button class="btn" data-go="discord" data-t="discordBtn"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="downloads" class="view">
+    <h2 data-t="dlTitle"></h2>
+    <p class="sub" data-t="dlSub"></p>
+    <div class="list">
+      <button class="card" data-go="github">
+        <div class="icon" aria-hidden="true">⌥</div>
+        <div class="info"><h3 data-t="github"></h3><p data-t="githubDesc"></p></div>
+      </button>
+      <button class="card" data-go="outros">
+        <div class="icon" aria-hidden="true">☍</div>
+        <div class="info"><h3 data-t="outros"></h3><p data-t="outrosDesc"></p></div>
+      </button>
+    </div>
+  </section>
+
+  <section id="github" class="view">
+    <h2 data-t="github"></h2>
+    <p class="sub" data-t="ghSub"></p>
+    <div class="list" id="lista-github"></div>
+    <button class="back" data-go="downloads" data-t="voltar"></button>
+  </section>
+
+  <section id="discord" class="view">
+    <h2 data-t="discordTitle"></h2>
+    <p class="sub" data-t="discordSub"></p>
+    <div class="list" id="lista-discord"></div>
+    <button class="back" data-go="inicio" data-t="voltar"></button>
+  </section>
+
+  <section id="outros" class="view">
+    <h2 data-t="outros"></h2>
+    <p class="sub" data-t="outrosSub"></p>
+    <div class="list" id="lista-outros"></div>
+    <button class="back" data-go="downloads" data-t="voltar"></button>
+  </section>
+</main>
+
+<script>
+/* ============ LINKS ============ */
+const GITHUB = [
+  { t: "setas",  d: "setasDesc", icone: "➤", url: "https://github.com/RussoViller/Setinhas-Animadas/releases/tag/Jinhsi" },
+  { t: "wall",   d: "wallDesc",  icone: "▣", url: "https://github.com/RussoViller/Wallpapers-For-ZL2" }
+];
+const OUTROS = [
+  { t: "curse", d: "curseDesc", icone: "🔥", url: "https://www.curseforge.com/members/russoviller/projects" },
+  { t: "mod",   d: "modDesc",   icone: "🌿", url: "https://modrinth.com/user/RussoViller_" },
+  { t: "zl",    d: "zlDesc",    icone: "⚙", url: "https://www.zalithlauncher.cn/download" }
+];
+
+const DISCORD = [
+  { t: "srvRusso", d: "srvRussoDesc", icone: "💬", code: "63brwP8wpS", url: "https://discord.gg/63brwP8wpS" },
+  { t: "srvYuira", d: "srvYuiraDesc", icone: "💬", code: "xP2t2STGRS", url: "https://discord.gg/xP2t2STGRS" }
+];
+
+/* ============ TEXTOS ============ */
+const T = {
+  pt: {
+    idioma:"Idioma", inicio:"Início", tagline:"Meus downloads e links, num só lugar.",
+    downloadsBtn:"DOWNLOADS", dlTitle:"Downloads", dlSub:"Escolha uma categoria.",
+    github:"Github do Russo", githubDesc:"Setas e wallpapers animados.", ghSub:"Projetos publicados no GitHub.",
+    outros:"Outros Links", outrosDesc:"Meus perfis e o site do Zalith.", outrosSub:"Meus perfis e o site oficial do Zalith Launcher.",
+    setas:"Setas Animadas", setasDesc:"Abrir a página de download no GitHub.",
+    wall:"Wallpapers animados", wallDesc:"Abrir o repositório no GitHub.",
+    curse:"Russo Curseforge", curseDesc:"Meu perfil no CurseForge com todos os projetos.",
+    mod:"Russo Modrinth", modDesc:"Meu perfil no Modrinth com todos os projetos.",
+    zl:"Zalith Launcher 2", zlDesc:"Site oficial do Zalith Launcher.",
+    discordBtn:"Server do Discord", discordTitle:"Server do Discord", discordSub:"Entre nos servidores do Discord.",
+    srvRusso:"Server do RussoViller", srvRussoDesc:"Entrar no servidor do RussoViller.",
+    srvYuira:"Server da Yuira", srvYuiraDesc:"Entrar no servidor da Yuira.",
+    voltar:"Voltar"
+  },
+  en: {
+    idioma:"Language", inicio:"Home", tagline:"My downloads and links, all in one place.",
+    downloadsBtn:"DOWNLOADS", dlTitle:"Downloads", dlSub:"Pick a category.",
+    github:"Russo’s GitHub", githubDesc:"Animated arrows and wallpapers.", ghSub:"Projects published on GitHub.",
+    outros:"Other Links", outrosDesc:"My profiles and the Zalith site.", outrosSub:"My profiles and the official Zalith Launcher site.",
+    setas:"Animated Arrows", setasDesc:"Open the download page on GitHub.",
+    wall:"Animated Wallpapers", wallDesc:"Open the repository on GitHub.",
+    curse:"Russo CurseForge", curseDesc:"My CurseForge profile with all my projects.",
+    mod:"Russo Modrinth", modDesc:"My Modrinth profile with all my projects.",
+    zl:"Zalith Launcher 2", zlDesc:"Official Zalith Launcher site.",
+    discordBtn:"Discord Servers", discordTitle:"Discord Servers", discordSub:"Join the Discord servers.",
+    srvRusso:"RussoViller’s Server", srvRussoDesc:"Join RussoViller’s server.",
+    srvYuira:"Yuira’s Server", srvYuiraDesc:"Join Yuira’s server.",
+    voltar:"Back"
+  }
+};
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* Busca a foto do servidor pela API pública de convites do Discord.
+   Se falhar (sem internet, convite expirado), fica o ícone padrão. */
+async function carregarIcone(code, box){
+  try{
+    const r = await fetch("https://discord.com/api/v9/invites/" + encodeURIComponent(code));
+    if (!r.ok) return;
+    const g = (await r.json()).guild;
+    if (!g || !g.icon) return;
+    const ext = g.icon.startsWith("a_") ? "gif" : "png";
+    const img = new Image();
+    img.alt = "";
+    img.onload = () => { box.textContent = ""; box.appendChild(img); };
+    img.src = "https://cdn.discordapp.com/icons/" + g.id + "/" + g.icon + "." + ext + "?size=128";
+  }catch(e){}
+}
+
+function montar(id, itens){
+  const box = document.getElementById(id);
+  itens.forEach(i => {
+    const a = document.createElement("a");
+    a.className = "card"; a.href = i.url; a.target = "_blank"; a.rel = "noopener";
+    a.innerHTML = `<div class="icon" aria-hidden="true">${esc(i.icone)}</div>
+      <div class="info"><h3 data-t="${i.t}"></h3><p data-t="${i.d}"></p></div>`;
+    box.appendChild(a);
+    if (i.code) carregarIcone(i.code, a.querySelector(".icon"));
+  });
+}
+montar("lista-github", GITHUB);
+montar("lista-outros", OUTROS);
+montar("lista-discord", DISCORD);
+
+let lang = "pt";
+try { const s = localStorage.getItem("lang"); if (s === "pt" || s === "en") lang = s; } catch (e) {}
+
+function traduzir(){
+  document.querySelectorAll("[data-t]").forEach(e => { e.textContent = T[lang][e.dataset.t] || ""; });
+  document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+  document.getElementById("idioma").value = lang;
+}
+document.getElementById("idioma").addEventListener("change", e => {
+  lang = e.target.value;
+  try { localStorage.setItem("lang", lang); } catch (err) {}
+  traduzir();
+});
+
+function ir(id){
+  if (!document.getElementById(id)) id = "inicio";
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
+  history.replaceState(null, "", "#" + id);
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => ir(b.dataset.go)));
+
+traduzir();
+ir(location.hash.slice(1) || "inicio");
+</script>
+</body>
+</html>
