@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0506">
 <title>RussoViller WebPage</title>
+<link rel="preconnect" href="https://abacus.jasoncameron.dev" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
@@ -1651,44 +1652,38 @@ document.getElementById("fadeTest").addEventListener("click", repetirFade);
 document.getElementById("fadeReset").addEventListener("click", () => { aplicarFade(FADE_PADRAO); guardarFade(); repetirFade(); });
 aplicarFade(fade);
 
-/* ============ VISITAS (contador público: counterapi.dev) ============ */
+/* ============ VISITAS (contador global: Abacus) ============ */
 const VIS_NS = "russoviller-webpage", VIS_KEY = "visitas";
+const VIS_MIN = 0, VIS_MAX = 10000000;
+const visLimite = n => Math.min(VIS_MAX, Math.max(VIS_MIN, Math.floor(Number(n)) || 0));
+const VIS_URL = "https://abacus.jasoncameron.dev/hit/" + VIS_NS + "/" + VIS_KEY; /* contador único e global: sobe 1 a cada entrada ou atualização */
 let visitas = null, visFalhou = false;
-const VIS_APIS = [
-  { up: "https://abacus.jasoncameron.dev/hit/" + VIS_NS + "/" + VIS_KEY, get: "https://abacus.jasoncameron.dev/get/" + VIS_NS + "/" + VIS_KEY },
-  { up: "https://api.counterapi.dev/v1/" + VIS_NS + "/" + VIS_KEY + "/up", get: "https://api.counterapi.dev/v1/" + VIS_NS + "/" + VIS_KEY }
-];
+try { const c = parseInt(localStorage.getItem("visitasGlobal"), 10); if (c >= 0) visitas = visLimite(c); } catch (e) {} /* mostra na hora o último número visto */
 function visitasRender(){
   const el = document.getElementById("visitas");
   if (!el) return;
   const n = visitas !== null ? visitas.toLocaleString(HTMLLANG[lang]) : (visFalhou ? "—" : "…");
   el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>' + n + '</b><span>' + esc(T[lang].visitasLabel) + '</span>';
 }
-async function visitasBuscar(url){
-  const c = new AbortController(), t = setTimeout(() => c.abort(), 7000);
+async function visitasBuscar(){
+  const c = new AbortController(), t = setTimeout(() => c.abort(), 4000);
   try{
-    const r = await fetch(url, { signal: c.signal });
+    const r = await fetch(VIS_URL, { signal: c.signal, cache: "no-store" });
     if (!r.ok) throw new Error(r.status);
-    const j = await r.json();
-    const n = Number(j.value != null ? j.value : (j.count != null ? j.count : (j.data && j.data.up_count)));
+    const n = Number((await r.json()).value);
     if (!isFinite(n)) throw new Error("formato");
-    return n;
+    return visLimite(n);
   } finally { clearTimeout(t); }
 }
-const VIS_MIN = 0, VIS_MAX = 10000000;
-const visLimite = n => Math.min(VIS_MAX, Math.max(VIS_MIN, Math.floor(Number(n)) || 0));
 async function visitasCarregar(){
-  /* sobe a cada entrada e a cada atualização da página */
-  for (const a of VIS_APIS){
-    try{ visitas = visLimite(await visitasBuscar(a.up)); break; }catch(e){}
+  for (let i = 0; i < 3; i++){
+    try{
+      visitas = await visitasBuscar();
+      try { localStorage.setItem("visitasGlobal", visitas); } catch (e) {}
+      break;
+    }catch(e){ await new Promise(r => setTimeout(r, 1200)); }
   }
-  if (visitas === null){
-    /* sem resposta dos contadores online: continua de onde parou, neste aparelho */
-    let ult = 0;
-    try { ult = parseInt(localStorage.getItem("visitas"), 10) || 0; } catch (e) {}
-    visitas = visLimite(ult + 1);
-  }
-  try { localStorage.setItem("visitas", visitas); } catch (e) {}
+  visFalhou = visitas === null;
   visitasRender();
 }
 
