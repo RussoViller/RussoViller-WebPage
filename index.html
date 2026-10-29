@@ -45,6 +45,7 @@ header{
 .chev{width:7px;height:7px;border-right:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
 .dd-btn[aria-expanded="true"] .chev{transform:rotate(225deg) translate(-2px,-1px)}
 .dd-menu{position:absolute;left:0;top:calc(100% + 10px);min-width:200px;padding:6px;background:rgba(22,8,10,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,59,59,.4);border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 40px rgba(255,40,40,.2);z-index:20;animation:up .18s ease both}
+.dd-menu{max-height:min(70vh,440px);overflow-y:auto;overscroll-behavior:contain}
 .dd-menu[hidden]{display:none}
 .dd-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;border:0;background:none;color:var(--text);font:inherit;font-size:.95rem;border-radius:13px;cursor:pointer;text-align:left}
 .dd-menu button:hover,.dd-menu button:focus-visible{background:var(--glass2)}
@@ -281,6 +282,9 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
         <button type="button" role="option" data-lang="es"><span class="opt"><span class="fl" data-flag="es"></span>Español</span></button>
         <button type="button" role="option" data-lang="id"><span class="opt"><span class="fl" data-flag="id"></span>Bahasa Indonesia</span></button>
         <button type="button" role="option" data-lang="ru"><span class="opt"><span class="fl" data-flag="ru"></span>Русский</span></button>
+        <button type="button" role="option" data-lang="it"><span class="opt"><span class="fl" data-flag="it"></span>Italiano</span></button>
+        <button type="button" role="option" data-lang="fr"><span class="opt"><span class="fl" data-flag="fr"></span>Français</span></button>
+        <button type="button" role="option" data-lang="zh"><span class="opt"><span class="fl" data-flag="zh"></span>中文 (简体)</span></button>
       </div>
     </div>
   </div>
@@ -555,8 +559,11 @@ const PROJ_MODRINTH = [
     url: "https://modrinth.com/shader/vanilla-extra-shaders/versions" }
 ];
 const DISCORD = [
+  { cat: "discMine" },
   { t: "srvRusso", d: "srvRussoDesc", icone: "💬", code: "63brwP8wpS", url: "https://discord.gg/63brwP8wpS" },
-  { t: "srvYuira", d: "srvYuiraDesc", icone: "💬", code: "xP2t2STGRS", url: "https://discord.gg/xP2t2STGRS" }
+  { cat: "discFriends" },
+  { t: "srvYuira", d: "srvYuiraDesc", icone: "💬", code: "xP2t2STGRS", url: "https://discord.gg/xP2t2STGRS" },
+  { t: "srvMonster", d: "srvMonsterDesc", icone: "💬", code: "uJrRSCSems", url: "https://discord.gg/uJrRSCSems" }
 ];
 const BILI_LOGO = "data:image/svg+xml;utf8," + encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">' +
@@ -587,6 +594,8 @@ const T = {
     discordBtn:"SERVERS DO DISCORD", discordTitle:"Servers do Discord", discordSub:"Entre nos servidores do Discord.",
     srvRusso:"Server do RussoViller", srvRussoDesc:"Entrar no servidor do RussoViller.",
     srvYuira:"Server da Yuira", srvYuiraDesc:"Entrar no servidor da Yuira.",
+    discMine:"Meu server", discFriends:"Server de amigos",
+    srvMonster:"Server Monster Land", srvMonsterDesc:"Entrar no servidor Monster Land.",
     socialBtn:"REDES SOCIAIS", socialTitle:"Redes Sociais", socialSub:"Me acompanhe nas redes.",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Vídeos de Minecraft no TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Vídeos de Roblox no TikTok.",
@@ -636,7 +645,7 @@ const T = {
     mgVersion:"VERSÃO DO MOBILEGLUES",
     mgLatest:"Mais recente",
     mgPre:"Pré-lançamento",
-    mgOfficial:"SITE OFICIAL DO MOBILEGLUES",
+    mgOfficial:"REPOSITÓRIO OFICIAL DO MG",
     mgLoading:"Buscando as versões no GitHub…"
   },
   en: {
@@ -653,6 +662,8 @@ const T = {
     discordBtn:"DISCORD SERVERS", discordTitle:"Discord Servers", discordSub:"Join the Discord servers.",
     srvRusso:"RussoViller’s Server", srvRussoDesc:"Join RussoViller’s server.",
     srvYuira:"Yuira’s Server", srvYuiraDesc:"Join Yuira’s server.",
+    discMine:"My server", discFriends:"Friends’ servers",
+    srvMonster:"Monster Land Server", srvMonsterDesc:"Join the Monster Land server.",
     socialBtn:"SOCIAL MEDIA", socialTitle:"Social Media", socialSub:"Follow me on social media.",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Minecraft videos on TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Roblox videos on TikTok.",
@@ -702,7 +713,7 @@ const T = {
     mgVersion:"MOBILEGLUES VERSION",
     mgLatest:"Latest",
     mgPre:"Pre-release",
-    mgOfficial:"MOBILEGLUES OFFICIAL SITE",
+    mgOfficial:"OFFICIAL MG REPOSITORY",
     mgLoading:"Fetching the versions from GitHub…"
   },
   es: {
@@ -719,6 +730,8 @@ const T = {
     discordBtn:"SERVIDORES DE DISCORD", discordTitle:"Servidores de Discord", discordSub:"Únete a los servidores de Discord.",
     srvRusso:"Servidor de RussoViller", srvRussoDesc:"Unirse al servidor de RussoViller.",
     srvYuira:"Servidor de Yuira", srvYuiraDesc:"Unirse al servidor de Yuira.",
+    discMine:"Mi servidor", discFriends:"Servidores de amigos",
+    srvMonster:"Servidor Monster Land", srvMonsterDesc:"Unirse al servidor Monster Land.",
     socialBtn:"REDES SOCIALES", socialTitle:"Redes sociales", socialSub:"Sígueme en las redes.",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Vídeos de Minecraft en TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Vídeos de Roblox en TikTok.",
@@ -768,7 +781,7 @@ const T = {
     mgVersion:"VERSIÓN DE MOBILEGLUES",
     mgLatest:"Más reciente",
     mgPre:"Versión preliminar",
-    mgOfficial:"SITIO OFICIAL DE MOBILEGLUES",
+    mgOfficial:"REPOSITORIO OFICIAL DE MG",
     mgLoading:"Buscando las versiones en GitHub…"
   },
   id: {
@@ -785,6 +798,8 @@ const T = {
     discordBtn:"SERVER DISCORD", discordTitle:"Server Discord", discordSub:"Gabung ke server Discord.",
     srvRusso:"Server RussoViller", srvRussoDesc:"Gabung ke server RussoViller.",
     srvYuira:"Server Yuira", srvYuiraDesc:"Gabung ke server Yuira.",
+    discMine:"Server saya", discFriends:"Server teman",
+    srvMonster:"Server Monster Land", srvMonsterDesc:"Gabung ke server Monster Land.",
     socialBtn:"MEDIA SOSIAL", socialTitle:"Media Sosial", socialSub:"Ikuti saya di media sosial.",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Video Minecraft di TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Video Roblox di TikTok.",
@@ -834,7 +849,7 @@ const T = {
     mgVersion:"VERSI MOBILEGLUES",
     mgLatest:"Terbaru",
     mgPre:"Pra-rilis",
-    mgOfficial:"SITUS RESMI MOBILEGLUES",
+    mgOfficial:"REPOSITORI RESMI MG",
     mgLoading:"Mengambil daftar versi dari GitHub…"
   },
   ru: {
@@ -851,6 +866,8 @@ const T = {
     discordBtn:"СЕРВЕРЫ DISCORD", discordTitle:"Серверы Discord", discordSub:"Присоединяйтесь к серверам Discord.",
     srvRusso:"Сервер RussoViller", srvRussoDesc:"Присоединиться к серверу RussoViller.",
     srvYuira:"Сервер Yuira", srvYuiraDesc:"Присоединиться к серверу Yuira.",
+    discMine:"Мой сервер", discFriends:"Серверы друзей",
+    srvMonster:"Сервер Monster Land", srvMonsterDesc:"Присоединиться к серверу Monster Land.",
     socialBtn:"СОЦСЕТИ", socialTitle:"Социальные сети", socialSub:"Подписывайтесь на меня в соцсетях.",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Видео по Minecraft в TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Видео по Roblox в TikTok.",
@@ -900,8 +917,212 @@ const T = {
     mgVersion:"ВЕРСИЯ MOBILEGLUES",
     mgLatest:"Последняя",
     mgPre:"Пре-релиз",
-    mgOfficial:"ОФИЦИАЛЬНЫЙ САЙТ MOBILEGLUES",
+    mgOfficial:"ОФИЦИАЛЬНЫЙ РЕПОЗИТОРИЙ MG",
     mgLoading:"Получаем список версий с GitHub…"
+  },
+  it: {
+    idioma:"Lingua", inicio:"Home", tagline:"I miei download e link, tutto in un unico posto.",
+    downloadsBtn:"DOWNLOAD", dlTitle:"Download", dlSub:"Scegli una categoria.",
+    github:"GitHub di Russo", githubDesc:"Freccette animate, sfondi e l’HUD di ZL2.", ghSub:"Progetti pubblicati su GitHub.",
+    outros:"CurseForge e Modrinth", outrosDesc:"I miei progetti principali su entrambi i siti.", outrosSub:"I miei progetti principali su CurseForge e Modrinth.",
+    setas:"Setinhas Animadas", setasDesc:"Scegli un personaggio, guarda l’anteprima e scarica.", setasSub:"Scegli un personaggio e scarica direttamente da GitHub.",
+    stChar:"PERSONAGGI O ALTRO", stMain:"FRECCIA PRINCIPALE", stVar:"VARIANTI", stFiles:"File da scaricare", stLoading:"Recupero dei personaggi da GitHub…", stNoPrev:"Nessuna anteprima disponibile.",
+    wall:"Sfondi Animati", wallDesc:"Scegli uno sfondo, guarda l’anteprima e scarica.", wallSub:"Scegli uno sfondo e scarica direttamente da GitHub.", wlPick:"SFONDI", wlPrev:"ANTEPRIMA", wlOpen:"Apri su GitHub", wlLoading:"Recupero degli sfondi da GitHub…", wlFail:"Impossibile caricare l’anteprima qui.",
+    curse:"Progetti Principali CurseForge", curseDesc:"I miei migliori progetti su CurseForge.",
+    mod:"Progetti Principali Modrinth", modDesc:"I miei migliori progetti su Modrinth.",
+    zl:"Zalith Launcher 2", zlDesc:"Sito ufficiale di Zalith Launcher.",
+    discordBtn:"SERVER DISCORD", discordTitle:"Server Discord", discordSub:"Entra nei server Discord.",
+    srvRusso:"Server di RussoViller", srvRussoDesc:"Entra nel server di RussoViller.",
+    srvYuira:"Server di Yuira", srvYuiraDesc:"Entra nel server di Yuira.",
+    discMine:"Il mio server", discFriends:"Server di amici",
+    srvMonster:"Server Monster Land", srvMonsterDesc:"Entra nel server Monster Land.",
+    socialBtn:"SOCIAL", socialTitle:"Social", socialSub:"Seguimi sui social.",
+    ttMc:"Tiktok Minecraft", ttMcDesc:"Video di Minecraft su TikTok.",
+    ttBlox:"Tiktok Roblox", ttBloxDesc:"Video di Roblox su TikTok.",
+    bili:"BiliBili", biliDesc:"Il mio canale BiliBili.",
+    yt:"YouTube", ytDesc:"Il mio canale YouTube.",
+    avatares:"Immagini del profilo tramite",
+    menuInicio:"HOME", menuConfig:"IMPOSTAZIONI", menuCodigo:"CODICE SORGENTE",
+    zalithSub:"Launcher e MobileGlues da installare.", zl2Desc:"Scarica l’ultima versione direttamente da GitHub.", zl2Sub:"Sempre l’ultima versione ufficiale, direttamente da GitHub.",
+    zlArch:"ARCHITETTURA DEL DISPOSITIVO", zlSource:"FONTE DI INSTALLAZIONE", zlGithub:"GitHub Ufficiale",
+    zlFiles:"File scaricabili", zlGet:"Scarica ora", zlPub:"Pubblicato il", zlOfficial:"SITO UFFICIALE DI ZALITH LAUNCHER",
+    zlLoading:"Recupero dell’ultima versione da GitHub…", zlError:"Impossibile caricare i dati da GitHub al momento.", zlRetry:"RIPROVA", zlNone:"Nessun file disponibile per questa architettura.", zlDl:"DOWNLOAD",
+    zlAll:"Tutti i file", zlAllD:"Mostra tutti i file disponibili",
+    zlUni:"Versione universale", zlUniD:"Non sai quale scaricare? Scegli questa.",
+    zlArm64D:"Processori Qualcomm Snapdragon/Dimensity e altri a 64 bit",
+    zlArmv7D:"Processori più vecchi a 32 bit", zlX86D:"Processore Intel a 32 bit", zlX8664D:"Emulatore o alcuni processori Intel",
+    hud:"ZL2 HUD", hudDesc:"Guarda l’anteprima e scarica l’ultima versione.", hudSub:"Sempre l’ultima versione dell’HUD, direttamente da GitHub.", hdPrev:"ANTEPRIMA HUD",
+    voltar:"Indietro",
+    curseSub:"Tocca un progetto per aprire la sua pagina su CurseForge.",
+    modSub:"Tocca un progetto per aprire la sua pagina su Modrinth.",
+    tpModpack:"MODPACK",
+    tpShader:"SHADER",
+    tpMod:"MOD",
+    tpTextura:"TEXTURE PACK",
+    pjZalith:"Ottimizzazione essenziale per far girare Minecraft sulla maggior parte dei telefoni.",
+    pjVanilla:"Uno shader semplicissimo pensato per dispositivi molto deboli.",
+    pjMoracolus:"Un motore di shader creato per Android, focalizzato su prestazioni e FPS.",
+    pjBattery:"Mostra la batteria del telefono in tempo reale nel gioco.",
+    pjTweaks:"Esperienza migliorata per Survival e PvP.",
+    cfgTitle:"Impostazioni",
+    cfgSub:"Personalizza il sito a modo tuo.",
+    fadeLabel:"INTENSITÀ DELLA DISSOLVENZA",
+    fadeDesc:"Controlla quanto le schermate appaiono con l’effetto di entrata. Predefinito: 1 · Massimo: 5.",
+    fadeTest:"PROVA L’EFFETTO",
+    fadeReset:"Ripristina predefinito (1)",
+    bgLabel:"OPACITÀ DELLO SFONDO",
+    bgDesc:"Controlla quanto è visibile l’immagine di sfondo. Predefinito: 35% · Minimo: 15% · Massimo: 80%.",
+    cfgInterface:"Interfaccia",
+    cfgAudio:"Audio",
+    audMusic:"MUSICA DI SOTTOFONDO",
+    audVol:"VOLUME",
+    audDesc:"Musica d’ambiente soft. Volume predefinito: 60% · Minimo: 10% · Massimo: 100%.",
+    visitasLabel:"visite",
+    aboutTitle:"Questo sito è di RussoViller!",
+    aboutText:"Ciao, mi chiamo <b>RussoViller</b> e questo è il mio sito, creato per aiutarti e rendere più facile l’installazione del Launcher che uso, o di qualsiasi altra cosa. Fai come se fossi a casa tua, esplora e scarica quello che vuoi!",
+    mgDesc:"Scarica l’ultima versione o scegline un’altra.",
+    mgSub:"Sempre aggiornato automaticamente dal GitHub ufficiale. Scegli la versione e scarica.",
+    mgVersion:"VERSIONE DI MOBILEGLUES",
+    mgLatest:"Ultima",
+    mgPre:"Pre-release",
+    mgOfficial:"REPOSITORY UFFICIALE DI MG",
+    mgLoading:"Recupero delle versioni da GitHub…"
+  },
+  fr: {
+    idioma:"Langue", inicio:"Accueil", tagline:"Mes téléchargements et liens, tout au même endroit.",
+    downloadsBtn:"TÉLÉCHARGEMENTS", dlTitle:"Téléchargements", dlSub:"Choisissez une catégorie.",
+    github:"GitHub de Russo", githubDesc:"Flèches animées, fonds d’écran et le HUD de ZL2.", ghSub:"Projets publiés sur GitHub.",
+    outros:"CurseForge et Modrinth", outrosDesc:"Mes projets principaux sur les deux sites.", outrosSub:"Mes projets principaux sur CurseForge et Modrinth.",
+    setas:"Setinhas Animadas", setasDesc:"Choisissez un personnage, voyez l’aperçu et téléchargez.", setasSub:"Choisissez un personnage et téléchargez directement depuis GitHub.",
+    stChar:"PERSONNAGES OU AUTRES", stMain:"FLÈCHE PRINCIPALE", stVar:"VARIANTES", stFiles:"Fichiers à télécharger", stLoading:"Récupération des personnages depuis GitHub…", stNoPrev:"Aucun aperçu disponible.",
+    wall:"Fonds d’écran animés", wallDesc:"Choisissez un fond d’écran, voyez l’aperçu et téléchargez.", wallSub:"Choisissez un fond d’écran et téléchargez directement depuis GitHub.", wlPick:"FONDS D’ÉCRAN", wlPrev:"APERÇU", wlOpen:"Voir sur GitHub", wlLoading:"Récupération des fonds d’écran depuis GitHub…", wlFail:"Impossible de charger l’aperçu ici.",
+    curse:"Projets principaux CurseForge", curseDesc:"Mes meilleurs projets sur CurseForge.",
+    mod:"Projets principaux Modrinth", modDesc:"Mes meilleurs projets sur Modrinth.",
+    zl:"Zalith Launcher 2", zlDesc:"Site officiel de Zalith Launcher.",
+    discordBtn:"SERVEURS DISCORD", discordTitle:"Serveurs Discord", discordSub:"Rejoignez les serveurs Discord.",
+    srvRusso:"Serveur de RussoViller", srvRussoDesc:"Rejoindre le serveur de RussoViller.",
+    srvYuira:"Serveur de Yuira", srvYuiraDesc:"Rejoindre le serveur de Yuira.",
+    discMine:"Mon serveur", discFriends:"Serveurs d’amis",
+    srvMonster:"Serveur Monster Land", srvMonsterDesc:"Rejoindre le serveur Monster Land.",
+    socialBtn:"RÉSEAUX SOCIAUX", socialTitle:"Réseaux sociaux", socialSub:"Suivez-moi sur les réseaux sociaux.",
+    ttMc:"Tiktok Minecraft", ttMcDesc:"Vidéos Minecraft sur TikTok.",
+    ttBlox:"Tiktok Roblox", ttBloxDesc:"Vidéos Roblox sur TikTok.",
+    bili:"BiliBili", biliDesc:"Ma chaîne BiliBili.",
+    yt:"YouTube", ytDesc:"Ma chaîne YouTube.",
+    avatares:"Photos de profil via",
+    menuInicio:"ACCUEIL", menuConfig:"PARAMÈTRES", menuCodigo:"CODE SOURCE",
+    zalithSub:"Launchers et MobileGlues à installer.", zl2Desc:"Téléchargez la dernière version directement depuis GitHub.", zl2Sub:"Toujours la dernière version officielle, directement depuis GitHub.",
+    zlArch:"ARCHITECTURE DE L’APPAREIL", zlSource:"SOURCE D’INSTALLATION", zlGithub:"GitHub officiel",
+    zlFiles:"Fichiers à télécharger", zlGet:"Télécharger maintenant", zlPub:"Publié le", zlOfficial:"SITE OFFICIEL DE ZALITH LAUNCHER",
+    zlLoading:"Récupération de la dernière version depuis GitHub…", zlError:"Impossible de charger les données de GitHub pour le moment.", zlRetry:"RÉESSAYER", zlNone:"Aucun fichier disponible pour cette architecture.", zlDl:"TÉLÉCHARGEMENTS",
+    zlAll:"Tous les fichiers", zlAllD:"Afficher tous les fichiers disponibles",
+    zlUni:"Version universelle", zlUniD:"Vous ne savez pas lequel télécharger ? Choisissez celui-ci.",
+    zlArm64D:"Processeurs Qualcomm Snapdragon/Dimensity et autres 64 bits",
+    zlArmv7D:"Anciens processeurs 32 bits", zlX86D:"Processeur Intel 32 bits", zlX8664D:"Émulateur ou certains processeurs Intel",
+    hud:"ZL2 HUD", hudDesc:"Voyez l’aperçu et téléchargez la dernière version.", hudSub:"Toujours la dernière version du HUD, directement depuis GitHub.", hdPrev:"APERÇU DU HUD",
+    voltar:"Retour",
+    curseSub:"Touchez un projet pour ouvrir sa page sur CurseForge.",
+    modSub:"Touchez un projet pour ouvrir sa page sur Modrinth.",
+    tpModpack:"MODPACK",
+    tpShader:"SHADER",
+    tpMod:"MOD",
+    tpTextura:"PACK DE TEXTURES",
+    pjZalith:"Optimisation essentielle pour faire tourner Minecraft sur la plupart des téléphones.",
+    pjVanilla:"Un shader ultra simple conçu pour les appareils très peu puissants.",
+    pjMoracolus:"Un moteur de shaders conçu pour Android, axé sur les performances et les FPS.",
+    pjBattery:"Affiche la batterie du téléphone en temps réel dans le jeu.",
+    pjTweaks:"Expérience améliorée pour le Survival et le PvP.",
+    cfgTitle:"Paramètres",
+    cfgSub:"Réglez le site à votre façon.",
+    fadeLabel:"INTENSITÉ DU FONDU",
+    fadeDesc:"Contrôle l’intensité de l’effet d’apparition des écrans. Par défaut : 1 · Maximum : 5.",
+    fadeTest:"TESTER L’EFFET",
+    fadeReset:"Rétablir par défaut (1)",
+    bgLabel:"OPACITÉ DE L’ARRIÈRE-PLAN",
+    bgDesc:"Contrôle la visibilité de l’image d’arrière-plan. Par défaut : 35 % · Minimum : 15 % · Maximum : 80 %.",
+    cfgInterface:"Interface",
+    cfgAudio:"Audio",
+    audMusic:"MUSIQUE DE FOND",
+    audVol:"VOLUME",
+    audDesc:"Musique d’ambiance douce. Volume par défaut : 60 % · Minimum : 10 % · Maximum : 100 %.",
+    visitasLabel:"visites",
+    aboutTitle:"Ce site appartient à RussoViller !",
+    aboutText:"Salut, je m’appelle <b>RussoViller</b> et voici mon site, créé pour vous aider et faciliter l’installation du Launcher que j’utilise, ou de toute autre chose. Faites comme chez vous, explorez et téléchargez ce que vous voulez !",
+    mgDesc:"Téléchargez la dernière version ou choisissez-en une autre.",
+    mgSub:"Toujours mis à jour automatiquement depuis le GitHub officiel. Choisissez la version et téléchargez.",
+    mgVersion:"VERSION DE MOBILEGLUES",
+    mgLatest:"Dernière",
+    mgPre:"Pré-version",
+    mgOfficial:"DÉPÔT OFFICIEL DE MG",
+    mgLoading:"Récupération des versions depuis GitHub…"
+  },
+  zh: {
+    idioma:"语言", inicio:"首页", tagline:"我的下载和链接，尽在一处。",
+    downloadsBtn:"下载", dlTitle:"下载", dlSub:"请选择一个分类。",
+    github:"Russo 的 GitHub", githubDesc:"动态箭头、壁纸和 ZL2 HUD。", ghSub:"发布在 GitHub 上的项目。",
+    outros:"CurseForge 和 Modrinth", outrosDesc:"我在这两个网站上的主要项目。", outrosSub:"我在 CurseForge 和 Modrinth 上的主要项目。",
+    setas:"Setinhas Animadas", setasDesc:"选择角色，查看预览并下载。", setasSub:"选择角色，直接从 GitHub 下载。",
+    stChar:"角色或其他", stMain:"主箭头", stVar:"变体", stFiles:"可下载的文件", stLoading:"正在从 GitHub 获取角色……", stNoPrev:"暂无预览。",
+    wall:"动态壁纸", wallDesc:"选择壁纸，查看预览并下载。", wallSub:"选择壁纸，直接从 GitHub 下载。", wlPick:"壁纸", wlPrev:"预览", wlOpen:"在 GitHub 上查看", wlLoading:"正在从 GitHub 获取壁纸……", wlFail:"无法在此加载预览。",
+    curse:"CurseForge 主要项目", curseDesc:"我在 CurseForge 上的最佳项目。",
+    mod:"Modrinth 主要项目", modDesc:"我在 Modrinth 上的最佳项目。",
+    zl:"Zalith Launcher 2", zlDesc:"Zalith Launcher 官方网站。",
+    discordBtn:"DISCORD 服务器", discordTitle:"Discord 服务器", discordSub:"加入 Discord 服务器。",
+    srvRusso:"RussoViller 的服务器", srvRussoDesc:"加入 RussoViller 的服务器。",
+    srvYuira:"Yuira 的服务器", srvYuiraDesc:"加入 Yuira 的服务器。",
+    discMine:"我的服务器", discFriends:"朋友的服务器",
+    srvMonster:"Monster Land 服务器", srvMonsterDesc:"加入 Monster Land 服务器。",
+    socialBtn:"社交媒体", socialTitle:"社交媒体", socialSub:"在社交媒体上关注我。",
+    ttMc:"Tiktok Minecraft", ttMcDesc:"TikTok 上的 Minecraft 视频。",
+    ttBlox:"Tiktok Roblox", ttBloxDesc:"TikTok 上的 Roblox 视频。",
+    bili:"BiliBili", biliDesc:"我的 BiliBili 频道。",
+    yt:"YouTube", ytDesc:"我的 YouTube 频道。",
+    avatares:"头像来源：",
+    menuInicio:"首页", menuConfig:"设置", menuCodigo:"源代码",
+    zalithSub:"可安装的启动器和 MobileGlues。", zl2Desc:"直接从 GitHub 下载最新版本。", zl2Sub:"始终是最新的官方版本，直接来自 GitHub。",
+    zlArch:"设备架构", zlSource:"安装来源", zlGithub:"GitHub 官方",
+    zlFiles:"可下载的文件", zlGet:"立即下载", zlPub:"发布于", zlOfficial:"ZALITH LAUNCHER 官方网站",
+    zlLoading:"正在从 GitHub 获取最新版本……", zlError:"目前无法从 GitHub 加载数据。", zlRetry:"重试", zlNone:"此架构暂无可用文件。", zlDl:"次下载",
+    zlAll:"所有文件", zlAllD:"显示所有可用文件",
+    zlUni:"通用版本", zlUniD:"不知道下载哪个？选这个。",
+    zlArm64D:"高通骁龙/天玑及其他 64 位处理器",
+    zlArmv7D:"较旧的 32 位处理器", zlX86D:"32 位 Intel 处理器", zlX8664D:"模拟器或部分 Intel 处理器",
+    hud:"ZL2 HUD", hudDesc:"查看预览并下载最新版本。", hudSub:"始终是最新的 HUD 版本，直接来自 GitHub。", hdPrev:"HUD 预览",
+    voltar:"返回",
+    curseSub:"点按项目即可打开它在 CurseForge 上的页面。",
+    modSub:"点按项目即可打开它在 Modrinth 上的页面。",
+    tpModpack:"整合包",
+    tpShader:"光影",
+    tpMod:"模组",
+    tpTextura:"资源包",
+    pjZalith:"让 Minecraft 能在大多数手机上运行的必备优化。",
+    pjVanilla:"为配置很低的设备打造的超简单光影。",
+    pjMoracolus:"专为 Android 打造的光影引擎，注重性能和帧率。",
+    pjBattery:"在游戏中实时显示手机电量。",
+    pjTweaks:"优化的生存和 PvP 体验。",
+    cfgTitle:"设置",
+    cfgSub:"按你的喜好调整网站。",
+    fadeLabel:"淡入强度",
+    fadeDesc:"控制界面出现时淡入效果的强度。默认：1 · 最大：5。",
+    fadeTest:"测试效果",
+    fadeReset:"恢复默认 (1)",
+    bgLabel:"背景不透明度",
+    bgDesc:"控制背景图片的显示程度。默认：35% · 最小：15% · 最大：80%。",
+    cfgInterface:"界面",
+    cfgAudio:"音频",
+    audMusic:"背景音乐",
+    audVol:"音量",
+    audDesc:"轻柔的氛围音乐。默认音量：60% · 最小：10% · 最大：100%。",
+    visitasLabel:"次访问",
+    aboutTitle:"这个网站属于 RussoViller！",
+    aboutText:"你好，我是 <b>RussoViller</b>，这是我的网站，旨在帮助你更轻松地安装我使用的启动器或其他任何东西。别客气，随便逛逛，想下载什么就下载什么！",
+    mgDesc:"下载最新版本或选择其他版本。",
+    mgSub:"自动与官方 GitHub 保持同步。选择版本并下载。",
+    mgVersion:"MOBILEGLUES 版本",
+    mgLatest:"最新",
+    mgPre:"预发布",
+    mgOfficial:"MG 官方仓库",
+    mgLoading:"正在从 GitHub 获取版本……"
   }
 };
 
@@ -926,6 +1147,13 @@ async function carregarIcone(code, box){
 function montar(id, itens){
   const box = document.getElementById(id);
   itens.forEach(i => {
+    if (i.cat){
+      const h = document.createElement("h3");
+      h.className = "cfg-h";
+      h.dataset.t = i.cat;
+      box.appendChild(h);
+      return;
+    }
     const a = document.createElement(i.go ? "button" : "a");
     a.className = "card";
     if (i.go){ a.type = "button"; a.dataset.go = i.go; }
@@ -977,7 +1205,7 @@ montarProjetos("lista-modrinth", PROJ_MODRINTH);
 let lang = "pt";
 try { const s = localStorage.getItem("lang"); if (T[s]) lang = s; } catch (e) {}
 
-const NOMES = { pt: "Português (BR)", en: "English", es: "Español", id: "Bahasa Indonesia", ru: "Русский" };
+const NOMES = { pt: "Português (BR)", en: "English", es: "Español", id: "Bahasa Indonesia", ru: "Русский", it: "Italiano", fr: "Français", zh: "中文 (简体)" };
 function bandeiraEN(){
   let r = '<rect width="24" height="16" fill="#fff"/>';
   for (let i = 0; i < 7; i++) r += `<rect y="${(i * 2 * 16 / 13).toFixed(2)}" width="24" height="${(16 / 13).toFixed(2)}" fill="#b22234"/>`;
@@ -990,9 +1218,12 @@ const FLAGS = {
   en: bandeiraEN(),
   id: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="8" fill="#ce1126"/><rect y="8" width="24" height="8" fill="#fff"/></svg>',
   ru: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.34" fill="#fff"/><rect y="5.33" width="24" height="5.34" fill="#0039a6"/><rect y="10.66" width="24" height="5.34" fill="#d52b1e"/></svg>',
-  es: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#aa151b"/><rect y="4" width="24" height="8" fill="#f1bf00"/></svg>'
+  es: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#aa151b"/><rect y="4" width="24" height="8" fill="#f1bf00"/></svg>',
+  it: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="8" height="16" fill="#009246"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ce2b37"/></svg>',
+  fr: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="8" height="16" fill="#0055a4"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ef4135"/></svg>',
+  zh: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#de2910"/><polygon points="4.60,1.80 5.18,3.60 7.07,3.60 5.54,4.71 6.13,6.50 4.60,5.39 3.07,6.50 3.66,4.71 2.13,3.60 4.02,3.60" fill="#ffde00"/><polygon points="10.05,1.59 9.53,1.99 9.75,2.61 9.21,2.24 8.70,2.65 8.88,2.02 8.33,1.65 8.99,1.63 9.17,1.00 9.39,1.61" fill="#ffde00"/><polygon points="11.54,3.26 11.24,3.85 11.70,4.31 11.06,4.21 10.76,4.79 10.66,4.14 10.01,4.04 10.59,3.74 10.49,3.10 10.95,3.56" fill="#ffde00"/><polygon points="11.21,5.55 11.19,6.21 11.80,6.43 11.17,6.61 11.15,7.27 10.78,6.72 10.15,6.90 10.56,6.39 10.19,5.85 10.81,6.07" fill="#ffde00"/><polygon points="9.12,7.40 9.38,8.01 10.03,7.95 9.53,8.38 9.79,8.98 9.23,8.64 8.74,9.07 8.88,8.43 8.32,8.10 8.97,8.04" fill="#ffde00"/></svg>'
 };
-const HTMLLANG = { pt: "pt-BR", en: "en", es: "es", id: "id", ru: "ru" };
+const HTMLLANG = { pt: "pt-BR", en: "en", es: "es", id: "id", ru: "ru", it: "it", fr: "fr", zh: "zh-CN" };
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
 
