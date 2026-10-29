@@ -88,7 +88,7 @@ header{
 .card .icon.alt img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);opacity:0;transition:opacity .6s ease}
 .card .icon.alt img.on{opacity:1}
 
-@media (max-width:520px){#langLabel{display:none}.home{padding:9px 16px}}
+@media (max-width:520px){.home{padding:9px 16px}}
 
 main{max-width:760px;margin:0 auto;padding:0 20px 72px}
 .view{display:none}
@@ -263,6 +263,42 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
 .zl-ficon.mgf{font:700 .9rem var(--display);color:#ff7a6a}
 .zl-menu small.pill{display:inline-block;margin-left:0;color:#ff9585}
 
+/* Botão de idioma moderno, mais à esquerda */
+header{padding:12px 14px 12px 8px}
+#langLabel{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lang{gap:0}
+.dd-btn{gap:10px;padding:6px 14px 6px 7px;font-weight:600;letter-spacing:.01em;
+  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 4px 18px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.14);transition:border-color .2s,box-shadow .2s,transform .15s}
+.dd-btn:active{transform:scale(.97)}
+.dd-btn:hover,.dd-btn[aria-expanded="true"]{border-color:rgba(255,59,59,.75);box-shadow:0 0 0 3px rgba(255,59,59,.14),0 6px 24px rgba(255,40,40,.3),inset 0 1px 0 rgba(255,255,255,.14)}
+.dd-btn .fl{width:30px;height:20px;border-radius:6px}
+.dd-menu{min-width:235px;border-radius:22px;padding:8px}
+.dd-menu button{border-radius:14px;transition:background .15s,transform .15s}
+.dd-menu button:hover{transform:translateX(3px)}
+
+/* Início: relógio do fuso, TikTok principal e seguidores */
+.hero{position:relative;padding-top:58px}
+.tz{position:absolute;top:10px;left:0;display:inline-flex;align-items:center;gap:7px;max-width:100%;padding:5px 12px 5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--muted);font-size:.74rem;line-height:1.2;white-space:nowrap}
+.tz[hidden]{display:none}
+.tz svg{width:14px;height:14px;flex:none;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tz b{color:var(--text);font:700 .8rem var(--display);font-variant-numeric:tabular-nums}
+.ttwrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:26px}
+.ttmain{display:flex;align-items:center;gap:14px;width:min(320px,100%);padding:10px 22px 10px 10px;border-radius:999px;text-align:left;
+  background:linear-gradient(135deg,rgba(217,15,43,.38),rgba(255,122,47,.16));border:1px solid rgba(255,59,59,.55);
+  box-shadow:0 10px 30px rgba(255,50,50,.3),inset 0 1px 0 rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:transform .15s,box-shadow .2s,border-color .2s}
+.ttmain:hover{box-shadow:0 12px 38px rgba(255,80,50,.5);border-color:rgba(255,120,90,.9)}
+.ttmain:active{transform:scale(.97)}
+.ttico{position:relative;overflow:hidden;flex:none;width:54px;height:54px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font:700 .85rem var(--display);color:#fff;box-shadow:0 4px 16px rgba(255,50,50,.35)}
+.ttico img{width:100%;height:100%;object-fit:cover;display:block}
+.tttxt{flex:1;min-width:0;font:700 .98rem var(--display);color:#fff;letter-spacing:.01em}
+.ttfol{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--glass);color:var(--muted);font-size:.85rem}
+.ttfol b{color:var(--text);font:700 .95rem var(--display);font-variant-numeric:tabular-nums}
+.ttfol i{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84;animation:pulso 2s ease-in-out infinite}
+@keyframes pulso{50%{opacity:.35}}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -285,6 +321,9 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
         <button type="button" role="option" data-lang="it"><span class="opt"><span class="fl" data-flag="it"></span>Italiano</span></button>
         <button type="button" role="option" data-lang="fr"><span class="opt"><span class="fl" data-flag="fr"></span>Français</span></button>
         <button type="button" role="option" data-lang="zh"><span class="opt"><span class="fl" data-flag="zh"></span>中文 (简体)</span></button>
+        <button type="button" role="option" data-lang="tr"><span class="opt"><span class="fl" data-flag="tr"></span>Türkçe</span></button>
+        <button type="button" role="option" data-lang="ja"><span class="opt"><span class="fl" data-flag="ja"></span>日本語</span></button>
+        <button type="button" role="option" data-lang="th"><span class="opt"><span class="fl" data-flag="th"></span>ไทย</span></button>
       </div>
     </div>
   </div>
@@ -314,6 +353,14 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
 <main>
   <section id="inicio" class="view">
     <div class="hero">
+      <div class="tz" id="tzChip" aria-live="off"></div>
+      <div class="ttwrap">
+        <a class="ttmain" id="ttMain" href="https://www.tiktok.com/@russoviller.mc?_r=1&amp;_t=ZS-9Av0Sc7ZwN3" target="_blank" rel="noopener">
+          <span class="ttico" id="ttMainIcon" aria-hidden="true">TT</span>
+          <span class="tttxt" data-t="ttMain"></span>
+        </a>
+        <div class="ttfol" id="ttFol"></div>
+      </div>
       <div class="logo"><span id="logoFoto">R</span></div>
       <h1>RussoViller WebPage</h1>
       <p data-t="tagline"></p>
@@ -572,7 +619,6 @@ const BILI_LOGO = "data:image/svg+xml;utf8," + encodeURIComponent(
   '<rect x="11" y="22" width="42" height="28" rx="8" fill="#0d1b2a"/>' +
   '<g stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none"><path d="M20 31l5 3-5 3M44 31l-5 3 5 3"/><path d="M28 42q4 3 8 0"/></g></svg>');
 const SOCIAL = [
-  { t: "ttMc",   d: "ttMcDesc",   icone: "TT", foto: "minecraft", avatar: AV.mc, url: "https://www.tiktok.com/@russoviller.mc?_r=1&_t=ZS-9Av0Sc7ZwN3" },
   { t: "ttBlox", d: "ttBloxDesc", icone: "TT", foto: "roblox", avatar: AV.blox, url: "https://www.tiktok.com/@russoviller.blox?_r=1&_t=ZS-9Av0SiVs657" },
   { t: "bili",   d: "biliDesc",   icone: "BB", foto: "bilibili", avatar: BILI_LOGO, brand: true, url: "https://b23.tv/fxuTdJs" },
   { t: "yt",     d: "ytDesc",     icone: "YT", foto: "youtube", avatar: AV.yt, url: "https://youtube.com/@russoviller?si=6CBQGB-vl8JMzw8w" }
@@ -596,7 +642,7 @@ const T = {
     srvYuira:"Server da Yuira", srvYuiraDesc:"Entrar no servidor da Yuira.",
     discMine:"Meu server", discFriends:"Server de amigos",
     srvMonster:"Server Monster Land", srvMonsterDesc:"Entrar no servidor Monster Land.",
-    socialBtn:"REDES SOCIAIS", socialTitle:"Redes Sociais", socialSub:"Me acompanhe nas redes.",
+    socialBtn:"OUTRAS REDES SOCIAIS", socialTitle:"Outras Redes Sociais", socialSub:"Me acompanhe nas outras redes.", ttMain:"Tiktok Principal", seguidores:"seguidores",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Vídeos de Minecraft no TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Vídeos de Roblox no TikTok.",
     bili:"BiliBili", biliDesc:"Meu canal no BiliBili.",
@@ -664,7 +710,7 @@ const T = {
     srvYuira:"Yuira’s Server", srvYuiraDesc:"Join Yuira’s server.",
     discMine:"My server", discFriends:"Friends’ servers",
     srvMonster:"Monster Land Server", srvMonsterDesc:"Join the Monster Land server.",
-    socialBtn:"SOCIAL MEDIA", socialTitle:"Social Media", socialSub:"Follow me on social media.",
+    socialBtn:"OTHER SOCIAL MEDIA", socialTitle:"Other Social Media", socialSub:"Follow me on the other networks.", ttMain:"Main Tiktok", seguidores:"followers",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Minecraft videos on TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Roblox videos on TikTok.",
     bili:"BiliBili", biliDesc:"My BiliBili channel.",
@@ -732,7 +778,7 @@ const T = {
     srvYuira:"Servidor de Yuira", srvYuiraDesc:"Unirse al servidor de Yuira.",
     discMine:"Mi servidor", discFriends:"Servidores de amigos",
     srvMonster:"Servidor Monster Land", srvMonsterDesc:"Unirse al servidor Monster Land.",
-    socialBtn:"REDES SOCIALES", socialTitle:"Redes sociales", socialSub:"Sígueme en las redes.",
+    socialBtn:"OTRAS REDES SOCIALES", socialTitle:"Otras Redes Sociales", socialSub:"Sígueme en las otras redes.", ttMain:"Tiktok Principal", seguidores:"seguidores",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Vídeos de Minecraft en TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Vídeos de Roblox en TikTok.",
     bili:"BiliBili", biliDesc:"Mi canal de BiliBili.",
@@ -800,7 +846,7 @@ const T = {
     srvYuira:"Server Yuira", srvYuiraDesc:"Gabung ke server Yuira.",
     discMine:"Server saya", discFriends:"Server teman",
     srvMonster:"Server Monster Land", srvMonsterDesc:"Gabung ke server Monster Land.",
-    socialBtn:"MEDIA SOSIAL", socialTitle:"Media Sosial", socialSub:"Ikuti saya di media sosial.",
+    socialBtn:"MEDIA SOSIAL LAINNYA", socialTitle:"Media Sosial Lainnya", socialSub:"Ikuti aku di media sosial lainnya.", ttMain:"Tiktok Utama", seguidores:"pengikut",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Video Minecraft di TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Video Roblox di TikTok.",
     bili:"BiliBili", biliDesc:"Kanal BiliBili saya.",
@@ -868,7 +914,7 @@ const T = {
     srvYuira:"Сервер Yuira", srvYuiraDesc:"Присоединиться к серверу Yuira.",
     discMine:"Мой сервер", discFriends:"Серверы друзей",
     srvMonster:"Сервер Monster Land", srvMonsterDesc:"Присоединиться к серверу Monster Land.",
-    socialBtn:"СОЦСЕТИ", socialTitle:"Социальные сети", socialSub:"Подписывайтесь на меня в соцсетях.",
+    socialBtn:"ДРУГИЕ СОЦСЕТИ", socialTitle:"Другие соцсети", socialSub:"Подписывайтесь на меня в других соцсетях.", ttMain:"Основной Tiktok", seguidores:"подписчиков",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Видео по Minecraft в TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Видео по Roblox в TikTok.",
     bili:"BiliBili", biliDesc:"Мой канал на BiliBili.",
@@ -936,7 +982,7 @@ const T = {
     srvYuira:"Server di Yuira", srvYuiraDesc:"Entra nel server di Yuira.",
     discMine:"Il mio server", discFriends:"Server di amici",
     srvMonster:"Server Monster Land", srvMonsterDesc:"Entra nel server Monster Land.",
-    socialBtn:"SOCIAL", socialTitle:"Social", socialSub:"Seguimi sui social.",
+    socialBtn:"ALTRI SOCIAL", socialTitle:"Altri Social", socialSub:"Seguimi sugli altri social.", ttMain:"Tiktok Principale", seguidores:"follower",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Video di Minecraft su TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Video di Roblox su TikTok.",
     bili:"BiliBili", biliDesc:"Il mio canale BiliBili.",
@@ -1004,7 +1050,7 @@ const T = {
     srvYuira:"Serveur de Yuira", srvYuiraDesc:"Rejoindre le serveur de Yuira.",
     discMine:"Mon serveur", discFriends:"Serveurs d’amis",
     srvMonster:"Serveur Monster Land", srvMonsterDesc:"Rejoindre le serveur Monster Land.",
-    socialBtn:"RÉSEAUX SOCIAUX", socialTitle:"Réseaux sociaux", socialSub:"Suivez-moi sur les réseaux sociaux.",
+    socialBtn:"AUTRES RÉSEAUX SOCIAUX", socialTitle:"Autres Réseaux Sociaux", socialSub:"Suivez-moi sur les autres réseaux.", ttMain:"Tiktok Principal", seguidores:"abonnés",
     ttMc:"Tiktok Minecraft", ttMcDesc:"Vidéos Minecraft sur TikTok.",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"Vidéos Roblox sur TikTok.",
     bili:"BiliBili", biliDesc:"Ma chaîne BiliBili.",
@@ -1072,7 +1118,7 @@ const T = {
     srvYuira:"Yuira 的服务器", srvYuiraDesc:"加入 Yuira 的服务器。",
     discMine:"我的服务器", discFriends:"朋友的服务器",
     srvMonster:"Monster Land 服务器", srvMonsterDesc:"加入 Monster Land 服务器。",
-    socialBtn:"社交媒体", socialTitle:"社交媒体", socialSub:"在社交媒体上关注我。",
+    socialBtn:"其他社交媒体", socialTitle:"其他社交媒体", socialSub:"在其他平台关注我。", ttMain:"主 TikTok", seguidores:"粉丝",
     ttMc:"Tiktok Minecraft", ttMcDesc:"TikTok 上的 Minecraft 视频。",
     ttBlox:"Tiktok Roblox", ttBloxDesc:"TikTok 上的 Roblox 视频。",
     bili:"BiliBili", biliDesc:"我的 BiliBili 频道。",
@@ -1125,6 +1171,80 @@ const T = {
     mgLoading:"正在从 GitHub 获取版本……"
   }
 };
+
+/* Novos idiomas: o que não estiver traduzido aqui aparece em inglês (fallback) */
+T.tr = Object.assign({}, T.en, {
+  idioma:"Dil", inicio:"Ana Sayfa", tagline:"İndirmelerim ve bağlantılarım, tek yerde.",
+  downloadsBtn:"İNDİRMELER", dlTitle:"İndirmeler", dlSub:"Bir kategori seç.",
+  github:"Russo’nun GitHub’ı", githubDesc:"Animasyonlu oklar, duvar kâğıtları ve ZL2 HUD.", ghSub:"GitHub’da yayınlanan projeler.",
+  outros:"CurseForge ve Modrinth", outrosDesc:"İki sitedeki ana projelerim.", outrosSub:"CurseForge ve Modrinth’teki ana projelerim.",
+  setasDesc:"Karakteri seç, önizle ve indir.", setasSub:"Karakteri seç ve doğrudan GitHub’dan indir.",
+  wall:"Animasyonlu Duvar Kâğıtları", wallDesc:"Duvar kâğıdını seç, önizle ve indir.", wallSub:"Duvar kâğıdını seç ve doğrudan GitHub’dan indir.",
+  curse:"CurseForge Ana Projeler", curseDesc:"CurseForge’daki en iyi projelerim.", mod:"Modrinth Ana Projeler", modDesc:"Modrinth’teki en iyi projelerim.",
+  discordBtn:"DISCORD SUNUCULARI", discordTitle:"Discord Sunucuları", discordSub:"Discord sunucularına katıl.",
+  srvRusso:"RussoViller Sunucusu", srvRussoDesc:"RussoViller’ın sunucusuna katıl.", srvYuira:"Yuira Sunucusu", srvYuiraDesc:"Yuira’nın sunucusuna katıl.",
+  discMine:"Benim sunucum", discFriends:"Arkadaşların sunucuları", srvMonster:"Monster Land Sunucusu", srvMonsterDesc:"Monster Land sunucusuna katıl.",
+  socialBtn:"DİĞER SOSYAL MEDYA", socialTitle:"Diğer Sosyal Medya", socialSub:"Beni diğer sosyal medyalarda takip et.", ttMain:"Ana Tiktok", seguidores:"takipçi",
+  ttBlox:"Tiktok Roblox", ttBloxDesc:"TikTok’ta Roblox videoları.", biliDesc:"BiliBili kanalım.", ytDesc:"YouTube kanalım.", avatares:"Profil fotoğrafları:",
+  menuInicio:"ANA SAYFA", menuConfig:"AYARLAR", menuCodigo:"KAYNAK KOD", voltar:"Geri",
+  curseSub:"CurseForge sayfasını açmak için bir projeye dokun.", modSub:"Modrinth sayfasını açmak için bir projeye dokun.",
+  tpModpack:"MODPACK", tpShader:"SHADER", tpMod:"MOD", tpTextura:"TEKSTÜR PAKETİ",
+  pjZalith:"Minecraft’ı çoğu telefonda çalıştırmak için temel optimizasyon.", pjVanilla:"Çok zayıf cihazlar için yapılmış süper basit bir shader.",
+  pjMoracolus:"Android için geliştirilmiş, performans ve FPS odaklı shader motoru.", pjBattery:"Telefonun pil seviyesini oyunda gerçek zamanlı gösterir.", pjTweaks:"Survival ve PvP için geliştirilmiş deneyim.",
+  cfgTitle:"Ayarlar", cfgSub:"Siteyi kendine göre ayarla.", cfgInterface:"Arayüz", cfgAudio:"Ses",
+  fadeLabel:"SOLARAK GİRİŞ GÜCÜ", fadeDesc:"Ekranların giriş efektinin gücünü belirler. Varsayılan: 1 · Maks: 5.", fadeTest:"EFEKTİ DENE", fadeReset:"Varsayılana dön (1)",
+  bgLabel:"ARKA PLAN OPAKLIĞI", bgDesc:"Arka plan görselinin ne kadar görüneceğini belirler. Varsayılan: %35 · Min: %15 · Maks: %80.",
+  audMusic:"ARKA PLAN MÜZİĞİ", audVol:"SES SEVİYESİ", audDesc:"Yumuşak ortam müziği. Varsayılan ses: %60 · Min: %10 · Maks: %100.", visitasLabel:"ziyaret",
+  aboutTitle:"Bu site RussoViller’a ait!", aboutText:"Merhaba, ben <b>RussoViller</b>. Bu, kullandığım Launcher’ı ve diğer her şeyi kurarken hayatını kolaylaştırmak için yaptığım sitem. Rahatça gez, keşfet ve beğendiğini indir!"
+});
+T.ja = Object.assign({}, T.en, {
+  idioma:"言語", inicio:"ホーム", tagline:"ダウンロードとリンクを、ひとつの場所に。",
+  downloadsBtn:"ダウンロード", dlTitle:"ダウンロード", dlSub:"カテゴリを選んでください。",
+  github:"RussoのGitHub", githubDesc:"アニメ矢印、壁紙、ZL2のHUD。", ghSub:"GitHubで公開しているプロジェクト。",
+  outros:"CurseForgeとModrinth", outrosDesc:"両サイトのメインプロジェクト。", outrosSub:"CurseForgeとModrinthのメインプロジェクト。",
+  setasDesc:"キャラを選んでプレビュー、ダウンロード。", setasSub:"キャラを選んでGitHubから直接ダウンロード。",
+  wall:"アニメ壁紙", wallDesc:"壁紙を選んでプレビュー、ダウンロード。", wallSub:"壁紙を選んでGitHubから直接ダウンロード。",
+  curse:"CurseForge メインプロジェクト", curseDesc:"CurseForgeのおすすめプロジェクト。", mod:"Modrinth メインプロジェクト", modDesc:"Modrinthのおすすめプロジェクト。",
+  discordBtn:"DISCORDサーバー", discordTitle:"Discordサーバー", discordSub:"Discordサーバーに参加しよう。",
+  srvRusso:"RussoVillerのサーバー", srvRussoDesc:"RussoVillerのサーバーに参加。", srvYuira:"Yuiraのサーバー", srvYuiraDesc:"Yuiraのサーバーに参加。",
+  discMine:"自分のサーバー", discFriends:"友達のサーバー", srvMonster:"Monster Landサーバー", srvMonsterDesc:"Monster Landサーバーに参加。",
+  socialBtn:"その他のSNS", socialTitle:"その他のSNS", socialSub:"その他のSNSでフォローしてね。", ttMain:"メインTikTok", seguidores:"フォロワー",
+  ttBlox:"TikTok Roblox", ttBloxDesc:"TikTokのRobloxの動画。", biliDesc:"BiliBiliのチャンネル。", ytDesc:"YouTubeのチャンネル。", avatares:"プロフィール画像：",
+  menuInicio:"ホーム", menuConfig:"設定", menuCodigo:"ソースコード", voltar:"戻る",
+  curseSub:"プロジェクトをタップするとCurseForgeのページが開きます。", modSub:"プロジェクトをタップするとModrinthのページが開きます。",
+  tpModpack:"MODPACK", tpShader:"シェーダー", tpMod:"MOD", tpTextura:"テクスチャ",
+  pjZalith:"ほとんどのスマホでMinecraftを動かすための必須の最適化。", pjVanilla:"とても非力な端末向けの超シンプルなシェーダー。",
+  pjMoracolus:"Android向けのシェーダーエンジン。性能とFPSを重視。", pjBattery:"スマホのバッテリー残量をゲーム内でリアルタイム表示。", pjTweaks:"サバイバルとPvPのための改善体験。",
+  cfgTitle:"設定", cfgSub:"サイトを好みに調整できます。", cfgInterface:"インターフェース", cfgAudio:"オーディオ",
+  fadeLabel:"フェードインの強さ", fadeDesc:"画面が現れるときのフェードの強さ。標準：1 · 最大：5。", fadeTest:"効果を試す", fadeReset:"標準に戻す (1)",
+  bgLabel:"背景の不透明度", bgDesc:"背景画像の見え方。標準：35% · 最小：15% · 最大：80%。",
+  audMusic:"BGM", audVol:"音量", audDesc:"やさしいアンビエント音楽。標準音量：60% · 最小：10% · 最大：100%。", visitasLabel:"回訪問",
+  aboutTitle:"このサイトはRussoVillerのものです！", aboutText:"こんにちは、<b>RussoViller</b>です。僕が使っているLauncherなどを簡単に導入できるように作ったサイトです。ゆっくり見て、好きなものをダウンロードしてね！"
+});
+T.th = Object.assign({}, T.en, {
+  idioma:"ภาษา", inicio:"หน้าแรก", tagline:"ดาวน์โหลดและลิงก์ของฉัน รวมไว้ที่เดียว",
+  downloadsBtn:"ดาวน์โหลด", dlTitle:"ดาวน์โหลด", dlSub:"เลือกหมวดหมู่",
+  github:"GitHub ของ Russo", githubDesc:"ลูกศรเคลื่อนไหว วอลเปเปอร์ และ HUD ของ ZL2", ghSub:"โปรเจกต์ที่เผยแพร่บน GitHub",
+  outros:"CurseForge และ Modrinth", outrosDesc:"โปรเจกต์หลักของฉันบนทั้งสองเว็บ", outrosSub:"โปรเจกต์หลักของฉันบน CurseForge และ Modrinth",
+  setasDesc:"เลือกตัวละคร ดูตัวอย่าง แล้วดาวน์โหลด", setasSub:"เลือกตัวละครแล้วดาวน์โหลดจาก GitHub โดยตรง",
+  wall:"วอลเปเปอร์เคลื่อนไหว", wallDesc:"เลือกวอลเปเปอร์ ดูตัวอย่าง แล้วดาวน์โหลด", wallSub:"เลือกวอลเปเปอร์แล้วดาวน์โหลดจาก GitHub โดยตรง",
+  curse:"โปรเจกต์หลักบน CurseForge", curseDesc:"โปรเจกต์เด่นของฉันบน CurseForge", mod:"โปรเจกต์หลักบน Modrinth", modDesc:"โปรเจกต์เด่นของฉันบน Modrinth",
+  discordBtn:"เซิร์ฟเวอร์ DISCORD", discordTitle:"เซิร์ฟเวอร์ Discord", discordSub:"เข้าร่วมเซิร์ฟเวอร์ Discord",
+  srvRusso:"เซิร์ฟเวอร์ของ RussoViller", srvRussoDesc:"เข้าร่วมเซิร์ฟเวอร์ของ RussoViller", srvYuira:"เซิร์ฟเวอร์ของ Yuira", srvYuiraDesc:"เข้าร่วมเซิร์ฟเวอร์ของ Yuira",
+  discMine:"เซิร์ฟเวอร์ของฉัน", discFriends:"เซิร์ฟเวอร์ของเพื่อน", srvMonster:"เซิร์ฟเวอร์ Monster Land", srvMonsterDesc:"เข้าร่วมเซิร์ฟเวอร์ Monster Land",
+  socialBtn:"โซเชียลมีเดียอื่น ๆ", socialTitle:"โซเชียลมีเดียอื่น ๆ", socialSub:"ติดตามฉันในโซเชียลอื่น ๆ", ttMain:"TikTok หลัก", seguidores:"ผู้ติดตาม",
+  ttBlox:"TikTok Roblox", ttBloxDesc:"วิดีโอ Roblox บน TikTok", biliDesc:"ช่อง BiliBili ของฉัน", ytDesc:"ช่อง YouTube ของฉัน", avatares:"รูปโปรไฟล์จาก",
+  menuInicio:"หน้าแรก", menuConfig:"ตั้งค่า", menuCodigo:"ซอร์สโค้ด", voltar:"กลับ",
+  curseSub:"แตะที่โปรเจกต์เพื่อเปิดหน้าใน CurseForge", modSub:"แตะที่โปรเจกต์เพื่อเปิดหน้าใน Modrinth",
+  tpModpack:"MODPACK", tpShader:"เชเดอร์", tpMod:"MOD", tpTextura:"เท็กซ์เจอร์แพ็ก",
+  pjZalith:"การปรับแต่งที่จำเป็นเพื่อรัน Minecraft บนมือถือส่วนใหญ่", pjVanilla:"เชเดอร์เรียบง่ายสำหรับอุปกรณ์สเปกต่ำมาก",
+  pjMoracolus:"เอนจินเชเดอร์สำหรับ Android เน้นประสิทธิภาพและ FPS", pjBattery:"แสดงแบตเตอรี่มือถือในเกมแบบเรียลไทม์", pjTweaks:"ประสบการณ์ที่ดีขึ้นสำหรับ Survival และ PvP",
+  cfgTitle:"ตั้งค่า", cfgSub:"ปรับเว็บไซต์ให้เป็นแบบที่คุณชอบ", cfgInterface:"หน้าตา", cfgAudio:"เสียง",
+  fadeLabel:"ความแรงของเอฟเฟกต์เฟดอิน", fadeDesc:"ควบคุมความแรงของเอฟเฟกต์ตอนหน้าจอปรากฏ ค่าเริ่มต้น: 1 · สูงสุด: 5", fadeTest:"ทดสอบเอฟเฟกต์", fadeReset:"คืนค่าเริ่มต้น (1)",
+  bgLabel:"ความทึบของพื้นหลัง", bgDesc:"ควบคุมความชัดของภาพพื้นหลัง ค่าเริ่มต้น: 35% · ต่ำสุด: 15% · สูงสุด: 80%",
+  audMusic:"เพลงพื้นหลัง", audVol:"ระดับเสียง", audDesc:"เพลงบรรยากาศเบา ๆ ระดับเสียงเริ่มต้น: 60% · ต่ำสุด: 10% · สูงสุด: 100%", visitasLabel:"ครั้งที่เข้าชม",
+  aboutTitle:"เว็บไซต์นี้เป็นของ RussoViller!", aboutText:"สวัสดี ฉันชื่อ <b>RussoViller</b> เว็บนี้ทำขึ้นเพื่อให้การติดตั้ง Launcher ที่ฉันใช้และอื่น ๆ ง่ายขึ้น เชิญดูได้เต็มที่ แล้วดาวน์โหลดสิ่งที่ชอบเลย!"
+});
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -1202,10 +1322,20 @@ function montarProjetos(id, itens){
 montarProjetos("lista-curse", PROJ_CURSE);
 montarProjetos("lista-modrinth", PROJ_MODRINTH);
 
-let lang = "pt";
+function idiomaDoAparelho(){
+  const lista = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || "en"];
+  const apelido = { in: "id", iw: "he", nb: "no" };
+  for (const x of lista){
+    const base = String(x).toLowerCase().split(/[-_]/)[0];
+    const c = apelido[base] || base;
+    if (T[c]) return c;
+  }
+  return "en";
+}
+let lang = idiomaDoAparelho();
 try { const s = localStorage.getItem("lang"); if (T[s]) lang = s; } catch (e) {}
 
-const NOMES = { pt: "Português (BR)", en: "English", es: "Español", id: "Bahasa Indonesia", ru: "Русский", it: "Italiano", fr: "Français", zh: "中文 (简体)" };
+const NOMES = { pt: "Português (BR)", en: "English", es: "Español", id: "Bahasa Indonesia", ru: "Русский", it: "Italiano", fr: "Français", zh: "中文 (简体)", tr: "Türkçe", ja: "日本語", th: "ไทย" };
 function bandeiraEN(){
   let r = '<rect width="24" height="16" fill="#fff"/>';
   for (let i = 0; i < 7; i++) r += `<rect y="${(i * 2 * 16 / 13).toFixed(2)}" width="24" height="${(16 / 13).toFixed(2)}" fill="#b22234"/>`;
@@ -1223,7 +1353,10 @@ const FLAGS = {
   fr: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="8" height="16" fill="#0055a4"/><rect x="8" width="8" height="16" fill="#fff"/><rect x="16" width="8" height="16" fill="#ef4135"/></svg>',
   zh: '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#de2910"/><polygon points="4.60,1.80 5.18,3.60 7.07,3.60 5.54,4.71 6.13,6.50 4.60,5.39 3.07,6.50 3.66,4.71 2.13,3.60 4.02,3.60" fill="#ffde00"/><polygon points="10.05,1.59 9.53,1.99 9.75,2.61 9.21,2.24 8.70,2.65 8.88,2.02 8.33,1.65 8.99,1.63 9.17,1.00 9.39,1.61" fill="#ffde00"/><polygon points="11.54,3.26 11.24,3.85 11.70,4.31 11.06,4.21 10.76,4.79 10.66,4.14 10.01,4.04 10.59,3.74 10.49,3.10 10.95,3.56" fill="#ffde00"/><polygon points="11.21,5.55 11.19,6.21 11.80,6.43 11.17,6.61 11.15,7.27 10.78,6.72 10.15,6.90 10.56,6.39 10.19,5.85 10.81,6.07" fill="#ffde00"/><polygon points="9.12,7.40 9.38,8.01 10.03,7.95 9.53,8.38 9.79,8.98 9.23,8.64 8.74,9.07 8.88,8.43 8.32,8.10 8.97,8.04" fill="#ffde00"/></svg>'
 };
-const HTMLLANG = { pt: "pt-BR", en: "en", es: "es", id: "id", ru: "ru", it: "it", fr: "fr", zh: "zh-CN" };
+FLAGS.tr = '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9" cy="8" r="4.2" fill="#fff"/><circle cx="10.2" cy="8" r="3.4" fill="#e30a17"/><polygon points="13.60,6.00 14.07,7.35 15.50,7.38 14.36,8.25 14.78,9.62 13.60,8.80 12.42,9.62 12.84,8.25 11.70,7.38 13.13,7.35" fill="#fff"/></svg>';
+FLAGS.ja = '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><circle cx="12" cy="8" r="4.8" fill="#bc002d"/></svg>';
+FLAGS.th = '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#a51931"/><rect y="2.67" width="24" height="10.66" fill="#f4f5f8"/><rect y="5.33" width="24" height="5.34" fill="#2d2a4a"/></svg>';
+const HTMLLANG = { pt: "pt-BR", en: "en", es: "es", id: "id", ru: "ru", it: "it", fr: "fr", zh: "zh-CN", tr: "tr", ja: "ja", th: "th" };
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
 
@@ -1241,6 +1374,8 @@ function traduzir(){
   hdRender();
   mgRender();
   visitasRender();
+  ttRender();
+  tzRender();
 }
 function menuIdioma(abrir){
   langMenu.hidden = !abrir;
@@ -1283,9 +1418,8 @@ function ir(id, rapido){
 document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => ir(b.dataset.go)));
 
 /* ============ FOTO DO LOGO ============
-   Troca a cada 15 s, seguindo o relógio: quem abrir o site vê a foto
-   que corresponde àquele momento (todo mundo vê a mesma ao mesmo tempo). */
-const FOTOS = [fontes("minecraft", AV.mc), fontes("roblox", AV.blox)];
+   Fixa: sempre a foto do TikTok principal (Minecraft). */
+const FOTOS = [fontes("minecraft", AV.mc)]; /* só a foto do TikTok principal (Minecraft) */
 const INTERVALO = 15000; /* 15 segundos */
 
 async function iniciarFotos(){
@@ -1296,6 +1430,8 @@ async function iniciarFotos(){
   let atual = indice();
   imgs.forEach((img, k) => { img.alt = ""; if (k === atual) img.className = "on"; box.appendChild(img); });
   box.parentElement.classList.add("tem-foto");
+  const ic = document.getElementById("ttMainIcon"); /* mesma foto no botão do TikTok principal */
+  if (ic){ const c = new Image(); c.alt = ""; c.src = imgs[0].src; ic.textContent = ""; ic.appendChild(c); }
   if (imgs.length < 2) return;
   setInterval(() => {
     const novo = indice();
@@ -1903,6 +2039,62 @@ fadeRange.addEventListener("change", repetirFade);
 document.getElementById("fadeTest").addEventListener("click", repetirFade);
 document.getElementById("fadeReset").addEventListener("click", () => { aplicarFade(FADE_PADRAO); guardarFade(); repetirFade(); });
 aplicarFade(fade);
+
+/* ============ FUSO HORÁRIO DO APARELHO (tempo real) ============ */
+function tzRender(){
+  const el = document.getElementById("tzChip");
+  if (!el) return;
+  try{
+    const zona = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    const agora = new Date(), loc = HTMLLANG[lang];
+    const hora = new Intl.DateTimeFormat(loc, { hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(agora);
+    let gmt = "";
+    try { gmt = new Intl.DateTimeFormat("en", { timeZoneName: "shortOffset" }).formatToParts(agora).find(p => p.type === "timeZoneName").value; } catch (e) {}
+    el.hidden = false;
+    el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>' + esc(hora) + '</b><span>' + esc([gmt, zona.replace(/_/g, " ")].filter(Boolean).join(" · ")) + '</span>';
+  }catch(e){ el.hidden = true; }
+}
+setInterval(tzRender, 1000);
+
+/* ============ SEGUIDORES DO TIKTOK PRINCIPAL (atualiza sozinho) ============ */
+const TT_USER = "russoviller.mc";
+let ttSeg = null, ttFalhou = false;
+try { const c = parseInt(localStorage.getItem("ttSeguidores"), 10); if (c >= 0) ttSeg = c; } catch (e) {}
+function ttRender(){
+  const el = document.getElementById("ttFol");
+  if (!el) return;
+  const n = ttSeg !== null ? ttSeg.toLocaleString(HTMLLANG[lang]) : (ttFalhou ? "—" : "…");
+  el.innerHTML = '<i aria-hidden="true"></i><b>' + n + '</b><span>' + esc(T[lang].seguidores) + '</span>';
+}
+async function ttBuscar(){
+  const alvo = "https://www.tiktok.com/@" + TT_USER;
+  const fontes = [
+    u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
+    u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
+    u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u)
+  ];
+  for (const f of fontes){
+    const c = new AbortController(), t = setTimeout(() => c.abort(), 9000);
+    try{
+      const r = await fetch(f(alvo), { signal: c.signal, cache: "no-store" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const txt = await r.text();
+      const m = /"followerCount"\s*:\s*(\d+)/.exec(txt);
+      if (m) return parseInt(m[1], 10);
+    }catch(e){} finally { clearTimeout(t); }
+  }
+  throw new Error("sem dados");
+}
+async function ttCarregar(){
+  try{
+    ttSeg = await ttBuscar(); ttFalhou = false;
+    try { localStorage.setItem("ttSeguidores", ttSeg); } catch (e) {}
+  }catch(e){ if (ttSeg === null) ttFalhou = true; console.warn("Seguidores do TikTok:", e); }
+  ttRender();
+}
+ttCarregar();
+setInterval(() => { if (!document.hidden) ttCarregar(); }, 30000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { ttCarregar(); tzRender(); } });
 
 /* ============ VISITAS (contador global: Abacus) ============ */
 const VIS_NS = "russoviller-webpage", VIS_KEY = "visitas";
