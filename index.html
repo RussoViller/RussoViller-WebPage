@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0a0506">
+<meta name="theme-color" content="#110d0e">
 <title>RussoViller WebPage</title>
 <link rel="preconnect" href="https://abacus.jasoncameron.dev" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0a0506; --line:rgba(255,255,255,.1); --glass:rgba(255,255,255,.05); --glass2:rgba(255,255,255,.09);
@@ -299,6 +299,71 @@ header{padding:12px 14px 12px 8px}
 .ttfol i{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84;animation:pulso 2s ease-in-out infinite}
 @keyframes pulso{50%{opacity:.35}}
 
+
+/* ===== Redesign v2: preto suave, vermelho e partes claras ===== */
+:root{--bg:#110d0e;--surface:#1a1415;--surface2:#231b1c;--cream:#f3ebe8;--ink:#1c1314;
+  --line:rgba(255,255,255,.09);--glass:#1a1415;--glass2:#241c1d;--text:#f6eeec;--muted:#b9a5a6;--red:#e5333f;
+  --grad:linear-gradient(135deg,#c41e2e,#e5333f);--display:"Sora","Segoe UI",system-ui,sans-serif}
+body{font-family:"Sora",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Arabic","Noto Sans Devanagari",sans-serif;font-size:15px}
+/* desempenho: fundo estático e sem blur pesado */
+body::before,body::after{filter:none;animation:none;border-radius:0;width:100vw;height:60vh;left:0;right:auto}
+body::before{top:0;opacity:1;background:radial-gradient(70% 90% at 15% 0,rgba(196,30,46,.26),transparent 70%)}
+body::after{bottom:0;top:auto;opacity:1;background:radial-gradient(60% 80% at 90% 100%,rgba(229,51,63,.12),transparent 70%)}
+header,.card,.zl-card,.btn.glass,.tz,.ttmain,.ttfol,.dd-btn,.sw,.visitas,.about{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+header{background:rgba(17,13,14,.94);padding:10px 14px 10px 10px}
+.logo::before{filter:none;animation-duration:12s}
+.about::before,.about-hi{animation:none}
+.view.active{animation-duration:.3s}
+/* tipografia e botões */
+.hero h1{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-weight:800;letter-spacing:-.03em}
+h2{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-size:1.55rem;margin-top:34px}
+.btn,.home,.zl-get{font-family:var(--display);font-weight:700;letter-spacing:.04em;box-shadow:0 6px 18px rgba(196,30,46,.28)}
+.btn{min-height:52px;padding:15px 24px;font-size:.82rem}
+.btn:hover,.home:hover,.zl-get:hover{box-shadow:0 8px 24px rgba(229,51,63,.4);transform:translateY(-1px)}
+.btn.glass{background:var(--cream);color:var(--ink);border-color:transparent;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.btn.glass:hover{background:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.home{padding:10px 20px;font-size:.78rem}
+/* cards */
+.card{background:var(--surface);border-radius:16px;padding:14px 16px;transition:transform .15s,border-color .2s,background .2s}
+.card:hover{transform:translateY(-1px);border-color:rgba(229,51,63,.6);background:var(--surface2);box-shadow:none}
+.card .icon{width:52px;height:52px;border-radius:14px;box-shadow:none}
+.card.proj .icon{width:64px;height:64px;border-radius:16px;box-shadow:none}
+.card h3{font-size:1rem}
+.zl-card{background:var(--surface);border-radius:20px}
+.tag{background:rgba(229,51,63,.14);color:#ff8f98;border-color:rgba(229,51,63,.35)}
+.dd-menu,.drawer{background:#1a1415}
+/* TikTok principal: compacto e texto realmente centralizado */
+.ttwrap{margin-bottom:22px}
+.ttmain{width:min(250px,100%);padding:6px;gap:8px;justify-content:center;border-radius:999px;background:var(--surface);border:1px solid rgba(229,51,63,.55);box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.ttmain::after{content:"";flex:none;width:40px;height:40px}
+.ttico{width:40px;height:40px;font-size:.7rem;box-shadow:none}
+.tttxt{flex:1;text-align:center;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ttfol{padding:5px 14px;background:var(--surface)}
+.ttfol b{font-size:.9rem}
+/* partes claras */
+.about{background:var(--cream);border:0;box-shadow:0 12px 40px rgba(0,0,0,.4);border-radius:24px}
+.about h3{background:none;-webkit-text-fill-color:currentColor;color:var(--ink)}
+.about p{color:#43353a}
+.about p b{background:none;-webkit-text-fill-color:currentColor;color:#c41e2e}
+.rodape{opacity:.6}
+/* celulares */
+@media (max-width:480px){main{padding:0 16px 56px}.hero{padding-top:54px}.logo{width:96px;height:96px;margin-bottom:22px}
+  .cta{margin-top:28px}.dd-btn{font-size:.85rem}.card p{font-size:.84rem}.drawer{width:min(86vw,360px)}.about{width:calc(100% - 32px)}}
+html,body{overflow-anchor:none}
+.hero{padding-top:62px}
+/* árabe: direita para a esquerda */
+[dir=rtl] body{font-family:"Noto Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
+[dir=rtl] .card,[dir=rtl] .zl-menu button,[dir=rtl] .dd-menu button,[dir=rtl] .drawer-nav button,[dir=rtl] .zl-dd>button,[dir=rtl] .ttmain{text-align:right}
+[dir=rtl] .card::after{content:"‹"}
+[dir=rtl] .dd-menu{left:auto;right:0}
+[dir=rtl] .dd-menu button:hover{transform:translateX(-3px)}
+[dir=rtl] .drawer{right:auto;left:0;border-left:0;border-right:1px solid rgba(229,51,63,.3);transform:translateX(-100%)}
+[dir=rtl] .drawer.open{transform:none}
+[dir=rtl] .tz{left:auto;right:0}
+[dir=rtl] .fade-scale{margin:12px 0 0 52px}
+[dir=rtl] input[type=range],[dir=rtl] .fade-row{direction:ltr}
+[dir=rtl] .tttxt,[dir=rtl] .zl-ver{letter-spacing:0}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -324,6 +389,14 @@ header{padding:12px 14px 12px 8px}
         <button type="button" role="option" data-lang="tr"><span class="opt"><span class="fl" data-flag="tr"></span>Türkçe</span></button>
         <button type="button" role="option" data-lang="ja"><span class="opt"><span class="fl" data-flag="ja"></span>日本語</span></button>
         <button type="button" role="option" data-lang="th"><span class="opt"><span class="fl" data-flag="th"></span>ไทย</span></button>
+        <button type="button" role="option" data-lang="de"><span class="opt"><span class="fl" data-flag="de"></span>Deutsch</span></button>
+        <button type="button" role="option" data-lang="ko"><span class="opt"><span class="fl" data-flag="ko"></span>한국어</span></button>
+        <button type="button" role="option" data-lang="pl"><span class="opt"><span class="fl" data-flag="pl"></span>Polski</span></button>
+        <button type="button" role="option" data-lang="vi"><span class="opt"><span class="fl" data-flag="vi"></span>Tiếng Việt</span></button>
+        <button type="button" role="option" data-lang="uk"><span class="opt"><span class="fl" data-flag="uk"></span>Українська</span></button>
+        <button type="button" role="option" data-lang="ar"><span class="opt"><span class="fl" data-flag="ar"></span>العربية</span></button>
+        <button type="button" role="option" data-lang="hi"><span class="opt"><span class="fl" data-flag="hi"></span>हिन्दी</span></button>
+        <button type="button" role="option" data-lang="nl"><span class="opt"><span class="fl" data-flag="nl"></span>Nederlands</span></button>
       </div>
     </div>
   </div>
@@ -1246,6 +1319,16 @@ T.th = Object.assign({}, T.en, {
   aboutTitle:"เว็บไซต์นี้เป็นของ RussoViller!", aboutText:"สวัสดี ฉันชื่อ <b>RussoViller</b> เว็บนี้ทำขึ้นเพื่อให้การติดตั้ง Launcher ที่ฉันใช้และอื่น ๆ ง่ายขึ้น เชิญดูได้เต็มที่ แล้วดาวน์โหลดสิ่งที่ชอบเลย!"
 });
 
+/* Novos idiomas (de, ko, pl, vi, uk, ar, hi, nl): o que ficar sem tradução cai no inglês */
+T.de = Object.assign({}, T.en, {"idioma": "Sprache", "inicio": "Start", "tagline": "Meine Downloads und Links an einem Ort.", "downloadsBtn": "DOWNLOADS", "dlTitle": "Downloads", "dlSub": "Wähle eine Kategorie.", "github": "Russos GitHub", "githubDesc": "Animierte Pfeile, Wallpaper und das ZL2-HUD.", "ghSub": "Auf GitHub veröffentlichte Projekte.", "outros": "CurseForge und Modrinth", "outrosDesc": "Meine Hauptprojekte auf beiden Seiten.", "outrosSub": "Meine Hauptprojekte auf CurseForge und Modrinth.", "zalithSub": "Launcher und MobileGlues zum Installieren.", "discordBtn": "DISCORD-SERVER", "discordTitle": "Discord-Server", "discordSub": "Tritt den Discord-Servern bei.", "socialBtn": "WEITERE NETZWERKE", "socialTitle": "Weitere soziale Netzwerke", "socialSub": "Folge mir auf den anderen Netzwerken.", "ttMain": "Haupt-TikTok", "seguidores": "Follower", "menuInicio": "START", "menuConfig": "EINSTELLUNGEN", "menuCodigo": "QUELLCODE", "voltar": "Zurück", "cfgTitle": "Einstellungen", "cfgSub": "Passe die Seite nach deinem Geschmack an.", "visitasLabel": "Besuche", "aboutTitle": "Diese Seite gehört RussoViller!", "aboutText": "Hallo, ich bin <b>RussoViller</b>. Diese Website erleichtert dir die Installation des Launchers, den ich benutze, und anderer Dinge. Schau dich in Ruhe um und lade herunter, was du willst!"});
+T.ko = Object.assign({}, T.en, {"idioma": "언어", "inicio": "홈", "tagline": "내 다운로드와 링크를 한곳에.", "downloadsBtn": "다운로드", "dlTitle": "다운로드", "dlSub": "카테고리를 선택하세요.", "github": "Russo의 GitHub", "githubDesc": "애니메이션 화살표, 배경화면, ZL2 HUD.", "ghSub": "GitHub에 공개된 프로젝트.", "outros": "CurseForge와 Modrinth", "outrosDesc": "두 사이트의 주요 프로젝트.", "outrosSub": "CurseForge와 Modrinth의 주요 프로젝트.", "zalithSub": "설치용 런처와 MobileGlues.", "discordBtn": "디스코드 서버", "discordTitle": "디스코드 서버", "discordSub": "디스코드 서버에 참여하세요.", "socialBtn": "기타 SNS", "socialTitle": "기타 소셜 미디어", "socialSub": "다른 SNS에서도 만나요.", "ttMain": "메인 TikTok", "seguidores": "팔로워", "menuInicio": "홈", "menuConfig": "설정", "menuCodigo": "소스 코드", "voltar": "뒤로", "cfgTitle": "설정", "cfgSub": "사이트를 원하는 대로 조정하세요.", "visitasLabel": "방문", "aboutTitle": "이 사이트는 RussoViller의 사이트입니다!", "aboutText": "안녕하세요, <b>RussoViller</b>입니다. 제가 쓰는 런처 등을 더 쉽게 설치하도록 만든 웹사이트예요. 편하게 둘러보고 원하는 걸 다운로드하세요!"});
+T.pl = Object.assign({}, T.en, {"idioma": "Język", "inicio": "Start", "tagline": "Moje pliki do pobrania i linki w jednym miejscu.", "downloadsBtn": "POBIERANIE", "dlTitle": "Pobieranie", "dlSub": "Wybierz kategorię.", "github": "GitHub Russo", "githubDesc": "Animowane strzałki, tapety i HUD do ZL2.", "ghSub": "Projekty opublikowane na GitHubie.", "outros": "CurseForge i Modrinth", "outrosDesc": "Moje główne projekty na obu stronach.", "outrosSub": "Moje główne projekty na CurseForge i Modrinth.", "zalithSub": "Launchery i MobileGlues do zainstalowania.", "discordBtn": "SERWERY DISCORD", "discordTitle": "Serwery Discord", "discordSub": "Dołącz do serwerów Discord.", "socialBtn": "INNE SERWISY", "socialTitle": "Inne serwisy społecznościowe", "socialSub": "Obserwuj mnie w innych serwisach.", "ttMain": "Główny TikTok", "seguidores": "obserwujących", "menuInicio": "START", "menuConfig": "USTAWIENIA", "menuCodigo": "KOD ŹRÓDŁOWY", "voltar": "Wstecz", "cfgTitle": "Ustawienia", "cfgSub": "Dostosuj stronę do siebie.", "visitasLabel": "odwiedzin", "aboutTitle": "Ta strona należy do RussoViller!", "aboutText": "Cześć, jestem <b>RussoViller</b>. Ta strona ułatwia instalację launchera, którego używam, i innych rzeczy. Rozejrzyj się i pobierz, co chcesz!"});
+T.vi = Object.assign({}, T.en, {"idioma": "Ngôn ngữ", "inicio": "Trang chủ", "tagline": "Tải xuống và liên kết của tôi, gói gọn một nơi.", "downloadsBtn": "TẢI XUỐNG", "dlTitle": "Tải xuống", "dlSub": "Chọn một danh mục.", "github": "GitHub của Russo", "githubDesc": "Mũi tên hoạt ảnh, hình nền và HUD cho ZL2.", "ghSub": "Các dự án đăng trên GitHub.", "outros": "CurseForge và Modrinth", "outrosDesc": "Các dự án chính của tôi trên cả hai trang.", "outrosSub": "Các dự án chính của tôi trên CurseForge và Modrinth.", "zalithSub": "Launcher và MobileGlues để cài đặt.", "discordBtn": "MÁY CHỦ DISCORD", "discordTitle": "Máy chủ Discord", "discordSub": "Tham gia các máy chủ Discord.", "socialBtn": "MẠNG XÃ HỘI KHÁC", "socialTitle": "Mạng xã hội khác", "socialSub": "Theo dõi tôi trên các mạng khác.", "ttMain": "TikTok chính", "seguidores": "người theo dõi", "menuInicio": "TRANG CHỦ", "menuConfig": "CÀI ĐẶT", "menuCodigo": "MÃ NGUỒN", "voltar": "Quay lại", "cfgTitle": "Cài đặt", "cfgSub": "Tùy chỉnh trang theo ý bạn.", "visitasLabel": "lượt truy cập", "aboutTitle": "Trang web này là của RussoViller!", "aboutText": "Xin chào, mình là <b>RussoViller</b>. Trang web này giúp việc cài Launcher mình dùng và những thứ khác dễ dàng hơn. Cứ thoải mái khám phá và tải những gì bạn muốn!"});
+T.uk = Object.assign({}, T.en, {"idioma": "Мова", "inicio": "Головна", "tagline": "Мої завантаження та посилання в одному місці.", "downloadsBtn": "ЗАВАНТАЖЕННЯ", "dlTitle": "Завантаження", "dlSub": "Оберіть категорію.", "github": "GitHub Russo", "githubDesc": "Анімовані стрілки, шпалери та HUD для ZL2.", "ghSub": "Проєкти, опубліковані на GitHub.", "outros": "CurseForge і Modrinth", "outrosDesc": "Мої головні проєкти на обох сайтах.", "outrosSub": "Мої головні проєкти на CurseForge і Modrinth.", "zalithSub": "Лаунчери та MobileGlues для встановлення.", "discordBtn": "СЕРВЕРИ DISCORD", "discordTitle": "Сервери Discord", "discordSub": "Приєднуйтесь до серверів Discord.", "socialBtn": "ІНШІ СОЦМЕРЕЖІ", "socialTitle": "Інші соцмережі", "socialSub": "Стежте за мною в інших соцмережах.", "ttMain": "Основний TikTok", "seguidores": "підписників", "menuInicio": "ГОЛОВНА", "menuConfig": "НАЛАШТУВАННЯ", "menuCodigo": "ВИХІДНИЙ КОД", "voltar": "Назад", "cfgTitle": "Налаштування", "cfgSub": "Налаштуйте сайт під себе.", "visitasLabel": "відвідувань", "aboutTitle": "Цей сайт належить RussoViller!", "aboutText": "Привіт, я <b>RussoViller</b>. Цей вебсайт допоможе легко встановити лаунчер, яким я користуюся, та інші речі. Почувайтеся як вдома й завантажуйте все, що потрібно!"});
+T.ar = Object.assign({}, T.en, {"idioma": "اللغة", "inicio": "الرئيسية", "tagline": "تنزيلاتي وروابطي في مكان واحد.", "downloadsBtn": "التنزيلات", "dlTitle": "التنزيلات", "dlSub": "اختر فئة.", "github": "GitHub الخاص بـ Russo", "githubDesc": "أسهم متحركة وخلفيات وHUD للـ ZL2.", "ghSub": "مشاريع منشورة على GitHub.", "outros": "CurseForge وModrinth", "outrosDesc": "مشاريعي الرئيسية على الموقعين.", "outrosSub": "مشاريعي الرئيسية على CurseForge وModrinth.", "zalithSub": "المشغّلات وMobileGlues للتثبيت.", "discordBtn": "خوادم DISCORD", "discordTitle": "خوادم Discord", "discordSub": "انضم إلى خوادم Discord.", "socialBtn": "وسائل تواصل أخرى", "socialTitle": "وسائل التواصل الأخرى", "socialSub": "تابعني على الشبكات الأخرى.", "ttMain": "TikTok الرئيسي", "seguidores": "متابع", "menuInicio": "الرئيسية", "menuConfig": "الإعدادات", "menuCodigo": "الكود المصدري", "voltar": "رجوع", "cfgTitle": "الإعدادات", "cfgSub": "خصّص الموقع على طريقتك.", "visitasLabel": "زيارة", "aboutTitle": "هذا الموقع يخص RussoViller!", "aboutText": "مرحبًا، أنا <b>RussoViller</b>. صُنع هذا الموقع لتسهيل تثبيت المشغّل الذي أستخدمه وأشياء أخرى. تصفّح براحتك وحمّل ما تريد!"});
+T.hi = Object.assign({}, T.en, {"idioma": "भाषा", "inicio": "होम", "tagline": "मेरे डाउनलोड और लिंक, एक ही जगह।", "downloadsBtn": "डाउनलोड", "dlTitle": "डाउनलोड", "dlSub": "एक श्रेणी चुनें।", "github": "Russo का GitHub", "githubDesc": "एनिमेटेड तीर, वॉलपेपर और ZL2 का HUD।", "ghSub": "GitHub पर प्रकाशित प्रोजेक्ट।", "outros": "CurseForge और Modrinth", "outrosDesc": "दोनों साइटों पर मेरे मुख्य प्रोजेक्ट।", "outrosSub": "CurseForge और Modrinth पर मेरे मुख्य प्रोजेक्ट।", "zalithSub": "इंस्टॉल करने के लिए लॉन्चर और MobileGlues।", "discordBtn": "DISCORD सर्वर", "discordTitle": "Discord सर्वर", "discordSub": "Discord सर्वर से जुड़ें।", "socialBtn": "अन्य सोशल मीडिया", "socialTitle": "अन्य सोशल मीडिया", "socialSub": "मुझे अन्य सोशल मीडिया पर फ़ॉलो करें।", "ttMain": "मुख्य TikTok", "seguidores": "फ़ॉलोअर्स", "menuInicio": "होम", "menuConfig": "सेटिंग्स", "menuCodigo": "सोर्स कोड", "voltar": "वापस", "cfgTitle": "सेटिंग्स", "cfgSub": "साइट को अपने हिसाब से सेट करें।", "visitasLabel": "विज़िट", "aboutTitle": "यह वेबसाइट RussoViller की है!", "aboutText": "नमस्ते, मैं <b>RussoViller</b> हूँ। यह वेबसाइट मेरे इस्तेमाल किए जाने वाले लॉन्चर और दूसरी चीज़ें इंस्टॉल करना आसान बनाती है। आराम से घूमें और जो चाहें डाउनलोड करें!"});
+T.nl = Object.assign({}, T.en, {"idioma": "Taal", "inicio": "Home", "tagline": "Mijn downloads en links op één plek.", "downloadsBtn": "DOWNLOADS", "dlTitle": "Downloads", "dlSub": "Kies een categorie.", "github": "GitHub van Russo", "githubDesc": "Geanimeerde pijlen, wallpapers en de HUD voor ZL2.", "ghSub": "Projecten gepubliceerd op GitHub.", "outros": "CurseForge en Modrinth", "outrosDesc": "Mijn hoofdprojecten op beide sites.", "outrosSub": "Mijn hoofdprojecten op CurseForge en Modrinth.", "zalithSub": "Launchers en MobileGlues om te installeren.", "discordBtn": "DISCORD-SERVERS", "discordTitle": "Discord-servers", "discordSub": "Word lid van de Discord-servers.", "socialBtn": "OVERIGE SOCIALS", "socialTitle": "Overige sociale media", "socialSub": "Volg me op de andere netwerken.", "ttMain": "Hoofd-TikTok", "seguidores": "volgers", "menuInicio": "HOME", "menuConfig": "INSTELLINGEN", "menuCodigo": "BRONCODE", "voltar": "Terug", "cfgTitle": "Instellingen", "cfgSub": "Pas de site aan zoals jij wilt.", "visitasLabel": "bezoeken", "aboutTitle": "Deze site is van RussoViller!", "aboutText": "Hallo, ik ben <b>RussoViller</b>. Deze website maakt het installeren van de launcher die ik gebruik en andere dingen makkelijker. Kijk rustig rond en download wat je wilt!"});
+
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* Foto do servidor pela API pública de convites do Discord.
@@ -1335,7 +1418,7 @@ function idiomaDoAparelho(){
 let lang = idiomaDoAparelho();
 try { const s = localStorage.getItem("lang"); if (T[s]) lang = s; } catch (e) {}
 
-const NOMES = { pt: "Português (BR)", en: "English", es: "Español", id: "Bahasa Indonesia", ru: "Русский", it: "Italiano", fr: "Français", zh: "中文 (简体)", tr: "Türkçe", ja: "日本語", th: "ไทย" };
+const NOMES = { pt: "Português (BR)", en: "English", es: "Español", id: "Bahasa Indonesia", ru: "Русский", it: "Italiano", fr: "Français", zh: "中文 (简体)", tr: "Türkçe", ja: "日本語", th: "ไทย", de: "Deutsch", ko: "한국어", pl: "Polski", vi: "Tiếng Việt", uk: "Українська", ar: "العربية", hi: "हिन्दी", nl: "Nederlands" };
 function bandeiraEN(){
   let r = '<rect width="24" height="16" fill="#fff"/>';
   for (let i = 0; i < 7; i++) r += `<rect y="${(i * 2 * 16 / 13).toFixed(2)}" width="24" height="${(16 / 13).toFixed(2)}" fill="#b22234"/>`;
@@ -1356,7 +1439,15 @@ const FLAGS = {
 FLAGS.tr = '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9" cy="8" r="4.2" fill="#fff"/><circle cx="10.2" cy="8" r="3.4" fill="#e30a17"/><polygon points="13.60,6.00 14.07,7.35 15.50,7.38 14.36,8.25 14.78,9.62 13.60,8.80 12.42,9.62 12.84,8.25 11.70,7.38 13.13,7.35" fill="#fff"/></svg>';
 FLAGS.ja = '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><circle cx="12" cy="8" r="4.8" fill="#bc002d"/></svg>';
 FLAGS.th = '<svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#a51931"/><rect y="2.67" width="24" height="10.66" fill="#f4f5f8"/><rect y="5.33" width="24" height="5.34" fill="#2d2a4a"/></svg>';
-const HTMLLANG = { pt: "pt-BR", en: "en", es: "es", id: "id", ru: "ru", it: "it", fr: "fr", zh: "zh-CN", tr: "tr", ja: "ja", th: "th" };
+FLAGS.de = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"5.34\" fill=\"#000\"/><rect y=\"5.33\" width=\"24\" height=\"5.34\" fill=\"#dd0000\"/><rect y=\"10.66\" width=\"24\" height=\"5.34\" fill=\"#ffce00\"/></svg>";
+FLAGS.nl = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"5.34\" fill=\"#ae1c28\"/><rect y=\"5.33\" width=\"24\" height=\"5.34\" fill=\"#fff\"/><rect y=\"10.66\" width=\"24\" height=\"5.34\" fill=\"#21468b\"/></svg>";
+FLAGS.pl = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"8\" fill=\"#fff\"/><rect y=\"8\" width=\"24\" height=\"8\" fill=\"#dc143c\"/></svg>";
+FLAGS.uk = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"8\" fill=\"#0057b7\"/><rect y=\"8\" width=\"24\" height=\"8\" fill=\"#ffd700\"/></svg>";
+FLAGS.vi = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#da251d\"/><polygon points=\"12.00,3.80 13.06,6.94 16.37,6.98 13.71,8.96 14.70,12.12 12.00,10.20 9.30,12.12 10.29,8.96 7.63,6.98 10.94,6.94\" fill=\"#ffff00\"/></svg>";
+FLAGS.ko = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#fff\"/><path d=\"M8.4 8a3.6 3.6 0 0 1 7.2 0z\" fill=\"#cd2e3a\"/><path d=\"M8.4 8a3.6 3.6 0 0 0 7.2 0z\" fill=\"#0047a0\"/><g fill=\"#222\"><rect x=\"2\" y=\"2\" width=\"3.4\" height=\".8\"/><rect x=\"2\" y=\"3.6\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"2\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"3.6\" width=\"3.4\" height=\".8\"/><rect x=\"2\" y=\"11.6\" width=\"3.4\" height=\".8\"/><rect x=\"2\" y=\"13.2\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"11.6\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"13.2\" width=\"3.4\" height=\".8\"/></g></svg>";
+FLAGS.ar = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#3b2a2d\"/><text x=\"12\" y=\"12.3\" text-anchor=\"middle\" font-size=\"11\" fill=\"#fff\" font-family=\"sans-serif\">ع</text></svg>";
+FLAGS.hi = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#3b2a2d\"/><text x=\"12\" y=\"12\" text-anchor=\"middle\" font-size=\"10\" fill=\"#fff\" font-family=\"sans-serif\">हि</text></svg>";
+const HTMLLANG = { pt: "pt-BR", en: "en", es: "es", id: "id", ru: "ru", it: "it", fr: "fr", zh: "zh-CN", tr: "tr", ja: "ja", th: "th", de: "de", ko: "ko", pl: "pl", vi: "vi", uk: "uk", ar: "ar", hi: "hi", nl: "nl" };
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
 
@@ -1364,6 +1455,7 @@ function traduzir(){
   document.querySelectorAll("[data-t]").forEach(e => { e.textContent = T[lang][e.dataset.t] || ""; });
   document.querySelectorAll("[data-th]").forEach(e => { e.innerHTML = T[lang][e.dataset.th] || ""; });
   document.documentElement.lang = HTMLLANG[lang];
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   document.getElementById("langAtual").textContent = NOMES[lang];
   document.getElementById("langFlag").innerHTML = FLAGS[lang];
   document.querySelectorAll("[data-flag]").forEach(e => { e.innerHTML = FLAGS[e.dataset.flag]; });
@@ -2071,19 +2163,31 @@ async function ttBuscar(){
   const fontes = [
     u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
     u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
-    u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u)
+    u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u),
+    u => "https://r.jina.ai/" + u
   ];
-  for (const f of fontes){
-    const c = new AbortController(), t = setTimeout(() => c.abort(), 9000);
+  /* aceita o JSON da página (followerCount) ou o texto "1.2K Followers" */
+  const ler = txt => {
+    let m = /"followerCount"\s*:\s*(\d+)/.exec(txt) || /"fans"\s*:\s*(\d+)/.exec(txt);
+    if (m) return parseInt(m[1], 10);
+    m = /(\d[\d.,]*)\s*([KMB])?\s*Followers/i.exec(txt);
+    if (!m) return null;
+    const k = { K: 1e3, M: 1e6, B: 1e9 }[(m[2] || "").toUpperCase()] || 1;
+    const v = Math.round(parseFloat(m[1].replace(/,/g, "")) * k);
+    return v >= 0 ? v : null;
+  };
+  /* todas as fontes ao mesmo tempo: vale a primeira que responder com número */
+  const tentar = async f => {
+    const c = new AbortController(), t = setTimeout(() => c.abort(), 12000);
     try{
-      const r = await fetch(f(alvo), { signal: c.signal, cache: "no-store" });
+      const r = await fetch(f(alvo), { signal: c.signal });
       if (!r.ok) throw new Error("HTTP " + r.status);
-      const txt = await r.text();
-      const m = /"followerCount"\s*:\s*(\d+)/.exec(txt);
-      if (m) return parseInt(m[1], 10);
-    }catch(e){} finally { clearTimeout(t); }
-  }
-  throw new Error("sem dados");
+      const n = ler(await r.text());
+      if (n === null) throw new Error("sem número");
+      return n;
+    } finally { clearTimeout(t); }
+  };
+  return Promise.any(fontes.map(tentar));
 }
 async function ttCarregar(){
   try{
@@ -2295,6 +2399,11 @@ visitasCarregar();
 
 traduzir();
 ir(location.hash.slice(1) || "inicio", true);
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+let tocou = false;
+["touchstart","wheel","keydown","pointerdown"].forEach(ev => addEventListener(ev, () => { tocou = true; }, { once: true, passive: true }));
+[350, 900].forEach(ms => setTimeout(() => { if (!tocou && (location.hash === "" || location.hash === "#inicio")) scrollTo(0, 0); }, ms));
+requestAnimationFrame(() => window.scrollTo(0, 0));
 </script>
 </body>
 </html>
