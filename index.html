@@ -320,8 +320,15 @@ h2{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-s
 .btn,.home,.zl-get{font-family:var(--display);font-weight:700;letter-spacing:.04em;box-shadow:0 6px 18px rgba(196,30,46,.28)}
 .btn{min-height:52px;padding:15px 24px;font-size:.82rem}
 .btn:hover,.home:hover,.zl-get:hover{box-shadow:0 8px 24px rgba(229,51,63,.4);transform:translateY(-1px)}
-.btn.glass{background:var(--cream);color:var(--ink);border-color:transparent;box-shadow:0 4px 14px rgba(0,0,0,.35)}
-.btn.glass:hover{background:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.btn.glass{position:relative;background:transparent;color:var(--text);border:0;box-shadow:none;isolation:isolate}
+.btn.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;pointer-events:none;
+  background:conic-gradient(from var(--ang),#050304 0 50%,#7a0f19 68%,#ff3b4a 88%,#050304 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+  animation:giraBorda 3.4s linear infinite}
+@keyframes giraBorda{to{--ang:360deg}}
+.btn.glass:hover{background:rgba(255,255,255,.05);border-color:transparent;box-shadow:none}
 .home{padding:10px 20px;font-size:.78rem}
 /* cards */
 .card{background:var(--surface);border-radius:16px;padding:14px 16px;transition:transform .15s,border-color .2s,background .2s}
@@ -335,7 +342,6 @@ h2{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-s
 /* TikTok principal: compacto e texto realmente centralizado */
 .ttwrap{margin-bottom:22px}
 .ttmain{width:min(250px,100%);padding:6px;gap:8px;justify-content:center;border-radius:999px;background:var(--surface);border:1px solid rgba(229,51,63,.55);box-shadow:0 4px 16px rgba(0,0,0,.4)}
-.ttmain::after{content:"";flex:none;width:40px;height:40px}
 .ttico{width:40px;height:40px;font-size:.7rem;box-shadow:none}
 .tttxt{flex:1;text-align:center;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ttfol{padding:5px 14px;background:var(--surface)}
@@ -1445,8 +1451,8 @@ FLAGS.pl = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" h
 FLAGS.uk = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"8\" fill=\"#0057b7\"/><rect y=\"8\" width=\"24\" height=\"8\" fill=\"#ffd700\"/></svg>";
 FLAGS.vi = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#da251d\"/><polygon points=\"12.00,3.80 13.06,6.94 16.37,6.98 13.71,8.96 14.70,12.12 12.00,10.20 9.30,12.12 10.29,8.96 7.63,6.98 10.94,6.94\" fill=\"#ffff00\"/></svg>";
 FLAGS.ko = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#fff\"/><path d=\"M8.4 8a3.6 3.6 0 0 1 7.2 0z\" fill=\"#cd2e3a\"/><path d=\"M8.4 8a3.6 3.6 0 0 0 7.2 0z\" fill=\"#0047a0\"/><g fill=\"#222\"><rect x=\"2\" y=\"2\" width=\"3.4\" height=\".8\"/><rect x=\"2\" y=\"3.6\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"2\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"3.6\" width=\"3.4\" height=\".8\"/><rect x=\"2\" y=\"11.6\" width=\"3.4\" height=\".8\"/><rect x=\"2\" y=\"13.2\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"11.6\" width=\"3.4\" height=\".8\"/><rect x=\"18.6\" y=\"13.2\" width=\"3.4\" height=\".8\"/></g></svg>";
-FLAGS.ar = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#3b2a2d\"/><text x=\"12\" y=\"12.3\" text-anchor=\"middle\" font-size=\"11\" fill=\"#fff\" font-family=\"sans-serif\">ع</text></svg>";
-FLAGS.hi = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#3b2a2d\"/><text x=\"12\" y=\"12\" text-anchor=\"middle\" font-size=\"10\" fill=\"#fff\" font-family=\"sans-serif\">हि</text></svg>";
+FLAGS.ar = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"16\" fill=\"#fff\"/><rect x=\"6\" width=\"18\" height=\"5.34\" fill=\"#00732f\"/><rect x=\"6\" y=\"10.66\" width=\"18\" height=\"5.34\" fill=\"#000\"/><rect width=\"6\" height=\"16\" fill=\"#ff0000\"/></svg>";
+FLAGS.hi = "<svg viewBox=\"0 0 24 16\" aria-hidden=\"true\"><rect width=\"24\" height=\"5.34\" fill=\"#ff9933\"/><rect y=\"5.33\" width=\"24\" height=\"5.34\" fill=\"#fff\"/><rect y=\"10.66\" width=\"24\" height=\"5.34\" fill=\"#138808\"/><circle cx=\"12\" cy=\"8\" r=\"1.9\" fill=\"none\" stroke=\"#000080\" stroke-width=\".5\"/><circle cx=\"12\" cy=\"8\" r=\".4\" fill=\"#000080\"/></svg>";
 const HTMLLANG = { pt: "pt-BR", en: "en", es: "es", id: "id", ru: "ru", it: "it", fr: "fr", zh: "zh-CN", tr: "tr", ja: "ja", th: "th", de: "de", ko: "ko", pl: "pl", vi: "vi", uk: "uk", ar: "ar", hi: "hi", nl: "nl" };
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
@@ -2150,7 +2156,7 @@ setInterval(tzRender, 1000);
 
 /* ============ SEGUIDORES DO TIKTOK PRINCIPAL (atualiza sozinho) ============ */
 const TT_USER = "russoviller.mc";
-let ttSeg = null, ttFalhou = false;
+let ttSeg = null, ttFalhou = false, ttUlt = 0, ttTent = 0;
 try { const c = parseInt(localStorage.getItem("ttSeguidores"), 10); if (c >= 0) ttSeg = c; } catch (e) {}
 function ttRender(){
   const el = document.getElementById("ttFol");
@@ -2160,7 +2166,11 @@ function ttRender(){
 }
 async function ttBuscar(){
   const alvo = "https://www.tiktok.com/@" + TT_USER;
+  const tw = "https://www.tikwm.com/api/user/info?unique_id=" + encodeURIComponent(TT_USER);
   const fontes = [
+    () => tw,
+    () => "https://api.allorigins.win/raw?url=" + encodeURIComponent(tw),
+    () => "https://corsproxy.io/?url=" + encodeURIComponent(tw),
     u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
     u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
     u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u),
@@ -2190,15 +2200,16 @@ async function ttBuscar(){
   return Promise.any(fontes.map(tentar));
 }
 async function ttCarregar(){
+  ttUlt = Date.now();
   try{
     ttSeg = await ttBuscar(); ttFalhou = false;
     try { localStorage.setItem("ttSeguidores", ttSeg); } catch (e) {}
-  }catch(e){ if (ttSeg === null) ttFalhou = true; console.warn("Seguidores do TikTok:", e); }
+  }catch(e){ if (ttSeg === null){ ttFalhou = true; if (ttTent++ < 6) setTimeout(ttCarregar, 20000); } console.warn("Seguidores do TikTok:", e); }
   ttRender();
 }
 ttCarregar();
-setInterval(() => { if (!document.hidden) ttCarregar(); }, 30000);
-document.addEventListener("visibilitychange", () => { if (!document.hidden) { ttCarregar(); tzRender(); } });
+setInterval(() => { if (!document.hidden) ttCarregar(); }, 300000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { if (Date.now() - ttUlt > 300000) ttCarregar(); tzRender(); } });
 
 /* ============ VISITAS (contador global: Abacus) ============ */
 const VIS_NS = "russoviller-webpage", VIS_KEY = "visitas";
