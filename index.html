@@ -362,6 +362,7 @@ h2{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-s
   .cta{margin-top:28px}.dd-btn{font-size:.85rem}.card p{font-size:.84rem}.drawer{width:min(86vw,360px)}.about{width:calc(100% - 32px)}}
 html,body{overflow-anchor:none}
 .hero{padding-top:62px}
+a.card{text-decoration:none;color:inherit}
 /* árabe: direita para a esquerda */
 [dir=rtl] body{font-family:"Noto Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif}
 [dir=rtl] .card,[dir=rtl] .zl-menu button,[dir=rtl] .dd-menu button,[dir=rtl] .drawer-nav button,[dir=rtl] .zl-dd>button,[dir=rtl] .ttmain{text-align:right}
@@ -461,6 +462,10 @@ html,body{overflow-anchor:none}
     <h2 data-t="dlTitle"></h2>
     <p class="sub" data-t="dlSub"></p>
     <div class="list">
+      <a class="card" id="cardPatreon" href="https://www.patreon.com/RussoViller_?utm_campaign=creatorshare_creator" target="_blank" rel="noopener">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="#fff"><circle cx="15" cy="9" r="6"/><rect x="2" y="3" width="4" height="18" rx=".6"/></svg></div>
+        <div class="info"><h3 data-t="meuTrabalho"></h3><p>Patreon</p></div>
+      </a>
       <button class="card" data-go="github">
         <div class="icon" id="icGithub" aria-hidden="true">GH</div>
         <div class="info"><h3 data-t="github"></h3><p data-t="githubDesc"></p></div>
@@ -1339,6 +1344,10 @@ T.uk = Object.assign({}, T.en, {"idioma": "Мова", "inicio": "Головна"
 T.ar = Object.assign({}, T.en, {"idioma": "اللغة", "inicio": "الرئيسية", "tagline": "تنزيلاتي وروابطي في مكان واحد.", "downloadsBtn": "التنزيلات", "dlTitle": "التنزيلات", "dlSub": "اختر فئة.", "github": "GitHub الخاص بـ Russo", "githubDesc": "أسهم متحركة وخلفيات وHUD للـ ZL2.", "ghSub": "مشاريع منشورة على GitHub.", "outros": "CurseForge وModrinth", "outrosDesc": "مشاريعي الرئيسية على الموقعين.", "outrosSub": "مشاريعي الرئيسية على CurseForge وModrinth.", "zalithSub": "المشغّلات وMobileGlues للتثبيت.", "discordBtn": "خوادم DISCORD", "discordTitle": "خوادم Discord", "discordSub": "انضم إلى خوادم Discord.", "socialBtn": "وسائل تواصل أخرى", "socialTitle": "وسائل التواصل الأخرى", "socialSub": "تابعني على الشبكات الأخرى.", "ttMain": "TikTok الرئيسي", "seguidores": "متابع", "menuInicio": "الرئيسية", "menuConfig": "الإعدادات", "menuCodigo": "الكود المصدري", "voltar": "رجوع", "cfgTitle": "الإعدادات", "cfgSub": "خصّص الموقع على طريقتك.", "visitasLabel": "زيارة", "aboutTitle": "مرحبًا بكم في الموقع الرسمي لـ RussoViller!", "aboutText": "مرحبًا، أنا <b>RussoViller</b>. صُنع هذا الموقع لتسهيل تثبيت المشغّل الذي أستخدمه وأشياء أخرى. تصفّح براحتك وحمّل ما تريد!"});
 T.hi = Object.assign({}, T.en, {"idioma": "भाषा", "inicio": "होम", "tagline": "मेरे डाउनलोड और लिंक, एक ही जगह।", "downloadsBtn": "डाउनलोड", "dlTitle": "डाउनलोड", "dlSub": "एक श्रेणी चुनें।", "github": "Russo का GitHub", "githubDesc": "एनिमेटेड तीर, वॉलपेपर और ZL2 का HUD।", "ghSub": "GitHub पर प्रकाशित प्रोजेक्ट।", "outros": "CurseForge और Modrinth", "outrosDesc": "दोनों साइटों पर मेरे मुख्य प्रोजेक्ट।", "outrosSub": "CurseForge और Modrinth पर मेरे मुख्य प्रोजेक्ट।", "zalithSub": "इंस्टॉल करने के लिए लॉन्चर और MobileGlues।", "discordBtn": "DISCORD सर्वर", "discordTitle": "Discord सर्वर", "discordSub": "Discord सर्वर से जुड़ें।", "socialBtn": "अन्य सोशल मीडिया", "socialTitle": "अन्य सोशल मीडिया", "socialSub": "मुझे अन्य सोशल मीडिया पर फ़ॉलो करें।", "ttMain": "मुख्य TikTok", "seguidores": "फ़ॉलोअर्स", "menuInicio": "होम", "menuConfig": "सेटिंग्स", "menuCodigo": "सोर्स कोड", "voltar": "वापस", "cfgTitle": "सेटिंग्स", "cfgSub": "साइट को अपने हिसाब से सेट करें।", "visitasLabel": "विज़िट", "aboutTitle": "RussoViller की आधिकारिक वेबसाइट पर आपका स्वागत है!", "aboutText": "नमस्ते, मैं <b>RussoViller</b> हूँ। यह वेबसाइट मेरे इस्तेमाल किए जाने वाले लॉन्चर और दूसरी चीज़ें इंस्टॉल करना आसान बनाती है। आराम से घूमें और जो चाहें डाउनलोड करें!"});
 T.nl = Object.assign({}, T.en, {"idioma": "Taal", "inicio": "Home", "tagline": "Mijn downloads en links op één plek.", "downloadsBtn": "DOWNLOADS", "dlTitle": "Downloads", "dlSub": "Kies een categorie.", "github": "GitHub van Russo", "githubDesc": "Geanimeerde pijlen, wallpapers en de HUD voor ZL2.", "ghSub": "Projecten gepubliceerd op GitHub.", "outros": "CurseForge en Modrinth", "outrosDesc": "Mijn hoofdprojecten op beide sites.", "outrosSub": "Mijn hoofdprojecten op CurseForge en Modrinth.", "zalithSub": "Launchers en MobileGlues om te installeren.", "discordBtn": "DISCORD-SERVERS", "discordTitle": "Discord-servers", "discordSub": "Word lid van de Discord-servers.", "socialBtn": "OVERIGE SOCIALS", "socialTitle": "Overige sociale media", "socialSub": "Volg me op de andere netwerken.", "ttMain": "Hoofd-TikTok", "seguidores": "volgers", "menuInicio": "HOME", "menuConfig": "INSTELLINGEN", "menuCodigo": "BRONCODE", "voltar": "Terug", "cfgTitle": "Instellingen", "cfgSub": "Pas de site aan zoals jij wilt.", "visitasLabel": "bezoeken", "aboutTitle": "Welkom op de officiële website van RussoViller!", "aboutText": "Hallo, ik ben <b>RussoViller</b>. Deze website maakt het installeren van de launcher die ik gebruik en andere dingen makkelijker. Kijk rustig rond en download wat je wilt!"});
+
+/* Botão "Meu trabalho" (Patreon) */
+const MEU_TRABALHO = {"pt": "Meu trabalho", "en": "My work", "es": "Mi trabajo", "id": "Karya saya", "ru": "Моя работа", "it": "Il mio lavoro", "fr": "Mon travail", "zh": "我的作品", "tr": "Çalışmalarım", "ja": "私の作品", "th": "ผลงานของฉัน", "de": "Meine Arbeit", "ko": "내 작업", "pl": "Moja praca", "vi": "Công việc của tôi", "uk": "Моя робота", "ar": "أعمالي", "hi": "मेरा काम", "nl": "Mijn werk"};
+Object.keys(MEU_TRABALHO).forEach(c => { if (T[c]) T[c].meuTrabalho = MEU_TRABALHO[c]; });
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
