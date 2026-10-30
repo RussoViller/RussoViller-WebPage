@@ -358,6 +358,37 @@ h2{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-s
 html,body{overflow-anchor:none}
 .hero{padding-top:62px}
 a.card{text-decoration:none;color:inherit}
+/* Avaliar site */
+.tz{left:-6px}.tz span{color:var(--muted)}
+[dir=rtl] .tz{left:auto;right:-6px}
+.avbtn{position:absolute;top:10px;right:-6px;display:inline-flex;align-items:center;gap:6px;padding:6px 13px 6px 10px;border:1px solid rgba(229,51,63,.55);border-radius:999px;background:var(--surface);color:var(--text);font:700 .76rem var(--display);text-decoration:none;white-space:nowrap;transition:background .2s,transform .15s}
+.avbtn svg{width:14px;height:14px;fill:#ffc94d;flex:none}
+.avbtn:hover{background:var(--surface2)}.avbtn:active{transform:scale(.97)}
+[dir=rtl] .avbtn{right:auto;left:-6px}
+.rv{max-width:560px;margin:0 auto}
+.rv form{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.rv input[type=text],.rv textarea{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--text);font:inherit;font-size:.95rem;outline:0;resize:vertical}
+.rv input[type=text]:focus,.rv textarea:focus{border-color:rgba(229,51,63,.7)}
+.rv-l{font-size:.82rem;color:var(--muted);margin-top:4px}
+.rv-stars{display:flex;gap:6px}
+.rv-stars button{flex:1;max-width:64px;height:52px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:#5b4d4f;font-size:1.6rem;line-height:1;cursor:pointer;transition:color .15s,border-color .15s,transform .1s}
+.rv-stars button.on{color:#ffc94d;border-color:rgba(255,201,77,.45)}
+.rv-stars button:active{transform:scale(.94)}
+.rv-c{align-self:flex-end;font-size:.75rem;color:var(--muted);margin-top:-4px}
+.rv form .btn{width:100%}
+.rv-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.rv-msg{min-height:1.2em;font-size:.88rem;margin:0}.rv-msg.err{color:#ff8f98}.rv-msg.ok{color:#3ddc84}
+.rv-top{display:flex;flex-direction:column;gap:10px;margin:26px 0 12px}
+.rv-top b{font:800 1.15rem var(--display)}
+.rv-chips{display:flex;flex-wrap:wrap;gap:6px}
+.rv-chips button{padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font:600 .8rem var(--display);cursor:pointer}
+.rv-chips button.on{background:var(--grad);border-color:transparent;color:#fff}
+.rv-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.rv-item{padding:13px 15px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.rv-item header{position:static;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:0;margin-bottom:5px;background:none;border:0}
+.rv-item header b{font-size:.92rem}.rv-item header .st{color:#ffc94d;letter-spacing:1px;font-size:.85rem}.rv-item header time{margin-inline-start:auto;font-size:.72rem;color:var(--muted)}
+.rv-item p{margin:0;font-size:.9rem;color:#e6d6d4;overflow-wrap:anywhere;white-space:pre-wrap}
+.rv-vazio{color:var(--muted);font-size:.9rem}
 /* Botão da seed (copia para a área de transferência) */
 .seed{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;width:min(340px,calc(100% - 8px));margin:26px auto 0;padding:18px 20px;border:0;border-radius:22px;background:transparent;color:var(--text);font:inherit;text-align:center;cursor:pointer;isolation:isolate;text-shadow:0 1px 10px rgba(0,0,0,.65);-webkit-tap-highlight-color:transparent;transition:background .2s,transform .15s}
 .seed::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;pointer-events:none;
@@ -446,6 +477,7 @@ a.card{text-decoration:none;color:inherit}
   <section id="inicio" class="view">
     <div class="hero">
       <div class="tz" id="tzChip" aria-live="off"></div>
+      <a class="avbtn" id="avBtn" href="#avaliar" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg><span data-t="avaliarBtn"></span></a>
       <div class="ttwrap">
         <a class="ttmain" id="ttMain" href="https://www.tiktok.com/@russoviller.mc?_r=1&amp;_t=ZS-9Av0Sc7ZwN3" target="_blank" rel="noopener">
           <span class="ttico" id="ttMainIcon" aria-hidden="true">TT</span>
@@ -532,6 +564,27 @@ a.card{text-decoration:none;color:inherit}
     <p class="sub" data-t="modSub"></p>
     <div class="list" id="lista-modrinth"></div>
     <button class="back" data-go="outros" data-t="voltar"></button>
+  </section>
+
+  <section id="avaliar" class="view">
+    <div class="rv">
+      <h2 data-t="revTitle"></h2>
+      <form id="rvForm" novalidate autocomplete="off">
+        <input id="rvNome" type="text" maxlength="30" autocomplete="off">
+        <div class="rv-l" data-t="revStars"></div>
+        <div class="rv-stars" id="rvStars" role="radiogroup">
+          <button type="button" role="radio" aria-checked="false" data-v="1">★</button><button type="button" role="radio" aria-checked="false" data-v="2">★</button><button type="button" role="radio" aria-checked="false" data-v="3">★</button><button type="button" role="radio" aria-checked="false" data-v="4">★</button><button type="button" role="radio" aria-checked="false" data-v="5">★</button>
+        </div>
+        <textarea id="rvTexto" maxlength="250" rows="4"></textarea>
+        <div class="rv-c" id="rvCont">0/250</div>
+        <input type="text" id="rvHp" class="rv-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn" id="rvEnviar" data-t="revSend"></button>
+        <p class="rv-msg" id="rvMsg" role="status"></p>
+      </form>
+      <div class="rv-top"><b id="rvMedia"></b><div class="rv-chips" id="rvChips"></div></div>
+      <div class="rv-list" id="rvLista"></div>
+      <button class="back" data-go="inicio" data-t="voltar"></button>
+    </div>
   </section>
 
   <section id="config" class="view">
@@ -1385,6 +1438,11 @@ Object.keys(SEED_I18N).forEach(c => { if (T[c]) { T[c].seedTitle = SEED_I18N[c][
   });
 })();
 
+/* Avaliar site */
+const REV_KEYS = ["avaliarBtn", "revTitle", "revName", "revStars", "revComment", "revSend", "revThanks", "revAll", "revEmpty", "revBlock", "revErr", "revOff", "revFill"];
+const REV_I18N = {"pt": ["Avaliar Site", "Avaliar o site", "Seu nome ou apelido", "Sua nota", "Comentário (máx. 250). Não inclua dados pessoais.", "Enviar avaliação", "Obrigado pela sua avaliação!", "Todas", "Ainda não há avaliações.", "Seu texto tem palavras ofensivas, dados pessoais ou links. Remova e tente de novo.", "Não foi possível enviar agora. Tente novamente em instantes.", "As avaliações serão ativadas em breve.", "Preencha o nome, escolha uma nota e escreva um comentário."], "en": ["Rate Site", "Rate the site", "Your name or nickname", "Your rating", "Comment (max 250). Don’t include personal data.", "Send review", "Thanks for your review!", "All", "No reviews yet.", "Your text contains offensive words, personal data or links. Remove them and try again.", "Couldn’t send right now. Please try again shortly.", "Reviews will be enabled soon.", "Enter your name, pick a rating and write a comment."], "es": ["Valorar el sitio", "Valorar el sitio", "Tu nombre o apodo", "Tu nota", "Comentario (máx. 250). No incluyas datos personales.", "Enviar valoración", "¡Gracias por tu valoración!", "Todas", "Aún no hay valoraciones.", "Tu texto contiene palabras ofensivas, datos personales o enlaces. Quítalos e inténtalo de nuevo.", "No se pudo enviar ahora. Inténtalo de nuevo en un momento.", "Las valoraciones se activarán pronto.", "Escribe tu nombre, elige una nota y escribe un comentario."], "id": ["Nilai Situs", "Nilai situs ini", "Nama atau panggilan", "Nilai kamu", "Komentar (maks. 250). Jangan sertakan data pribadi.", "Kirim ulasan", "Terima kasih atas ulasanmu!", "Semua", "Belum ada ulasan.", "Teksmu berisi kata kasar, data pribadi, atau tautan. Hapus lalu coba lagi.", "Tidak bisa mengirim sekarang. Coba lagi sebentar lagi.", "Ulasan akan segera diaktifkan.", "Isi nama, pilih nilai, dan tulis komentar."], "ru": ["Оценить сайт", "Оценить сайт", "Ваше имя или ник", "Ваша оценка", "Комментарий (до 250). Не указывайте личные данные.", "Отправить отзыв", "Спасибо за отзыв!", "Все", "Отзывов пока нет.", "В тексте есть оскорбления, личные данные или ссылки. Удалите их и попробуйте снова.", "Не удалось отправить. Попробуйте чуть позже.", "Отзывы скоро заработают.", "Введите имя, выберите оценку и напишите комментарий."], "it": ["Valuta il sito", "Valuta il sito", "Il tuo nome o nickname", "Il tuo voto", "Commento (max 250). Non inserire dati personali.", "Invia recensione", "Grazie per la tua recensione!", "Tutte", "Ancora nessuna recensione.", "Il testo contiene parole offensive, dati personali o link. Rimuovili e riprova.", "Impossibile inviare ora. Riprova tra poco.", "Le recensioni saranno attivate presto.", "Inserisci il nome, scegli un voto e scrivi un commento."], "fr": ["Noter le site", "Noter le site", "Votre nom ou pseudo", "Votre note", "Commentaire (250 max). Pas de données personnelles.", "Envoyer l’avis", "Merci pour votre avis !", "Tous", "Aucun avis pour le moment.", "Votre texte contient des insultes, des données personnelles ou des liens. Retirez-les et réessayez.", "Envoi impossible pour l’instant. Réessayez bientôt.", "Les avis seront bientôt activés.", "Entrez votre nom, choisissez une note et écrivez un commentaire."], "zh": ["评价网站", "评价本站", "你的名字或昵称", "你的评分", "评论（最多250字）。请勿包含个人信息。", "提交评价", "感谢你的评价！", "全部", "暂无评价。", "内容含有不当用语、个人信息或链接，请删除后重试。", "暂时无法发送，请稍后再试。", "评价功能即将开放。", "请填写名字、选择评分并写下评论。"], "tr": ["Siteyi Değerlendir", "Siteyi değerlendir", "Adın veya takma adın", "Puanın", "Yorum (en fazla 250). Kişisel veri ekleme.", "Değerlendirmeyi gönder", "Değerlendirmen için teşekkürler!", "Tümü", "Henüz değerlendirme yok.", "Metnin küfür, kişisel veri veya bağlantı içeriyor. Kaldırıp tekrar dene.", "Şu an gönderilemedi. Birazdan tekrar dene.", "Değerlendirmeler yakında açılacak.", "Adını yaz, bir puan seç ve yorum yaz."], "ja": ["サイトを評価", "サイトを評価する", "お名前またはニックネーム", "評価", "コメント（250文字まで）。個人情報は書かないでください。", "評価を送信", "ご評価ありがとうございます！", "すべて", "まだ評価はありません。", "不適切な言葉・個人情報・リンクが含まれています。削除して再度お試しください。", "現在送信できません。しばらくしてからお試しください。", "評価機能は近日公開予定です。", "名前を入力し、評価を選んでコメントを書いてください。"], "th": ["ให้คะแนนเว็บไซต์", "ให้คะแนนเว็บไซต์", "ชื่อหรือชื่อเล่นของคุณ", "คะแนนของคุณ", "ความคิดเห็น (ไม่เกิน 250 ตัวอักษร) ห้ามใส่ข้อมูลส่วนตัว", "ส่งรีวิว", "ขอบคุณสำหรับรีวิว!", "ทั้งหมด", "ยังไม่มีรีวิว", "ข้อความมีคำหยาบ ข้อมูลส่วนตัว หรือลิงก์ กรุณาลบแล้วลองอีกครั้ง", "ส่งไม่ได้ในขณะนี้ โปรดลองใหม่อีกครั้ง", "ระบบรีวิวจะเปิดให้ใช้เร็ว ๆ นี้", "กรอกชื่อ เลือกคะแนน และเขียนความคิดเห็น"], "de": ["Seite bewerten", "Seite bewerten", "Dein Name oder Spitzname", "Deine Bewertung", "Kommentar (max. 250). Keine persönlichen Daten angeben.", "Bewertung senden", "Danke für deine Bewertung!", "Alle", "Noch keine Bewertungen.", "Dein Text enthält Beleidigungen, persönliche Daten oder Links. Entferne sie und versuche es erneut.", "Senden gerade nicht möglich. Versuche es gleich noch einmal.", "Bewertungen werden bald freigeschaltet.", "Gib deinen Namen ein, wähle eine Bewertung und schreibe einen Kommentar."], "ko": ["사이트 평가", "사이트 평가하기", "이름 또는 닉네임", "별점", "댓글 (최대 250자). 개인정보는 쓰지 마세요.", "평가 보내기", "평가해 주셔서 감사합니다!", "전체", "아직 평가가 없습니다.", "욕설, 개인정보 또는 링크가 포함되어 있습니다. 삭제 후 다시 시도하세요.", "지금은 전송할 수 없습니다. 잠시 후 다시 시도하세요.", "평가 기능이 곧 열립니다.", "이름을 입력하고 별점을 선택한 뒤 댓글을 작성하세요."], "pl": ["Oceń stronę", "Oceń stronę", "Twoje imię lub pseudonim", "Twoja ocena", "Komentarz (maks. 250). Nie podawaj danych osobowych.", "Wyślij opinię", "Dziękujemy za opinię!", "Wszystkie", "Brak opinii.", "Tekst zawiera wulgaryzmy, dane osobowe lub linki. Usuń je i spróbuj ponownie.", "Nie udało się wysłać. Spróbuj za chwilę.", "Opinie zostaną wkrótce włączone.", "Wpisz imię, wybierz ocenę i napisz komentarz."], "vi": ["Đánh giá trang", "Đánh giá trang web", "Tên hoặc biệt danh", "Điểm của bạn", "Bình luận (tối đa 250). Đừng ghi thông tin cá nhân.", "Gửi đánh giá", "Cảm ơn bạn đã đánh giá!", "Tất cả", "Chưa có đánh giá.", "Nội dung có từ xúc phạm, thông tin cá nhân hoặc liên kết. Hãy xóa và thử lại.", "Hiện chưa gửi được. Hãy thử lại sau.", "Đánh giá sẽ sớm được bật.", "Nhập tên, chọn số sao và viết bình luận."], "uk": ["Оцінити сайт", "Оцінити сайт", "Ваше ім’я або нік", "Ваша оцінка", "Коментар (до 250). Не вказуйте особисті дані.", "Надіслати відгук", "Дякуємо за відгук!", "Усі", "Відгуків поки немає.", "У тексті є образи, особисті дані або посилання. Видаліть їх і спробуйте знову.", "Не вдалося надіслати. Спробуйте трохи пізніше.", "Відгуки скоро запрацюють.", "Введіть ім’я, виберіть оцінку й напишіть коментар."], "ar": ["قيّم الموقع", "قيّم الموقع", "اسمك أو لقبك", "تقييمك", "تعليق (حتى 250 حرفًا). لا تكتب بيانات شخصية.", "إرسال التقييم", "شكرًا على تقييمك!", "الكل", "لا توجد تقييمات بعد.", "النص يحتوي على ألفاظ مسيئة أو بيانات شخصية أو روابط. احذفها وحاول مجددًا.", "تعذّر الإرسال الآن. حاول مرة أخرى بعد قليل.", "سيتم تفعيل التقييمات قريبًا.", "اكتب اسمك واختر تقييمًا واكتب تعليقًا."], "hi": ["साइट रेट करें", "साइट को रेट करें", "आपका नाम या उपनाम", "आपकी रेटिंग", "टिप्पणी (अधिकतम 250)। निजी जानकारी न लिखें।", "रिव्यू भेजें", "आपके रिव्यू के लिए धन्यवाद!", "सभी", "अभी कोई रिव्यू नहीं है।", "टेक्स्ट में अपशब्द, निजी जानकारी या लिंक हैं। हटाकर फिर कोशिश करें।", "अभी भेजा नहीं जा सका। थोड़ी देर में फिर कोशिश करें।", "रिव्यू जल्द ही चालू होंगे।", "नाम लिखें, रेटिंग चुनें और टिप्पणी लिखें।"], "nl": ["Site beoordelen", "Beoordeel de site", "Je naam of bijnaam", "Je beoordeling", "Opmerking (max. 250). Geen persoonlijke gegevens.", "Beoordeling versturen", "Bedankt voor je beoordeling!", "Alle", "Nog geen beoordelingen.", "Je tekst bevat scheldwoorden, persoonlijke gegevens of links. Verwijder ze en probeer opnieuw.", "Verzenden lukt nu niet. Probeer het zo opnieuw.", "Beoordelingen worden binnenkort geactiveerd.", "Vul je naam in, kies een beoordeling en schrijf een opmerking."]};
+Object.keys(REV_I18N).forEach(c => { if (T[c]) REV_KEYS.forEach((k, i) => { T[c][k] = REV_I18N[c][i]; }); });
+
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 /* Foto do servidor pela API pública de convites do Discord.
@@ -1512,6 +1570,7 @@ function traduzir(){
   document.querySelectorAll("[data-th]").forEach(e => { e.innerHTML = T[lang][e.dataset.th] || ""; });
   document.documentElement.lang = HTMLLANG[lang];
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  if (window.rvRender) rvRender();
   document.getElementById("langAtual").textContent = NOMES[lang];
   document.getElementById("langFlag").innerHTML = FLAGS[lang];
   document.querySelectorAll("[data-flag]").forEach(e => { e.innerHTML = FLAGS[e.dataset.flag]; });
@@ -2198,7 +2257,7 @@ function tzRender(){
     let gmt = "";
     try { gmt = new Intl.DateTimeFormat("en", { timeZoneName: "shortOffset" }).formatToParts(agora).find(p => p.type === "timeZoneName").value; } catch (e) {}
     el.hidden = false;
-    el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>' + esc(hora) + '</b><span>' + esc([gmt, zona.replace(/_/g, " ")].filter(Boolean).join(" · ")) + '</span>';
+    el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>' + esc(hora) + '</b>' + (gmt ? '<span>' + esc(gmt) + '</span>' : "");
   }catch(e){ el.hidden = true; }
 }
 setInterval(tzRender, 1000);
@@ -2410,6 +2469,116 @@ let tocou = false;
 ["touchstart","wheel","keydown","pointerdown"].forEach(ev => addEventListener(ev, () => { tocou = true; }, { once: true, passive: true }));
 [350, 900].forEach(ms => setTimeout(() => { if (!tocou && (location.hash === "" || location.hash === "#inicio")) scrollTo(0, 0); }, ms));
 requestAnimationFrame(() => window.scrollTo(0, 0));
+
+/* ============ AVALIAR SITE ============
+   REVIEWS_API: endereço do Cloudflare Worker (arquivo reviews-worker.js). Vazio = avaliações ainda desativadas. */
+const REVIEWS_API = "";
+const MOD = (function(){
+  const norm = s => String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f\u200b-\u200f\u2060\ufeff]/g, "")
+    .replace(/[@4]/g, "a").replace(/3/g, "e").replace(/[1!|]/g, "i").replace(/0/g, "o").replace(/[5$]/g, "s").replace(/7/g, "t");
+  const red = s => s.replace(/(.)\1+/g, "$1");
+  const STEMS = ["puta","caralh","merd","bosta","foda","fode","fodi","cuzao","buceta","xoxota","xereca","viado","boiola","arrombad","babaca","otario","retard","vagabund","desgrac","cacet","punhet","fuck","shit","bitch","cunt","pussy","asshole","bastard","whore","slut","nigg","fagg","wanker","motherfuck","mierd","joder","pendej","cabron","gilipoll","culero","chingad","maricon","hijueputa","crioulo","paneleiro","traveco","sapatao"].map(red);
+  const EXACT = new Set(["porra","fdp","pqp","vsf","tnc","krl","kct","cu","cus","dick","cock","cocks","verga","zorra","hdp"].map(red));
+  const LONG = STEMS.filter(w => w.length >= 6);
+  const PII = [
+    /\d{3}[.\s-]?\d{3}[.\s-]?\d{3}[-.\s]?\d{2}/,
+    /(?:\d[\s.\-()\/]?){9,}/,
+    /[^\s@]+@[^\s@]+/, /@\w{3,}/,
+    /https?:|www\.|\b[\w-]+\.(?:com|net|org|br|io|gg|me|xyz|ru|tk|ly|link|app|dev)\b/i,
+    /\b(?:meu|minha|my|mi)\s+(?:nome|name|nombre|cpf|rg|cnpj|telefone|celular|whatsapp|zap|endere[cç]o|address|email|e-mail|insta|instagram)\b/i,
+    /\b(?:me chamo|meu nome (?:é|e)|my name is|me llamo|i live (?:at|in)|moro (?:em|na|no))\b/i
+  ];
+  return { check(t){
+    const raw = String(t);
+    if (PII.some(r => r.test(raw))) return "pii";
+    const n = norm(raw);
+    const tokens = n.split(/[^a-z]+/).filter(Boolean).map(red);
+    for (const k of tokens){ if (EXACT.has(k) || STEMS.some(s => k.startsWith(s))) return "bad"; }
+    /* letras separadas: "p o r r a", "f.u.c.k" */
+    const raw2 = n.split(/[^a-z]+/).filter(Boolean); let run = "";
+    for (const k of raw2.concat([""])){
+      if (k.length === 1) { run += k; continue; }
+      if (run.length >= 3){ const r = red(run); if (EXACT.has(r) || STEMS.some(s => r.startsWith(s))) return "bad"; }
+      run = "";
+    }
+    const j = red(n.replace(/[^a-z]/g, ""));
+    if (LONG.some(s => j.includes(s))) return "bad";
+    return null;
+  } };
+})();
+
+(function(){
+  const $ = id => document.getElementById(id);
+  const tr = k => (T[lang] && T[lang][k]) || T.en[k] || "";
+  const limpa = (v, n) => String(v || "").replace(/[\u0000-\u001f\u007f<>]/g, " ").replace(/\s+/g, " ").trim().slice(0, n);
+  let nota = 0, filtro = 0, lista = [];
+  const form = $("rvForm"), nome = $("rvNome"), texto = $("rvTexto"), msgEl = $("rvMsg"), enviar = $("rvEnviar"), estrelas = $("rvStars").querySelectorAll("button");
+  const msg = (t, tipo) => { msgEl.textContent = t || ""; msgEl.className = "rv-msg" + (tipo ? " " + tipo : ""); };
+  const pinta = () => estrelas.forEach(b => { const on = +b.dataset.v <= nota; b.classList.toggle("on", on); b.setAttribute("aria-checked", String(+b.dataset.v === nota)); });
+  estrelas.forEach(b => b.addEventListener("click", () => { nota = +b.dataset.v; pinta(); }));
+  texto.addEventListener("input", () => { $("rvCont").textContent = texto.value.length + "/250"; });
+
+  window.rvRender = function(){
+    nome.placeholder = tr("revName"); nome.setAttribute("aria-label", tr("revName"));
+    texto.placeholder = tr("revComment"); texto.setAttribute("aria-label", tr("revComment"));
+    const total = lista.length, loc = HTMLLANG[lang] || "en";
+    $("rvMedia").textContent = total ? "★ " + (lista.reduce((a, r) => a + r.stars, 0) / total).toLocaleString(loc, { maximumFractionDigits: 1, minimumFractionDigits: 1 }) + " · " + total : "";
+    const chips = $("rvChips"); chips.textContent = "";
+    [0, 5, 4, 3, 2, 1].forEach(v => {
+      const q = v ? lista.filter(r => r.stars === v).length : total;
+      const b = document.createElement("button"); b.type = "button"; b.className = v === filtro ? "on" : "";
+      b.textContent = (v ? v + "★" : tr("revAll")) + " (" + q + ")";
+      b.addEventListener("click", () => { filtro = v; rvRender(); });
+      chips.appendChild(b);
+    });
+    const box = $("rvLista"); box.textContent = "";
+    const ver = lista.filter(r => !filtro || r.stars === filtro).slice(0, 100);
+    if (!ver.length){ const p = document.createElement("p"); p.className = "rv-vazio"; p.textContent = tr("revEmpty"); box.appendChild(p); return; }
+    ver.forEach(r => {
+      const it = document.createElement("div"); it.className = "rv-item";
+      const h = document.createElement("header");
+      const n = document.createElement("b"); n.textContent = r.name;
+      const st = document.createElement("span"); st.className = "st"; st.textContent = "★".repeat(r.stars) + "☆".repeat(5 - r.stars);
+      const d = document.createElement("time"); d.textContent = new Date(r.ts).toLocaleDateString(loc);
+      h.append(n, st, d);
+      const p = document.createElement("p"); p.textContent = r.text;
+      it.append(h, p); box.appendChild(it);
+    });
+  };
+
+  async function carregar(){
+    if (!REVIEWS_API) return;
+    try {
+      const r = await fetch(REVIEWS_API, { cache: "no-store" });
+      const d = await r.json();
+      lista = (Array.isArray(d) ? d : []).filter(x => x && x.stars >= 1 && x.stars <= 5 && x.name && x.text).map(x => ({ name: String(x.name), stars: x.stars | 0, text: String(x.text), ts: +x.ts || Date.now() }));
+      rvRender();
+    } catch (e) { console.warn("Avaliações:", e); }
+  }
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault(); msg("");
+    const n = limpa(nome.value, 30), t = limpa(texto.value, 250);
+    if (n.length < 2 || t.length < 5 || !nota){ msg(tr("revFill"), "err"); return; }
+    if (MOD.check(n) || MOD.check(t)){ msg(tr("revBlock"), "err"); return; }
+    if (!REVIEWS_API){ msg(tr("revOff"), "err"); return; }
+    let ult = 0; try { ult = +localStorage.getItem("rvUlt") || 0; } catch (x) {}
+    if (Date.now() - ult < 60000){ msg(tr("revErr"), "err"); return; }
+    enviar.disabled = true;
+    try {
+      const r = await fetch(REVIEWS_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: n, stars: nota, text: t, hp: $("rvHp").value }) });
+      if (r.status === 422){ msg(tr("revBlock"), "err"); return; }
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      try { localStorage.setItem("rvUlt", String(Date.now())); } catch (x) {}
+      lista.unshift({ name: n, stars: nota, text: t, ts: Date.now() });
+      form.reset(); nota = 0; pinta(); $("rvCont").textContent = "0/250";
+      msg(tr("revThanks"), "ok"); rvRender();
+    } catch (x) { msg(tr("revErr"), "err"); }
+    finally { enviar.disabled = false; }
+  });
+
+  rvRender(); carregar();
+})();
 </script>
 </body>
 </html>
