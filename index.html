@@ -361,7 +361,7 @@ a.card{text-decoration:none;color:inherit}
 /* Avaliar site */
 .tz{left:-6px}.tz span{color:var(--muted)}
 [dir=rtl] .tz{left:auto;right:-6px}
-.avbtn{position:absolute;top:10px;right:-6px;display:inline-flex;align-items:center;gap:6px;padding:6px 13px 6px 10px;border:1px solid rgba(229,51,63,.55);border-radius:999px;background:var(--surface);color:var(--text);font:700 .76rem var(--display);text-decoration:none;white-space:nowrap;transition:background .2s,transform .15s}
+.avbtn{cursor:pointer;position:absolute;top:10px;right:-6px;display:inline-flex;align-items:center;gap:6px;padding:6px 13px 6px 10px;border:1px solid rgba(229,51,63,.55);border-radius:999px;background:var(--surface);color:var(--text);font:700 .76rem var(--display);text-decoration:none;white-space:nowrap;transition:background .2s,transform .15s}
 .avbtn svg{width:14px;height:14px;fill:#ffc94d;flex:none}
 .avbtn:hover{background:var(--surface2)}.avbtn:active{transform:scale(.97)}
 [dir=rtl] .avbtn{right:auto;left:-6px}
@@ -480,7 +480,7 @@ a.card{text-decoration:none;color:inherit}
   <section id="inicio" class="view">
     <div class="hero">
       <div class="tz" id="tzChip" aria-live="off"></div>
-      <a class="avbtn" id="avBtn" href="#avaliar" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg><span data-t="avaliarBtn"></span></a>
+      <button type="button" class="avbtn" id="avBtn" data-go="avaliar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg><span data-t="avaliarBtn"></span></button>
       <div class="ttwrap">
         <a class="ttmain" id="ttMain" href="https://www.tiktok.com/@russoviller.mc?_r=1&amp;_t=ZS-9Av0Sc7ZwN3" target="_blank" rel="noopener">
           <span class="ttico" id="ttMainIcon" aria-hidden="true">TT</span>
