@@ -2372,36 +2372,40 @@ function nota(freq, t, dur, pico, destino, tipo, ataque){
   g.gain.linearRampToValueAtTime(pico, t + (ataque || dur * .35));
   g.gain.linearRampToValueAtTime(0, t + dur);
   g.connect(destino);
+  let vivos = 2;
   [-3, 3].forEach(c => {
     const o = ac.createOscillator();
     o.type = tipo; o.frequency.value = freq; o.detune.value = c;
     o.connect(g); o.start(t); o.stop(t + dur + .1);
+    o.onended = () => { o.disconnect(); if (--vivos === 0) g.disconnect(); };
   });
 }
 function acorde(){
   if (!ac || ac.state !== "running") return;
-  const t = ac.currentTime + .05;
+  const t = ac.currentTime + .15;
   const prim = acordeI === 0; /* primeiro acorde entra rápido; os demais, bem devagar */
   ACORDES[acordeI % ACORDES.length].forEach((n, i) => nota(hz(n), t + (prim ? 0 : i * .4), 16, .022, master, "sine", prim ? 1 : 5));
-  const b = ac.createGain(); b.gain.value = 1; b.connect(master); b.connect(eco);
   {
     const n = BELLS[Math.floor(Math.random() * BELLS.length)];
     const tt = t + 4 + Math.random() * 3;
     const g = ac.createGain();
     g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(.028, tt + .6); g.gain.exponentialRampToValueAtTime(.0005, tt + 7);
-    g.connect(b);
+    g.connect(master); g.connect(eco);
     const o = ac.createOscillator(); o.type = "sine"; o.frequency.value = hz(n);
     o.connect(g); o.start(tt); o.stop(tt + 7.2);
+    o.onended = () => { o.disconnect(); g.disconnect(); };
   }
   acordeI++;
 }
 function criarCtx(){
   const AC = window.AudioContext || window.webkitAudioContext;
   if (!AC) throw new Error("sem áudio");
-  ac = new AC();
+  try { ac = new AC({ latencyHint: "playback" }); } catch (e) { ac = new AC(); }
   master = ac.createGain(); master.gain.value = 0;
   const lp = ac.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 950;
-  master.connect(lp); lp.connect(ac.destination);
+  const lim = ac.createDynamicsCompressor();
+  lim.threshold.value = -10; lim.knee.value = 6; lim.ratio.value = 12; lim.attack.value = .003; lim.release.value = .25;
+  master.connect(lp); lp.connect(lim); lim.connect(ac.destination);
   eco = ac.createDelay(1); eco.delayTime.value = .7;
   const fb = ac.createGain(); fb.gain.value = .4;
   eco.connect(fb); fb.connect(eco); eco.connect(master);
