@@ -467,6 +467,9 @@ a.card{text-decoration:none;color:inherit}
   <nav class="drawer-nav">
     <button type="button" data-go="inicio"><span data-t="menuInicio"></span></button>
     <button type="button" data-go="config"><span data-t="menuConfig"></span></button>
+    <button type="button" id="adminBtn" data-href="admin.html"><span data-t="menuAdmin"></span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+    </button>
     <button type="button" id="codigoFonte" data-href="https://github.com/RussoViller/RussoViller-WebPage"><span data-t="menuCodigo"></span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
     </button>
@@ -801,7 +804,7 @@ const T = {
     bili:"BiliBili", biliDesc:"Meu canal no BiliBili.",
     yt:"YouTube", ytDesc:"Meu canal no YouTube.",
     avatares:"Fotos de perfil via",
-    menuInicio:"INÍCIO", menuConfig:"CONFIGURAÇÕES", menuCodigo:"CÓDIGO FONTE",
+    menuInicio:"INÍCIO", menuConfig:"CONFIGURAÇÕES", menuAdmin:"ÁREA DE ADMIN", menuCodigo:"CÓDIGO FONTE",
     zalithSub:"Launchers e o MobileGlues para instalar.", zl2Desc:"Baixar a versão mais recente direto do GitHub.", zl2Sub:"Sempre a última versão oficial, direto do GitHub.",
     zlArch:"ARQUITETURA DO DISPOSITIVO", zlSource:"FONTE DE INSTALAÇÃO", zlGithub:"GitHub Oficial",
     zlFiles:"Lista de arquivos baixados", zlGet:"Baixe agora", zlPub:"Publicado em", zlOfficial:"SITE OFICIAL DO ZALITH LAUNCHER",
@@ -869,7 +872,7 @@ const T = {
     bili:"BiliBili", biliDesc:"My BiliBili channel.",
     yt:"YouTube", ytDesc:"My YouTube channel.",
     avatares:"Profile pictures via",
-    menuInicio:"HOME", menuConfig:"SETTINGS", menuCodigo:"SOURCE CODE",
+    menuInicio:"HOME", menuConfig:"SETTINGS", menuAdmin:"ADMIN AREA", menuCodigo:"SOURCE CODE",
     zalithSub:"Launchers and MobileGlues to install.", zl2Desc:"Download the latest version straight from GitHub.", zl2Sub:"Always the latest official release, straight from GitHub.",
     zlArch:"DEVICE ARCHITECTURE", zlSource:"INSTALL SOURCE", zlGithub:"Official GitHub",
     zlFiles:"Downloadable files", zlGet:"Download now", zlPub:"Published on", zlOfficial:"ZALITH LAUNCHER OFFICIAL SITE",
@@ -937,7 +940,7 @@ const T = {
     bili:"BiliBili", biliDesc:"Mi canal de BiliBili.",
     yt:"YouTube", ytDesc:"Mi canal de YouTube.",
     avatares:"Fotos de perfil vía",
-    menuInicio:"INICIO", menuConfig:"CONFIGURACIÓN", menuCodigo:"CÓDIGO FUENTE",
+    menuInicio:"INICIO", menuConfig:"CONFIGURACIÓN", menuAdmin:"ÁREA DE ADMIN", menuCodigo:"CÓDIGO FUENTE",
     zalithSub:"Launchers y MobileGlues para instalar.", zl2Desc:"Descargar la versión más reciente directo desde GitHub.", zl2Sub:"Siempre la última versión oficial, directo desde GitHub.",
     zlArch:"ARQUITECTURA DEL DISPOSITIVO", zlSource:"FUENTE DE INSTALACIÓN", zlGithub:"GitHub Oficial",
     zlFiles:"Lista de archivos descargables", zlGet:"Descargar ahora", zlPub:"Publicado el", zlOfficial:"SITIO OFICIAL DE ZALITH LAUNCHER",
@@ -1005,7 +1008,7 @@ const T = {
     bili:"BiliBili", biliDesc:"Kanal BiliBili saya.",
     yt:"YouTube", ytDesc:"Kanal YouTube saya.",
     avatares:"Foto profil melalui",
-    menuInicio:"BERANDA", menuConfig:"PENGATURAN", menuCodigo:"KODE SUMBER",
+    menuInicio:"BERANDA", menuConfig:"PENGATURAN", menuAdmin:"AREA ADMIN", menuCodigo:"KODE SUMBER",
     zalithSub:"Launcher dan MobileGlues untuk dipasang.", zl2Desc:"Unduh versi terbaru langsung dari GitHub.", zl2Sub:"Selalu rilis resmi terbaru, langsung dari GitHub.",
     zlArch:"ARSITEKTUR PERANGKAT", zlSource:"SUMBER INSTALASI", zlGithub:"GitHub Resmi",
     zlFiles:"File yang dapat diunduh", zlGet:"Unduh sekarang", zlPub:"Dipublikasikan pada", zlOfficial:"SITUS RESMI ZALITH LAUNCHER",
@@ -1073,7 +1076,7 @@ const T = {
     bili:"BiliBili", biliDesc:"Мой канал на BiliBili.",
     yt:"YouTube", ytDesc:"Мой канал на YouTube.",
     avatares:"Фото профиля через",
-    menuInicio:"ГЛАВНАЯ", menuConfig:"НАСТРОЙКИ", menuCodigo:"ИСХОДНЫЙ КОД",
+    menuInicio:"ГЛАВНАЯ", menuConfig:"НАСТРОЙКИ", menuAdmin:"ПАНЕЛЬ АДМИНА", menuCodigo:"ИСХОДНЫЙ КОД",
     zalithSub:"Лаунчеры и MobileGlues для установки.", zl2Desc:"Скачайте последнюю версию прямо с GitHub.", zl2Sub:"Всегда последний официальный релиз, прямо с GitHub.",
     zlArch:"АРХИТЕКТУРА УСТРОЙСТВА", zlSource:"ИСТОЧНИК УСТАНОВКИ", zlGithub:"Официальный GitHub",
     zlFiles:"Файлы для загрузки", zlGet:"Скачать", zlPub:"Опубликовано", zlOfficial:"ОФИЦИАЛЬНЫЙ САЙТ ZALITH LAUNCHER",
@@ -1141,7 +1144,7 @@ const T = {
     bili:"BiliBili", biliDesc:"Il mio canale BiliBili.",
     yt:"YouTube", ytDesc:"Il mio canale YouTube.",
     avatares:"Immagini del profilo tramite",
-    menuInicio:"HOME", menuConfig:"IMPOSTAZIONI", menuCodigo:"CODICE SORGENTE",
+    menuInicio:"HOME", menuConfig:"IMPOSTAZIONI", menuAdmin:"AREA ADMIN", menuCodigo:"CODICE SORGENTE",
     zalithSub:"Launcher e MobileGlues da installare.", zl2Desc:"Scarica l’ultima versione direttamente da GitHub.", zl2Sub:"Sempre l’ultima versione ufficiale, direttamente da GitHub.",
     zlArch:"ARCHITETTURA DEL DISPOSITIVO", zlSource:"FONTE DI INSTALLAZIONE", zlGithub:"GitHub Ufficiale",
     zlFiles:"File scaricabili", zlGet:"Scarica ora", zlPub:"Pubblicato il", zlOfficial:"SITO UFFICIALE DI ZALITH LAUNCHER",
@@ -1209,7 +1212,7 @@ const T = {
     bili:"BiliBili", biliDesc:"Ma chaîne BiliBili.",
     yt:"YouTube", ytDesc:"Ma chaîne YouTube.",
     avatares:"Photos de profil via",
-    menuInicio:"ACCUEIL", menuConfig:"PARAMÈTRES", menuCodigo:"CODE SOURCE",
+    menuInicio:"ACCUEIL", menuConfig:"PARAMÈTRES", menuAdmin:"ZONE ADMIN", menuCodigo:"CODE SOURCE",
     zalithSub:"Launchers et MobileGlues à installer.", zl2Desc:"Téléchargez la dernière version directement depuis GitHub.", zl2Sub:"Toujours la dernière version officielle, directement depuis GitHub.",
     zlArch:"ARCHITECTURE DE L’APPAREIL", zlSource:"SOURCE D’INSTALLATION", zlGithub:"GitHub officiel",
     zlFiles:"Fichiers à télécharger", zlGet:"Télécharger maintenant", zlPub:"Publié le", zlOfficial:"SITE OFFICIEL DE ZALITH LAUNCHER",
@@ -1277,7 +1280,7 @@ const T = {
     bili:"BiliBili", biliDesc:"我的 BiliBili 频道。",
     yt:"YouTube", ytDesc:"我的 YouTube 频道。",
     avatares:"头像来源：",
-    menuInicio:"首页", menuConfig:"设置", menuCodigo:"源代码",
+    menuInicio:"首页", menuConfig:"设置", menuAdmin:"管理区", menuCodigo:"源代码",
     zalithSub:"可安装的启动器和 MobileGlues。", zl2Desc:"直接从 GitHub 下载最新版本。", zl2Sub:"始终是最新的官方版本，直接来自 GitHub。",
     zlArch:"设备架构", zlSource:"安装来源", zlGithub:"GitHub 官方",
     zlFiles:"可下载的文件", zlGet:"立即下载", zlPub:"发布于", zlOfficial:"ZALITH LAUNCHER 官方网站",
@@ -1339,7 +1342,7 @@ T.tr = Object.assign({}, T.en, {
   discMine:"Benim sunucum", discFriends:"Arkadaşların sunucuları", srvMonster:"Monster Land Sunucusu", srvMonsterDesc:"Monster Land sunucusuna katıl.",
   socialBtn:"DİĞER SOSYAL MEDYA", socialTitle:"Diğer Sosyal Medya", socialSub:"Beni diğer sosyal medyalarda takip et.", ttMain:"Ana Tiktok", seguidores:"takipçi",
   ttBlox:"Tiktok Roblox", ttBloxDesc:"TikTok’ta Roblox videoları.", biliDesc:"BiliBili kanalım.", ytDesc:"YouTube kanalım.", avatares:"Profil fotoğrafları:",
-  menuInicio:"ANA SAYFA", menuConfig:"AYARLAR", menuCodigo:"KAYNAK KOD", voltar:"Geri",
+  menuInicio:"ANA SAYFA", menuConfig:"AYARLAR", menuAdmin:"YÖNETİCİ ALANI", menuCodigo:"KAYNAK KOD", voltar:"Geri",
   curseSub:"CurseForge sayfasını açmak için bir projeye dokun.", modSub:"Modrinth sayfasını açmak için bir projeye dokun.",
   tpModpack:"MODPACK", tpShader:"SHADER", tpMod:"MOD", tpTextura:"TEKSTÜR PAKETİ",
   pjZalith:"Minecraft’ı çoğu telefonda çalıştırmak için temel optimizasyon.", pjVanilla:"Çok zayıf cihazlar için yapılmış süper basit bir shader.",
@@ -1363,7 +1366,7 @@ T.ja = Object.assign({}, T.en, {
   discMine:"自分のサーバー", discFriends:"友達のサーバー", srvMonster:"Monster Landサーバー", srvMonsterDesc:"Monster Landサーバーに参加。",
   socialBtn:"その他のSNS", socialTitle:"その他のSNS", socialSub:"その他のSNSでフォローしてね。", ttMain:"メインTikTok", seguidores:"フォロワー",
   ttBlox:"TikTok Roblox", ttBloxDesc:"TikTokのRobloxの動画。", biliDesc:"BiliBiliのチャンネル。", ytDesc:"YouTubeのチャンネル。", avatares:"プロフィール画像：",
-  menuInicio:"ホーム", menuConfig:"設定", menuCodigo:"ソースコード", voltar:"戻る",
+  menuInicio:"ホーム", menuConfig:"設定", menuAdmin:"管理エリア", menuCodigo:"ソースコード", voltar:"戻る",
   curseSub:"プロジェクトをタップするとCurseForgeのページが開きます。", modSub:"プロジェクトをタップするとModrinthのページが開きます。",
   tpModpack:"MODPACK", tpShader:"シェーダー", tpMod:"MOD", tpTextura:"テクスチャ",
   pjZalith:"ほとんどのスマホでMinecraftを動かすための必須の最適化。", pjVanilla:"とても非力な端末向けの超シンプルなシェーダー。",
@@ -1387,7 +1390,7 @@ T.th = Object.assign({}, T.en, {
   discMine:"เซิร์ฟเวอร์ของฉัน", discFriends:"เซิร์ฟเวอร์ของเพื่อน", srvMonster:"เซิร์ฟเวอร์ Monster Land", srvMonsterDesc:"เข้าร่วมเซิร์ฟเวอร์ Monster Land",
   socialBtn:"โซเชียลมีเดียอื่น ๆ", socialTitle:"โซเชียลมีเดียอื่น ๆ", socialSub:"ติดตามฉันในโซเชียลอื่น ๆ", ttMain:"TikTok หลัก", seguidores:"ผู้ติดตาม",
   ttBlox:"TikTok Roblox", ttBloxDesc:"วิดีโอ Roblox บน TikTok", biliDesc:"ช่อง BiliBili ของฉัน", ytDesc:"ช่อง YouTube ของฉัน", avatares:"รูปโปรไฟล์จาก",
-  menuInicio:"หน้าแรก", menuConfig:"ตั้งค่า", menuCodigo:"ซอร์สโค้ด", voltar:"กลับ",
+  menuInicio:"หน้าแรก", menuConfig:"ตั้งค่า", menuAdmin:"พื้นที่แอดมิน", menuCodigo:"ซอร์สโค้ด", voltar:"กลับ",
   curseSub:"แตะที่โปรเจกต์เพื่อเปิดหน้าใน CurseForge", modSub:"แตะที่โปรเจกต์เพื่อเปิดหน้าใน Modrinth",
   tpModpack:"MODPACK", tpShader:"เชเดอร์", tpMod:"MOD", tpTextura:"เท็กซ์เจอร์แพ็ก",
   pjZalith:"การปรับแต่งที่จำเป็นเพื่อรัน Minecraft บนมือถือส่วนใหญ่", pjVanilla:"เชเดอร์เรียบง่ายสำหรับอุปกรณ์สเปกต่ำมาก",
@@ -1690,6 +1693,10 @@ menuBtn.addEventListener("click", () => { menuIdioma(false); menuLateral(true); 
 document.getElementById("menuClose").addEventListener("click", () => menuLateral(false));
 scrim.addEventListener("click", () => menuLateral(false));
 drawer.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => menuLateral(false)));
+document.getElementById("adminBtn").addEventListener("click", e => {
+  window.open(e.currentTarget.dataset.href, "_blank", "noopener");
+  menuLateral(false);
+});
 document.getElementById("codigoFonte").addEventListener("click", e => {
   window.open(e.currentTarget.dataset.href, "_blank", "noopener");
   menuLateral(false);
