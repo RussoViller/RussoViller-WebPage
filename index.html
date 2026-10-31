@@ -162,6 +162,12 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
 .zl-notes p{margin:0 0 10px;line-height:1.5;color:var(--text);word-break:break-word}
 .zl-notes ul{margin:0 0 12px;padding-left:20px}
 .zl-notes li{margin:0 0 6px;line-height:1.45;word-break:break-word}
+.zl-nhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.zl-nhead .zl-ntag{margin:0}
+.zl-trad{border:1px solid rgba(229,51,63,.6);background:rgba(229,51,63,.14);color:var(--text);font:700 .74rem var(--display);letter-spacing:.04em;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s,border-color .2s}
+.zl-trad:hover{background:rgba(229,51,63,.28);border-color:#ff3b4a}
+.zl-trad:disabled{opacity:.6;cursor:default}
+.zl-badge{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:8px;background:rgba(61,220,132,.13);color:#3ddc84;font-size:.72rem;font-weight:700;vertical-align:middle}
 .zl-notes code{background:rgba(255,255,255,.08);border-radius:6px;padding:1px 6px;font-size:.88em}
 .zl-notes a{color:#ff7a6a}
 .zl-ver{font:800 2rem/1.1 var(--display);color:#ff7a6a;word-break:break-word}
@@ -1442,6 +1448,8 @@ const MEU_PATREON = {"pt": "Meu Patreon", "es": "Mi Patreon", "it": "Il mio Patr
 Object.keys(T).forEach(c => { T[c].meuPatreon = MEU_PATREON[c] || "My Patreon"; });
 const ZL_NOTES = {"pt": ["NOTAS DE ATUALIZAÇÃO", "Esta versão não traz notas de atualização."], "en": ["RELEASE NOTES", "This version has no release notes."], "es": ["NOTAS DE ACTUALIZACIÓN", "Esta versión no incluye notas de actualización."], "it": ["NOTE DI AGGIORNAMENTO", "Questa versione non ha note di aggiornamento."], "fr": ["NOTES DE MISE À JOUR", "Cette version n’a pas de notes de mise à jour."], "de": ["UPDATE-NOTIZEN", "Diese Version enthält keine Update-Notizen."], "nl": ["UPDATE-NOTITIES", "Deze versie heeft geen update-notities."], "pl": ["NOTATKI O AKTUALIZACJI", "Ta wersja nie ma notatek o aktualizacji."], "ru": ["ЗАМЕТКИ ОБ ОБНОВЛЕНИИ", "У этой версии нет заметок об обновлении."], "uk": ["ПРИМІТКИ ДО ОНОВЛЕННЯ", "У цієї версії немає приміток до оновлення."], "tr": ["GÜNCELLEME NOTLARI", "Bu sürümün güncelleme notu yok."], "id": ["CATATAN PEMBARUAN", "Versi ini tidak memiliki catatan pembaruan."], "vi": ["GHI CHÚ CẬP NHẬT", "Phiên bản này không có ghi chú cập nhật."], "zh": ["更新说明", "此版本没有更新说明。"], "ja": ["アップデートノート", "このバージョンにはアップデートノートがありません。"], "ko": ["업데이트 노트", "이 버전에는 업데이트 노트가 없습니다."], "th": ["บันทึกการอัปเดต", "เวอร์ชันนี้ไม่มีบันทึกการอัปเดต"], "ar": ["ملاحظات التحديث", "لا تحتوي هذه النسخة على ملاحظات تحديث."], "hi": ["अपडेट नोट्स", "इस संस्करण में कोई अपडेट नोट्स नहीं हैं।"]};
 Object.keys(T).forEach(c => { const n = ZL_NOTES[c] || ZL_NOTES.en; T[c].zlNotes = n[0]; T[c].zlNotesNone = n[1]; });
+const ZL_UI = {"pt": ["TRADUZIR", "VER ORIGINAL", "TRADUZINDO...", "Não foi possível traduzir agora.", "Mais rápido na China", "Fornecido por"], "en": ["TRANSLATE", "VIEW ORIGINAL", "TRANSLATING...", "Could not translate right now.", "Faster in China", "Provided by"], "es": ["TRADUCIR", "VER ORIGINAL", "TRADUCIENDO...", "No se pudo traducir ahora.", "Más rápido en China", "Proporcionado por"], "it": ["TRADUCI", "VEDI ORIGINALE", "TRADUZIONE...", "Impossibile tradurre ora.", "Più veloce in Cina", "Fornito da"], "fr": ["TRADUIRE", "VOIR L’ORIGINAL", "TRADUCTION...", "Traduction impossible pour le moment.", "Plus rapide en Chine", "Fourni par"], "de": ["ÜBERSETZEN", "ORIGINAL ANZEIGEN", "WIRD ÜBERSETZT...", "Übersetzung derzeit nicht möglich.", "Schneller in China", "Bereitgestellt von"], "nl": ["VERTALEN", "ORIGINEEL TONEN", "VERTALEN...", "Vertalen is nu niet mogelijk.", "Sneller in China", "Aangeboden door"], "pl": ["TŁUMACZ", "POKAŻ ORYGINAŁ", "TŁUMACZENIE...", "Nie można teraz przetłumaczyć.", "Szybciej w Chinach", "Udostępnia"], "ru": ["ПЕРЕВЕСТИ", "ПОКАЗАТЬ ОРИГИНАЛ", "ПЕРЕВОД...", "Сейчас не удалось перевести.", "Быстрее в Китае", "Предоставляет"], "uk": ["ПЕРЕКЛАСТИ", "ПОКАЗАТИ ОРИГІНАЛ", "ПЕРЕКЛАД...", "Зараз не вдалося перекласти.", "Швидше в Китаї", "Надає"], "tr": ["ÇEVİR", "ORİJİNALİ GÖSTER", "ÇEVRİLİYOR...", "Şu anda çevrilemedi.", "Çin’de daha hızlı", "Sağlayan:"], "id": ["TERJEMAHKAN", "LIHAT ASLI", "MENERJEMAHKAN...", "Tidak dapat menerjemahkan sekarang.", "Lebih cepat di Tiongkok", "Disediakan oleh"], "vi": ["DỊCH", "XEM BẢN GỐC", "ĐANG DỊCH...", "Hiện không thể dịch.", "Nhanh hơn ở Trung Quốc", "Cung cấp bởi"], "zh": ["翻译", "查看原文", "正在翻译...", "暂时无法翻译。", "国内较快", "提供者："], "ja": ["翻訳", "原文を表示", "翻訳中...", "現在翻訳できません。", "中国国内で高速", "提供:"], "ko": ["번역", "원문 보기", "번역 중...", "지금은 번역할 수 없습니다.", "중국 내 빠름", "제공:"], "th": ["แปล", "ดูต้นฉบับ", "กำลังแปล...", "ไม่สามารถแปลได้ในขณะนี้", "เร็วกว่าในจีน", "ให้บริการโดย"], "ar": ["ترجمة", "عرض الأصل", "جارٍ الترجمة...", "تعذّرت الترجمة الآن.", "أسرع في الصين", "مقدَّم من"], "hi": ["अनुवाद करें", "मूल देखें", "अनुवाद हो रहा है...", "अभी अनुवाद नहीं हो सका।", "चीन में तेज़", "प्रदाता:"]};
+Object.keys(T).forEach(c => { const n = ZL_UI[c] || ZL_UI.en; T[c].zlTrad = n[0]; T[c].zlOrig = n[1]; T[c].zlTrading = n[2]; T[c].zlTradErr = n[3]; T[c].zlFast = n[4]; T[c].zlBy = n[5]; });
 
 /* Botão da seed: copia para a área de transferência */
 const SEED_I18N = {"pt": ["Seed do Russo Mapa 2!", "(Clique para copiar)", "Copiado!"], "en": ["Seed of Russo Mapa 2!", "(Click to copy)", "Copied!"], "es": ["¡Semilla de Russo Mapa 2!", "(Haz clic para copiar)", "¡Copiado!"], "id": ["Seed Russo Mapa 2!", "(Klik untuk menyalin)", "Tersalin!"], "ru": ["Сид Russo Mapa 2!", "(Нажмите, чтобы скопировать)", "Скопировано!"], "it": ["Seed di Russo Mapa 2!", "(Clicca per copiare)", "Copiato!"], "fr": ["Graine de Russo Mapa 2 !", "(Cliquez pour copier)", "Copié !"], "zh": ["Russo Mapa 2 的种子！", "（点击复制）", "已复制！"], "tr": ["Russo Mapa 2 Seed’i!", "(Kopyalamak için dokun)", "Kopyalandı!"], "ja": ["Russo Mapa 2 のシード値！", "（タップでコピー）", "コピーしました！"], "th": ["ซีดของ Russo Mapa 2!", "(แตะเพื่อคัดลอก)", "คัดลอกแล้ว!"], "de": ["Seed von Russo Mapa 2!", "(Zum Kopieren tippen)", "Kopiert!"], "ko": ["Russo Mapa 2 시드!", "(눌러서 복사)", "복사됨!"], "pl": ["Seed Russo Mapa 2!", "(Kliknij, aby skopiować)", "Skopiowano!"], "vi": ["Seed của Russo Mapa 2!", "(Nhấn để sao chép)", "Đã sao chép!"], "uk": ["Сід Russo Mapa 2!", "(Натисніть, щоб скопіювати)", "Скопійовано!"], "ar": ["بذرة Russo Mapa 2!", "(انقر للنسخ)", "تم النسخ!"], "hi": ["Russo Mapa 2 की सीड!", "(कॉपी करने के लिए क्लिक करें)", "कॉपी हो गया!"], "nl": ["Seed van Russo Mapa 2!", "(Klik om te kopiëren)", "Gekopieerd!"]};
@@ -1760,7 +1768,66 @@ function arqDe(nome){
   if (/x86|i[3-6]86/.test(n)) return "x86";
   return "universal";
 }
-const zl = { rel: null, carregando: false, t: 0, arq: null, oa: false, os: false };
+const zl = { rel: null, carregando: false, t: 0, arq: null, oa: false, os: false, src: "github", fy: null, fyCarregando: false, tr: { on: false, key: "", txt: "", busy: false, err: false } };
+const ZL_FONTES = [
+  { id: "github", nome: t => t.zlGithub, por: null },
+  { id: "frostlynx", nome: () => "枫源镜像", por: "FrostLynx" },
+  { id: "lemwood", nome: () => "柠泽资源站", por: "Lemwood" },
+  { id: "cxsj", nome: () => "创想镜像", por: "239LAN" }
+];
+const ZL_ARCH_CX = { arm64: "-arm64-v8a", armv7: "-armeabi-v7a", x86_64: "-x86_64", x86: "-x86", universal: "" };
+function zlUrl(f){
+  const v = zl.rel.tag;
+  if (zl.src === "cxsj") return "https://mirror.cxsjmc.cn/ZL/ZalithLauncher-latest" + (ZL_ARCH_CX[f.arq] || "") + ".apk";
+  if (zl.src === "lemwood") return "https://miawa.cn/download/zl2/" + encodeURIComponent(v) + "/" + encodeURIComponent(f.name);
+  if (zl.src === "frostlynx"){
+    const m = (zl.fy || []).find(x => x.file_name === f.name && x.available !== false);
+    if (m) return m.download_path ? "https://fyhub.cn" + m.download_path : "https://fyhub.cn/ZalithLauncher2/" + m.version + "/" + m.file_name;
+    return "https://fyhub.cn/ZalithLauncher2/" + encodeURIComponent(v) + "/" + encodeURIComponent(f.name);
+  }
+  return f.url;
+}
+async function zlFyCarregar(){
+  if (zl.fy || zl.fyCarregando) return;
+  zl.fyCarregando = true;
+  try{
+    const r = await fetch("https://fyhub.cn/api/public/v1/projects/ZalithLauncher2/assets");
+    if (r.ok){
+      const j = await r.json();
+      const a = j && j.data && Array.isArray(j.data.assets) ? j.data.assets : (Array.isArray(j) ? j : null);
+      if (a) zl.fy = a;
+    }
+  }catch(e){}
+  zl.fyCarregando = false; zlRender();
+}
+function zlTlCode(){ return lang === "zh" ? "zh-CN" : lang; }
+async function zlTraduzir(texto, tl){
+  const r = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&dt=t&tl=" + encodeURIComponent(tl) + "&q=" + encodeURIComponent(texto));
+  if (!r.ok) throw new Error(r.status);
+  const j = await r.json();
+  return (j[0] || []).map(p => p[0] || "").join("");
+}
+async function zlTraduzirNotas(){
+  const rel = zl.rel, tl = zlTlCode(), key = rel.tag + "|" + tl;
+  if (zl.tr.busy || zl.tr.key === key) return;
+  zl.tr.busy = true; zl.tr.err = false; zlNotasRender();
+  try{
+    const linhas = rel.body.replace(/<!--[\s\S]*?-->/g, "").replace(/\r/g, "").split("\n");
+    const saida = new Array(linhas.length);
+    let i = 0;
+    const worker = async () => {
+      while (i < linhas.length){
+        const k = i++;
+        const m = /^(\s*(?:[-*+]|#{1,6})\s+)?(.*)$/.exec(linhas[k]);
+        const limpo = m[2].replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*`]/g, "").trim();
+        saida[k] = limpo ? (m[1] || "") + await zlTraduzir(limpo, tl) : "";
+      }
+    };
+    await Promise.all([worker(), worker(), worker(), worker()]);
+    zl.tr.txt = saida.join("\n"); zl.tr.key = key;
+  }catch(e){ zl.tr.err = true; zl.tr.on = false; }
+  zl.tr.busy = false; zlNotasRender();
+}
 
 function zlMd(src){
   const inl = x => esc(x)
@@ -1791,9 +1858,20 @@ function zlNotasRender(){
     el.innerHTML = '<p class="zl-msg">' + esc(zl.carregando ? t.zlLoading : t.zlError) + '</p>';
     return;
   }
-  const corpo = zlMd(zl.rel.body);
-  el.innerHTML = '<div class="zl-ntag">' + esc(zl.rel.tag) + '</div>' + (corpo || '<p class="zl-msg">' + esc(t.zlNotesNone) + '</p>');
+  const traduzido = zl.tr.on && zl.tr.key === zl.rel.tag + "|" + zlTlCode();
+  if (zl.tr.on && !traduzido && !zl.tr.busy) zlTraduzirNotas();
+  const corpo = zlMd(traduzido ? zl.tr.txt : zl.rel.body);
+  const rot = zl.tr.busy ? t.zlTrading : (zl.tr.on ? t.zlOrig : t.zlTrad);
+  el.innerHTML = '<div class="zl-nhead"><div class="zl-ntag">' + esc(zl.rel.tag) + '</div><button type="button" class="zl-trad" data-act="trad"' + (zl.tr.busy ? ' disabled' : '') + '>' + esc(rot) + '</button></div>'
+    + (zl.tr.err ? '<p class="zl-msg">' + esc(t.zlTradErr) + '</p>' : '')
+    + (corpo || '<p class="zl-msg">' + esc(t.zlNotesNone) + '</p>');
 }
+document.getElementById("zlNotes").addEventListener("click", e => {
+  const b = e.target.closest('[data-act="trad"]');
+  if (!b || zl.tr.busy) return;
+  zl.tr.on = !zl.tr.on; zl.tr.err = false;
+  zlNotasRender();
+});
 document.getElementById("zlNotesBtn").addEventListener("click", () => {
   const el = document.getElementById("zlNotes"), b = document.getElementById("zlNotesBtn");
   el.hidden = !el.hidden;
@@ -1823,8 +1901,10 @@ function zlRender(){
   const arquivos = r.files.filter(f => zl.arq === "all" || f.arq === zl.arq).map(f => {
     const mb = (f.size / 1048576).toLocaleString(fl, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return '<div class="zl-file"><div class="zl-ftop"><div class="zl-ficon' + (zlFoto ? " tem-foto" : "") + '">' + zlIco() + '</div><div><div class="zl-fname">' + esc(f.name) + '</div><div class="zl-meta"><span>' + mb + ' MB</span><span>' + f.dl.toLocaleString(fl) + ' ' + esc(t.zlDl) + '</span></div></div></div>'
-      + '<a class="zl-get" href="' + esc(f.url) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
+      + '<a class="zl-get" href="' + esc(zlUrl(f)) + '"' + (zl.src === "github" ? "" : ' target="_blank"') + ' rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
   }).join("") || '<p class="zl-msg">' + esc(t.zlNone) + '</p>';
+  const fontes = ZL_FONTES.map(x => '<button type="button" role="option" data-act="pickSrc" data-id="' + x.id + '" aria-selected="' + (x.id === zl.src) + '"><span><b>' + esc(x.nome(t)) + (x.por ? '<span class="zl-badge">' + esc(t.zlFast) + '</span>' : '') + '</b>' + (x.por ? '<small>' + esc(t.zlBy) + ' ' + esc(x.por) + '</small>' : '') + '</span>' + (x.id === zl.src ? IC.ok : "") + '</button>').join("");
+  const fonteAtual = ZL_FONTES.find(x => x.id === zl.src);
   el.innerHTML =
     '<div class="zl-ver">' + esc(r.tag) + '</div>' +
     '<div class="zl-date">' + esc(t.zlPub) + ' ' + esc(data) + '</div>' +
@@ -1832,8 +1912,8 @@ function zlRender(){
     '<div class="zl-dd' + (zl.oa ? ' zl-open' : '') + '"><button type="button" data-act="arch" aria-expanded="' + zl.oa + '">' + IC.phone + '<span>' + esc(atual.nome(t)) + '</span><i class="chev"></i></button>' +
       (zl.oa ? '<div class="zl-menu" role="listbox">' + arqs + '</div>' : '') + '</div>' +
     '<span class="zl-lab">' + esc(t.zlSource) + '</span>' +
-    '<div class="zl-dd' + (zl.os ? ' zl-open' : '') + '"><button type="button" data-act="src" aria-expanded="' + zl.os + '">' + IC.globe + '<span>' + esc(t.zlGithub) + '</span><i class="chev"></i></button>' +
-      (zl.os ? '<div class="zl-menu" role="listbox"><button type="button" role="option" data-act="pickSrc" aria-selected="true"><span><b>' + esc(t.zlGithub) + '</b></span>' + IC.ok + '</button></div>' : '') + '</div>' +
+    '<div class="zl-dd' + (zl.os ? ' zl-open' : '') + '"><button type="button" data-act="src" aria-expanded="' + zl.os + '">' + IC.globe + '<span>' + esc(fonteAtual.nome(t)) + '</span><i class="chev"></i></button>' +
+      (zl.os ? '<div class="zl-menu" role="listbox">' + fontes + '</div>' : '') + '</div>' +
     '<div class="zl-ftitle">' + IC.down + '<span>' + esc(t.zlFiles) + '</span></div>' + arquivos;
 }
 
@@ -1866,7 +1946,7 @@ document.getElementById("zlCard").addEventListener("click", e => {
   if (a === "arch"){ zl.oa = !zl.oa; zl.os = false; }
   else if (a === "src"){ zl.os = !zl.os; zl.oa = false; }
   else if (a === "pick"){ zl.arq = b.dataset.id; zl.oa = false; }
-  else if (a === "pickSrc"){ zl.os = false; }
+  else if (a === "pickSrc"){ zl.src = b.dataset.id; zl.os = false; if (zl.src === "frostlynx") zlFyCarregar(); }
   zlRender();
 });
 
