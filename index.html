@@ -336,6 +336,8 @@ h2{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-s
 @keyframes giraBorda{to{--ang:360deg}}
 .btn.glass:hover{background:rgba(255,255,255,.05);border-color:transparent;box-shadow:none}
 .home{padding:10px 20px;font-size:.78rem}
+#zlNotesBtn{display:block;width:min(100%,420px);margin:24px auto 0;text-align:center;background:linear-gradient(135deg,rgba(229,51,63,.26),rgba(122,15,25,.14));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 0 26px rgba(229,51,63,.2)}
+#zlNotesBtn:hover,#zlNotesBtn[aria-expanded="true"]{background:linear-gradient(135deg,rgba(229,51,63,.38),rgba(122,15,25,.22));box-shadow:0 0 32px rgba(229,51,63,.34)}
 /* cards */
 .card{background:var(--surface);border-radius:16px;padding:14px 16px;transition:transform .15s,border-color .2s,background .2s}
 .card:hover{transform:translateY(-1px);border-color:rgba(229,51,63,.6);background:var(--surface2);box-shadow:none}
@@ -669,7 +671,7 @@ a.card{text-decoration:none;color:inherit}
     <h2>ZALITH LAUNCHER 2</h2>
     <p class="sub" data-t="zl2Sub"></p>
     <div class="zl-card" id="zlCard"></div>
-    <button type="button" class="btn" id="zlNotesBtn" aria-expanded="false" data-t="zlNotes"></button>
+    <button type="button" class="btn glass" id="zlNotesBtn" aria-expanded="false" data-t="zlNotes"></button>
     <div class="zl-card zl-notes" id="zlNotes" hidden></div>
     <button class="back" data-go="zalith" data-t="voltar"></button>
   </section>
