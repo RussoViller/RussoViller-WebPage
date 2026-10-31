@@ -155,6 +155,15 @@ a.btn{display:block;text-align:center;text-decoration:none;width:min(100%,420px)
 .card .icon.dark{background:#2a1c1a;box-shadow:none;padding:4px}
 .card .icon.dark img{object-fit:contain}
 .zl-card{background:var(--glass);border:1px solid var(--line);border-radius:28px;padding:26px 20px;backdrop-filter:blur(10px)}
+.zl-notes{margin-top:16px;text-align:left}
+.zl-notes[hidden]{display:none}
+.zl-notes .zl-ntag{font:800 1.3rem/1.2 var(--display);color:#ff7a6a;margin:0 0 14px;word-break:break-word}
+.zl-notes h4{font:700 1rem/1.3 var(--display);margin:18px 0 8px;color:var(--text)}
+.zl-notes p{margin:0 0 10px;line-height:1.5;color:var(--text);word-break:break-word}
+.zl-notes ul{margin:0 0 12px;padding-left:20px}
+.zl-notes li{margin:0 0 6px;line-height:1.45;word-break:break-word}
+.zl-notes code{background:rgba(255,255,255,.08);border-radius:6px;padding:1px 6px;font-size:.88em}
+.zl-notes a{color:#ff7a6a}
 .zl-ver{font:800 2rem/1.1 var(--display);color:#ff7a6a;word-break:break-word}
 .zl-date{color:var(--muted);margin:12px 0 22px;font-size:.95rem}
 .zl-lab{display:block;color:var(--muted);font:600 .7rem var(--display);letter-spacing:.12em;margin:20px 0 10px}
@@ -660,7 +669,8 @@ a.card{text-decoration:none;color:inherit}
     <h2>ZALITH LAUNCHER 2</h2>
     <p class="sub" data-t="zl2Sub"></p>
     <div class="zl-card" id="zlCard"></div>
-    <a class="btn" href="https://www.zalithlauncher.cn/download" target="_blank" rel="noopener" data-t="zlOfficial"></a>
+    <button type="button" class="btn" id="zlNotesBtn" aria-expanded="false" data-t="zlNotes"></button>
+    <div class="zl-card zl-notes" id="zlNotes" hidden></div>
     <button class="back" data-go="zalith" data-t="voltar"></button>
   </section>
   <section id="mg" class="view">
@@ -1428,6 +1438,8 @@ const MEU_TRABALHO = {"pt": "Meu trabalho", "en": "My work", "es": "Mi trabajo",
 Object.keys(MEU_TRABALHO).forEach(c => { if (T[c]) T[c].meuTrabalho = MEU_TRABALHO[c]; });
 const MEU_PATREON = {"pt": "Meu Patreon", "es": "Mi Patreon", "it": "Il mio Patreon", "fr": "Mon Patreon", "de": "Mein Patreon", "nl": "Mijn Patreon", "pl": "Mój Patreon", "ru": "Мой Patreon", "uk": "Мій Patreon", "tr": "Patreon’um", "id": "Patreon saya", "vi": "Patreon của tôi", "zh": "我的 Patreon", "ja": "私の Patreon", "ko": "내 Patreon", "th": "Patreon ของฉัน", "ar": "Patreon الخاص بي", "hi": "मेरा Patreon"};
 Object.keys(T).forEach(c => { T[c].meuPatreon = MEU_PATREON[c] || "My Patreon"; });
+const ZL_NOTES = {"pt": ["NOTAS DE ATUALIZAÇÃO", "Esta versão não traz notas de atualização."], "en": ["RELEASE NOTES", "This version has no release notes."], "es": ["NOTAS DE ACTUALIZACIÓN", "Esta versión no incluye notas de actualización."], "it": ["NOTE DI AGGIORNAMENTO", "Questa versione non ha note di aggiornamento."], "fr": ["NOTES DE MISE À JOUR", "Cette version n’a pas de notes de mise à jour."], "de": ["UPDATE-NOTIZEN", "Diese Version enthält keine Update-Notizen."], "nl": ["UPDATE-NOTITIES", "Deze versie heeft geen update-notities."], "pl": ["NOTATKI O AKTUALIZACJI", "Ta wersja nie ma notatek o aktualizacji."], "ru": ["ЗАМЕТКИ ОБ ОБНОВЛЕНИИ", "У этой версии нет заметок об обновлении."], "uk": ["ПРИМІТКИ ДО ОНОВЛЕННЯ", "У цієї версії немає приміток до оновлення."], "tr": ["GÜNCELLEME NOTLARI", "Bu sürümün güncelleme notu yok."], "id": ["CATATAN PEMBARUAN", "Versi ini tidak memiliki catatan pembaruan."], "vi": ["GHI CHÚ CẬP NHẬT", "Phiên bản này không có ghi chú cập nhật."], "zh": ["更新说明", "此版本没有更新说明。"], "ja": ["アップデートノート", "このバージョンにはアップデートノートがありません。"], "ko": ["업데이트 노트", "이 버전에는 업데이트 노트가 없습니다."], "th": ["บันทึกการอัปเดต", "เวอร์ชันนี้ไม่มีบันทึกการอัปเดต"], "ar": ["ملاحظات التحديث", "لا تحتوي هذه النسخة على ملاحظات تحديث."], "hi": ["अपडेट नोट्स", "इस संस्करण में कोई अपडेट नोट्स नहीं हैं।"]};
+Object.keys(T).forEach(c => { const n = ZL_NOTES[c] || ZL_NOTES.en; T[c].zlNotes = n[0]; T[c].zlNotesNone = n[1]; });
 
 /* Botão da seed: copia para a área de transferência */
 const SEED_I18N = {"pt": ["Seed do Russo Mapa 2!", "(Clique para copiar)", "Copiado!"], "en": ["Seed of Russo Mapa 2!", "(Click to copy)", "Copied!"], "es": ["¡Semilla de Russo Mapa 2!", "(Haz clic para copiar)", "¡Copiado!"], "id": ["Seed Russo Mapa 2!", "(Klik untuk menyalin)", "Tersalin!"], "ru": ["Сид Russo Mapa 2!", "(Нажмите, чтобы скопировать)", "Скопировано!"], "it": ["Seed di Russo Mapa 2!", "(Clicca per copiare)", "Copiato!"], "fr": ["Graine de Russo Mapa 2 !", "(Cliquez pour copier)", "Copié !"], "zh": ["Russo Mapa 2 的种子！", "（点击复制）", "已复制！"], "tr": ["Russo Mapa 2 Seed’i!", "(Kopyalamak için dokun)", "Kopyalandı!"], "ja": ["Russo Mapa 2 のシード値！", "（タップでコピー）", "コピーしました！"], "th": ["ซีดของ Russo Mapa 2!", "(แตะเพื่อคัดลอก)", "คัดลอกแล้ว!"], "de": ["Seed von Russo Mapa 2!", "(Zum Kopieren tippen)", "Kopiert!"], "ko": ["Russo Mapa 2 시드!", "(눌러서 복사)", "복사됨!"], "pl": ["Seed Russo Mapa 2!", "(Kliknij, aby skopiować)", "Skopiowano!"], "vi": ["Seed của Russo Mapa 2!", "(Nhấn để sao chép)", "Đã sao chép!"], "uk": ["Сід Russo Mapa 2!", "(Натисніть, щоб скопіювати)", "Скопійовано!"], "ar": ["بذرة Russo Mapa 2!", "(انقر للنسخ)", "تم النسخ!"], "hi": ["Russo Mapa 2 की सीड!", "(कॉपी करने के लिए क्लिक करें)", "कॉपी हो गया!"], "nl": ["Seed van Russo Mapa 2!", "(Klik om te kopiëren)", "Gekopieerd!"]};
@@ -1748,7 +1760,48 @@ function arqDe(nome){
 }
 const zl = { rel: null, carregando: false, t: 0, arq: null, oa: false, os: false };
 
+function zlMd(src){
+  const inl = x => esc(x)
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>");
+  let out = "", ul = false;
+  String(src).replace(/<!--[\s\S]*?-->/g, "").replace(/\r/g, "").split("\n").forEach(l => {
+    let m;
+    if ((m = /^\s*[-*+]\s+(.*)$/.exec(l))){
+      if (!ul){ out += "<ul>"; ul = true; }
+      out += "<li>" + inl(m[1]) + "</li>";
+      return;
+    }
+    if (ul){ out += "</ul>"; ul = false; }
+    if ((m = /^#{1,6}\s+(.*)$/.exec(l))) out += "<h4>" + inl(m[1]) + "</h4>";
+    else if (l.trim()) out += "<p>" + inl(l.trim()) + "</p>";
+  });
+  if (ul) out += "</ul>";
+  return out;
+}
+function zlNotasRender(){
+  const el = document.getElementById("zlNotes");
+  if (!el || el.hidden) return;
+  const t = T[lang];
+  if (!zl.rel){
+    el.innerHTML = '<p class="zl-msg">' + esc(zl.carregando ? t.zlLoading : t.zlError) + '</p>';
+    return;
+  }
+  const corpo = zlMd(zl.rel.body);
+  el.innerHTML = '<div class="zl-ntag">' + esc(zl.rel.tag) + '</div>' + (corpo || '<p class="zl-msg">' + esc(t.zlNotesNone) + '</p>');
+}
+document.getElementById("zlNotesBtn").addEventListener("click", () => {
+  const el = document.getElementById("zlNotes"), b = document.getElementById("zlNotesBtn");
+  el.hidden = !el.hidden;
+  b.setAttribute("aria-expanded", String(!el.hidden));
+  if (!el.hidden && !zl.rel) zlCarregar(true);
+  zlNotasRender();
+});
+
 function zlRender(){
+  zlNotasRender();
   const el = document.getElementById("zlCard");
   if (!el) return;
   const t = T[lang];
@@ -1796,6 +1849,7 @@ async function zlCarregar(forcar){
     zl.rel = {
       tag: String(j.tag_name || j.name || "").replace(/^v/i, ""),
       date: j.published_at,
+      body: String(j.body || ""),
       files: as.map(a => ({ name: a.name, size: a.size, dl: a.download_count, url: a.browser_download_url, arq: arqDe(a.name) }))
     };
     zl.t = Date.now();
