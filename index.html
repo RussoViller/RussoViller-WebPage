@@ -2673,7 +2673,8 @@ const MOD = (function(){
   try { const a = JSON.parse(localStorage.getItem("rvLiked") || "[]"); if (Array.isArray(a)) curtidos = new Set(a.map(String)); } catch (x) {}
   const salvaCurtidos = () => { try { localStorage.setItem("rvLiked", JSON.stringify([...curtidos].slice(-500))); } catch (x) {} };
   const hid = x => { let h = 0; const t = x.name + "|" + x.text; for (let i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) | 0; return x.ts + "-" + (h >>> 0).toString(36); };
-  const nCurt = r => Math.max(r.likes, curtidos.has(r.id) ? 1 : 0);
+  const nCurt = r => r.likes;
+  let vid = ""; try { vid = localStorage.getItem("rvVid") || ""; if (vid.length < 12) { vid = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2)).replace(/-/g, ""); localStorage.setItem("rvVid", vid); } } catch (x) { vid = vid || ("v" + Date.now().toString(36) + Math.random().toString(36).slice(2)); }
   const form = $("rvForm"), nome = $("rvNome"), texto = $("rvTexto"), msgEl = $("rvMsg"), enviar = $("rvEnviar"), estrelas = $("rvStars").querySelectorAll("button");
   const msg = (t, tipo) => { msgEl.textContent = t || ""; msgEl.className = "rv-msg" + (tipo ? " " + tipo : ""); };
   const pinta = () => estrelas.forEach(b => { const on = +b.dataset.v <= nota; b.classList.toggle("on", on); b.setAttribute("aria-checked", String(+b.dataset.v === nota)); });
@@ -2689,7 +2690,7 @@ const MOD = (function(){
     [["new", tr("revNew")], ["likes", "♥ " + tr("revTop")]].forEach(([v, t]) => {
       const b = document.createElement("button"); b.type = "button"; b.className = v === ordem ? "on" : "";
       b.textContent = t;
-      b.addEventListener("click", () => { ordem = v; rvRender(); });
+      b.addEventListener("click", () => { ordem = v; rvRender(); if (v === "likes") carregar(); });
       ord.appendChild(b);
     });
     const chips = $("rvChips"); chips.textContent = "";
@@ -2731,7 +2732,10 @@ const MOD = (function(){
     else { curtidos.delete(r.id); r.likes = Math.max(0, r.likes - 1); }
     salvaCurtidos(); pinta2();
     lk.classList.remove("pop"); void lk.offsetWidth; if (on) lk.classList.add("pop");
-    if (REVIEWS_API && r.srv) fetch(REVIEWS_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ like: r.id, on, hp: "" }), keepalive: true }).catch(() => {});
+    if (REVIEWS_API) fetch(REVIEWS_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ like: r.id, on, vid, hp: "" }) })
+      .then(x => x.ok ? x.json() : null)
+      .then(j => { if (j && typeof j.likes === "number") { r.likes = j.likes; pinta2(); } })
+      .catch(() => {});
   }
 
   async function carregar(){

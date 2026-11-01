@@ -98,6 +98,11 @@ p.sub{color:var(--muted);margin-bottom:22px}
 .it .st{color:#ffc94d;letter-spacing:1px;font-size:.86rem}
 .it time{margin-left:auto;color:var(--muted);font-size:.74rem}
 .it p{color:#e6d6d4;font-size:.92rem;white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:12px}
+.ord{display:flex;gap:8px;margin:-6px 0 16px}
+.ord button{padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font:600 .78rem var(--display)}
+.ord button.on{border-color:rgba(229,51,63,.7);color:var(--text);background:rgba(229,51,63,.12)}
+.it .ft{display:flex;align-items:center;gap:12px}
+.it .lk{color:#ff4d5e;font:700 .86rem var(--display)}
 .del{border:1px solid rgba(229,51,63,.35);background:rgba(229,51,63,.12);color:#ff8f98;border-radius:999px;padding:7px 14px;font-size:.8rem;font-weight:600}
 .del:disabled{opacity:.5}
 .vazio{color:var(--muted);text-align:center;padding:30px 0}
@@ -147,11 +152,13 @@ p.sub{color:var(--muted);margin-bottom:22px}
 <section class="tela" id="lista">
   <div class="topo"><span class="mini">R</span><div><b>RussoViller</b><small>PAINEL ADMIN</small></div><button type="button" class="sair" data-sair>Sair</button></div>
   <h3 class="tit">Comentários e avaliações</h3>
-  <div class="stats" style="margin-top:22px">
+  <div class="stats" style="margin-top:22px;grid-template-columns:repeat(3,1fr)">
     <div class="stat"><span>AVALIAÇÕES</span><b id="sTotal">0</b></div>
     <div class="stat"><span>MÉDIA</span><b class="am" id="sMedia">—</b></div>
+    <div class="stat"><span>CURTIDAS</span><b id="sLikes" style="color:#ff4d5e">0</b></div>
   </div>
   <p class="sub" id="mLista">Filtre pela categoria desejada.</p>
+  <div class="ord" id="ord"></div>
   <div class="chips" id="chips"></div>
   <div id="l"></div>
   <button type="button" class="back" id="voltarPainel">Voltar</button>
@@ -160,7 +167,7 @@ p.sub{color:var(--muted);margin-bottom:22px}
 <script>
 const API = "https://twilight-shadow-c38e.ninjax13ofc.workers.dev";
 const $ = id => document.getElementById(id);
-let KEY = "", lista = [], filtro = 0;
+let KEY = "", lista = [], filtro = 0, ordem = "new";
 
 async function call(body){
   const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...body, key: KEY }) });
@@ -182,12 +189,20 @@ function mostrar(id){
 
 function resumo(){
   $("sTotal").textContent = lista.length;
+  $("sLikes").textContent = lista.reduce((a, x) => a + x.likes, 0).toLocaleString("pt-BR");
   $("sMedia").textContent = lista.length ? "★ " + (lista.reduce((a, x) => a + x.stars, 0) / lista.length).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : "—";
 }
 
 function desenhar(){
+  const ord = $("ord"); ord.textContent = "";
+  [["new", "Mais recentes"], ["likes", "♥ Mais curtidos"]].forEach(([v, t]) => {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = t;
+    b.className = v === ordem ? "on" : "";
+    b.onclick = () => { ordem = v; desenhar(); };
+    ord.appendChild(b);
+  });
   const chips = $("chips"); chips.textContent = "";
-  [[0, "Comentário mais recente"], [1, "1 🌟"], [2, "2 🌟"], [3, "3 🌟"], [4, "4 🌟"], [5, "5 🌟"]].forEach(([v, rot]) => {
+  [[0, "Todas"], [1, "1 🌟"], [2, "2 🌟"], [3, "3 🌟"], [4, "4 🌟"], [5, "5 🌟"]].forEach(([v, rot]) => {
     const q = v ? lista.filter(x => x.stars === v).length : lista.length;
     const b = document.createElement("button"); b.type = "button";
     b.className = v === filtro ? "on" : "";
@@ -196,7 +211,7 @@ function desenhar(){
     chips.appendChild(b);
   });
   const box = $("l"); box.textContent = "";
-  const ver = lista.filter(x => !filtro || x.stars === filtro).sort((a, b) => b.ts - a.ts);
+  const ver = lista.filter(x => !filtro || x.stars === filtro).sort((a, b) => ordem === "likes" ? (b.likes - a.likes || b.ts - a.ts) : b.ts - a.ts);
   if (!ver.length){ const p = document.createElement("p"); p.className = "vazio"; p.textContent = "Nenhuma avaliação nesta categoria."; box.appendChild(p); return; }
   ver.forEach(x => {
     const it = document.createElement("div"); it.className = "it";
@@ -206,6 +221,8 @@ function desenhar(){
     const d = document.createElement("time"); d.textContent = new Date(x.ts).toLocaleString("pt-BR");
     h.append(n, st, d);
     const p = document.createElement("p"); p.textContent = x.text;
+    const ft = document.createElement("div"); ft.className = "ft";
+    const lk = document.createElement("span"); lk.className = "lk"; lk.textContent = "♥ " + x.likes;
     const b = document.createElement("button"); b.type = "button"; b.className = "del"; b.textContent = "Apagar";
     b.onclick = async () => {
       if (!confirm("Apagar a avaliação de " + x.name + "?")) return;
@@ -216,12 +233,12 @@ function desenhar(){
         $("mLista").textContent = "Avaliação apagada."; resumo(); desenhar();
       } catch (e) { $("mLista").textContent = e.message; b.disabled = false; }
     };
-    it.append(h, p, b); box.appendChild(it);
+    ft.append(b, lk); it.append(h, p, ft); box.appendChild(it);
   });
 }
 
 function normalizar(d){
-  return (Array.isArray(d) ? d : []).filter(x => x && x.stars >= 1 && x.stars <= 5).map(x => ({ ...x, name: String(x.name || ""), text: String(x.text || ""), stars: x.stars | 0, ts: +x.ts || 0 }));
+  return (Array.isArray(d) ? d : []).filter(x => x && x.stars >= 1 && x.stars <= 5).map(x => ({ ...x, name: String(x.name || ""), text: String(x.text || ""), stars: x.stars | 0, ts: +x.ts || 0, likes: Math.max(0, x.likes | 0) }));
 }
 
 const SB_URL = "https://knecfrlrnosjehvrhqot.supabase.co";
