@@ -441,6 +441,31 @@ a.card{text-decoration:none;color:inherit}
 .segredo{display:block;width:min(60%,300px);height:36px;margin:-14px auto 6px;opacity:0;-webkit-tap-highlight-color:transparent}
 .card .icon.maleta{background:#2a1c1a;box-shadow:none;padding:6px}.card .icon.maleta img{object-fit:contain}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ===== Ajustes para o WebView do Launcher (janela baixa, GPU limitada) ===== */
+/* 1) Sem backdrop-filter / blur pesado: eles cortavam e bugavam as listas dentro do WebView */
+*,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+header{background:rgba(10,5,6,.94)}
+.scrim{background:rgba(0,0,0,.72)}
+body::before,body::after{filter:none!important;border-radius:0!important;background:radial-gradient(circle closest-side,rgba(217,15,43,.85),rgba(217,15,43,0))!important}
+body::after{background:radial-gradient(circle closest-side,rgba(255,106,26,.85),rgba(255,106,26,0))!important}
+#fundoImg{height:100%!important}
+/* 2) Listas rolam com o dedo */
+.dd-menu,.zl-menu{-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain}
+/* 3) Janela baixa (Launcher): cabeçalho não gruda e as listas viram uma folha central com rolagem própria */
+@media (max-height:560px){
+  header{position:static}
+  .dd-menu,.zl-menu{
+    position:fixed!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;
+    transform:translate(-50%,-50%)!important;width:min(92vw,440px)!important;min-width:0!important;
+    max-height:calc(var(--vh,1vh) * 84)!important;overflow-y:auto!important;z-index:200!important;
+    animation:none!important;
+    box-shadow:0 0 0 100vmax rgba(0,0,0,.66),0 18px 50px rgba(0,0,0,.7)!important
+  }
+  .dd-menu button{padding:10px 14px!important;transform:none!important}
+  .zl-menu button{padding:10px 12px!important}
+  .zl-dd.zl-open,.zl-dd:has(.zl-menu){z-index:60}
+}
 </style>
 </head>
 <body>
@@ -2742,6 +2767,50 @@ const MOD = (function(){
   });
 
   rvRender(); carregar();
+})();
+
+/* ===== Ajustes para o WebView do Launcher ===== */
+(function(){
+  const raiz = document.documentElement;
+  function medir(){
+    const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight || 400;
+    raiz.style.setProperty("--vh", (h / 100) + "px");
+  }
+  medir();
+  window.addEventListener("resize", medir);
+  if (window.visualViewport) window.visualViewport.addEventListener("resize", medir);
+  const compacto = () => window.matchMedia("(max-height:560px)").matches;
+
+  function fecharListas(){
+    try { zl.oa = false; zl.os = false; st.open = false; wl.open = false; mg.open = false; } catch (e) {}
+    try { zlRender(); stRender(); wlRender(); mgRender(); } catch (e) {}
+    try { menuIdioma(false); } catch (e) {}
+  }
+
+  /* toque fora da lista (na parte escurecida) só fecha — não aciona o que está por baixo */
+  document.addEventListener("click", function(e){
+    if (!compacto()) return;
+    const aberta = document.querySelector(".zl-menu, .dd-menu:not([hidden])");
+    if (!aberta || aberta.contains(e.target)) return;
+    if (e.target.closest("#langBtn")) return;
+    e.preventDefault(); e.stopPropagation();
+    fecharListas();
+  }, true);
+
+  /* a rolagem dentro da lista não pode ser roubada pelo Launcher/página */
+  document.addEventListener("touchmove", function(e){
+    if (e.target.closest && e.target.closest(".dd-menu, .zl-menu")) e.stopPropagation();
+  }, { passive: true, capture: true });
+
+  /* ao abrir o idioma, leva até o item marcado */
+  document.getElementById("langBtn").addEventListener("click", function(){
+    setTimeout(function(){
+      const m = document.getElementById("langMenu");
+      if (!m || m.hidden) return;
+      const s = m.querySelector('[aria-selected="true"]'); if (!s) return;
+      m.scrollTop = Math.max(0, s.offsetTop - (m.clientHeight - s.offsetHeight) / 2);
+    }, 0);
+  });
 })();
 </script>
 </body>
