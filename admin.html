@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#110d0e">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-loOUcjxJNLOLSXsgvFEbMyn2aHND38tzuhz663q45x8=' 'sha256-e75bjIs1a8dJTIONFBQCeyJ9kKzhSabHc51SCwyWfdg='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://twilight-shadow-c38e.ninjax13ofc.workers.dev https://knecfrlrnosjehvrhqot.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<script>if(window.top!==window.self){try{window.top.location=window.self.location}catch(e){}document.documentElement.style.display="none"}</script>
 <title>Admin · RussoViller</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,13 +171,13 @@ p.sub{color:var(--muted);margin-bottom:22px}
 <script>
 const API = "https://twilight-shadow-c38e.ninjax13ofc.workers.dev";
 const $ = id => document.getElementById(id);
-let KEY = "", lista = [], filtro = 0, ordem = "new";
+let KEY = "", lista = [], filtro = 0, ordem = "new", falhas = 0, bloqueio = 0, ocioT = 0;
 
 async function call(body){
-  const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...body, key: KEY }) });
+  const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...body, key: KEY }), credentials: "omit", cache: "no-store", referrerPolicy: "no-referrer" });
   if (r.status === 401) throw new Error("Achou que sabia a senha? Otário!");
   if (r.status === 429) throw new Error("Muitas tentativas. Aguarde 1 minuto.");
-  if (r.status === 403) throw new Error("ADMIN_KEY ainda não foi criada no Cloudflare.");
+  if (r.status === 403) throw new Error("Acesso indisponível.");
   if (!r.ok) throw new Error("Erro " + r.status);
   return r.json();
 }
@@ -206,7 +210,7 @@ function desenhar(){
     const q = v ? lista.filter(x => x.stars === v).length : lista.length;
     const b = document.createElement("button"); b.type = "button";
     b.className = v === filtro ? "on" : "";
-    b.innerHTML = rot + "<i>(" + q + ")</i>";
+    b.textContent = rot; const iq = document.createElement("i"); iq.textContent = "(" + q + ")"; b.appendChild(iq);
     b.onclick = () => { filtro = v; desenhar(); };
     chips.appendChild(b);
   });
@@ -271,12 +275,13 @@ $("olho").onclick = () => { const i = $("k"); i.type = i.type === "password" ? "
 $("fLogin").addEventListener("submit", async e => {
   e.preventDefault();
   const m = $("mLogin"), f = $("fLogin");
+  if (Date.now() < bloqueio){ m.textContent = "Muitas tentativas. Aguarde " + Math.ceil((bloqueio - Date.now()) / 1000) + "s."; m.className = "msg err"; return; }
   KEY = $("k").value;
   if (!KEY){ m.textContent = "Digite a senha."; m.className = "msg err"; return; }
   $("go").disabled = true; m.textContent = "Verificando…"; m.className = "msg";
   try {
     lista = normalizar(await call({ action: "list" }));
-    resumo();
+    resumo(); falhas = 0; zerarOcio();
     m.textContent = ""; $("k").value = "";
     mostrar("intro");
     setTimeout(() => {
@@ -284,6 +289,7 @@ $("fLogin").addEventListener("submit", async e => {
       setTimeout(() => { $("intro").classList.remove("on", "fim"); $("painel").classList.add("on"); }, 600);
     }, 3700);
   } catch (err) {
+    KEY = ""; if (++falhas >= 5){ bloqueio = Date.now() + 60000; falhas = 0; }
     m.textContent = err.message; m.className = "msg err";
     f.classList.remove("erro"); void f.offsetWidth; f.classList.add("erro");
   } finally { $("go").disabled = false; }
@@ -294,7 +300,11 @@ $("abrirLista").onclick = async () => {
   try { lista = normalizar(await call({ action: "list" })); resumo(); desenhar(); } catch (e) { $("mLista").textContent = e.message; }
 };
 $("voltarPainel").onclick = () => mostrar("painel");
-document.querySelectorAll("[data-sair]").forEach(b => b.onclick = () => { KEY = ""; lista = []; mostrar("login"); });
+function sairAdmin(){ KEY = ""; lista = []; clearTimeout(ocioT); $("k").value = ""; mostrar("login"); }
+/* sai sozinho após 15 min sem uso */
+function zerarOcio(){ clearTimeout(ocioT); if (KEY) ocioT = setTimeout(sairAdmin, 15 * 60 * 1000); }
+["pointerdown", "keydown", "touchstart"].forEach(ev => document.addEventListener(ev, zerarOcio, { passive: true }));
+document.querySelectorAll("[data-sair]").forEach(b => b.onclick = sairAdmin);
 </script>
 </body>
 </html>

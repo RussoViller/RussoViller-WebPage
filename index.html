@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#110d0e">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-loOUcjxJNLOLSXsgvFEbMyn2aHND38tzuhz663q45x8=' 'sha256-BPq4m8/I8nGqvlqQKxOlebiWM2xEY6PgDSjISzj1w2U='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data: blob:; media-src 'self' https: blob: data:; connect-src https://api.github.com https://discord.com https://translate.googleapis.com https://twilight-shadow-c38e.ninjax13ofc.workers.dev https://knecfrlrnosjehvrhqot.supabase.co https://abacus.jasoncameron.dev; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<script>if(window.top!==window.self){try{window.top.location=window.self.location}catch(e){}document.documentElement.style.display="none"}</script>
 <title>RussoViller WebPage</title>
 <link rel="preconnect" href="https://abacus.jasoncameron.dev" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1517,7 +1521,9 @@ const REV_KEYS = ["avaliarBtn", "revTitle", "revName", "revStars", "revComment",
 const REV_I18N = {"pt": ["Avaliar Site", "Avaliar o site", "Seu nome ou apelido", "Sua nota", "Comentário (máx. 250).", "Enviar avaliação", "Obrigado pela sua avaliação!", "Todas", "Ainda não há avaliações.", "Seu texto tem palavras ofensivas, dados pessoais ou links. Remova e tente de novo.", "Não foi possível enviar agora. Tente novamente em instantes.", "As avaliações serão ativadas em breve.", "Preencha o nome, escolha uma nota e escreva um comentário.", "Recentes", "Mais curtidos", "Curtir"], "en": ["Rate Site", "Rate the site", "Your name or nickname", "Your rating", "Comment (max 250).", "Send review", "Thanks for your review!", "All", "No reviews yet.", "Your text contains offensive words, personal data or links. Remove them and try again.", "Couldn’t send right now. Please try again shortly.", "Reviews will be enabled soon.", "Enter your name, pick a rating and write a comment.", "Newest", "Most liked", "Like"], "es": ["Valorar el sitio", "Valorar el sitio", "Tu nombre o apodo", "Tu nota", "Comentario (máx. 250).", "Enviar valoración", "¡Gracias por tu valoración!", "Todas", "Aún no hay valoraciones.", "Tu texto contiene palabras ofensivas, datos personales o enlaces. Quítalos e inténtalo de nuevo.", "No se pudo enviar ahora. Inténtalo de nuevo en un momento.", "Las valoraciones se activarán pronto.", "Escribe tu nombre, elige una nota y escribe un comentario.", "Recientes", "Más gustados", "Me gusta"], "id": ["Nilai Situs", "Nilai situs ini", "Nama atau panggilan", "Nilai kamu", "Komentar (maks. 250).", "Kirim ulasan", "Terima kasih atas ulasanmu!", "Semua", "Belum ada ulasan.", "Teksmu berisi kata kasar, data pribadi, atau tautan. Hapus lalu coba lagi.", "Tidak bisa mengirim sekarang. Coba lagi sebentar lagi.", "Ulasan akan segera diaktifkan.", "Isi nama, pilih nilai, dan tulis komentar.", "Terbaru", "Paling disukai", "Suka"], "ru": ["Оценить сайт", "Оценить сайт", "Ваше имя или ник", "Ваша оценка", "Комментарий (до 250).", "Отправить отзыв", "Спасибо за отзыв!", "Все", "Отзывов пока нет.", "В тексте есть оскорбления, личные данные или ссылки. Удалите их и попробуйте снова.", "Не удалось отправить. Попробуйте чуть позже.", "Отзывы скоро заработают.", "Введите имя, выберите оценку и напишите комментарий.", "Новые", "Больше лайков", "Нравится"], "it": ["Valuta il sito", "Valuta il sito", "Il tuo nome o nickname", "Il tuo voto", "Commento (max 250).", "Invia recensione", "Grazie per la tua recensione!", "Tutte", "Ancora nessuna recensione.", "Il testo contiene parole offensive, dati personali o link. Rimuovili e riprova.", "Impossibile inviare ora. Riprova tra poco.", "Le recensioni saranno attivate presto.", "Inserisci il nome, scegli un voto e scrivi un commento.", "Più recenti", "Più apprezzati", "Mi piace"], "fr": ["Noter le site", "Noter le site", "Votre nom ou pseudo", "Votre note", "Commentaire (250 max).", "Envoyer l’avis", "Merci pour votre avis !", "Tous", "Aucun avis pour le moment.", "Votre texte contient des insultes, des données personnelles ou des liens. Retirez-les et réessayez.", "Envoi impossible pour l’instant. Réessayez bientôt.", "Les avis seront bientôt activés.", "Entrez votre nom, choisissez une note et écrivez un commentaire.", "Récents", "Les plus aimés", "J’aime"], "zh": ["评价网站", "评价本站", "你的名字或昵称", "你的评分", "评论（最多250字）。", "提交评价", "感谢你的评价！", "全部", "暂无评价。", "内容含有不当用语、个人信息或链接，请删除后重试。", "暂时无法发送，请稍后再试。", "评价功能即将开放。", "请填写名字、选择评分并写下评论。", "最新", "最多点赞", "点赞"], "tr": ["Siteyi Değerlendir", "Siteyi değerlendir", "Adın veya takma adın", "Puanın", "Yorum (en fazla 250).", "Değerlendirmeyi gönder", "Değerlendirmen için teşekkürler!", "Tümü", "Henüz değerlendirme yok.", "Metnin küfür, kişisel veri veya bağlantı içeriyor. Kaldırıp tekrar dene.", "Şu an gönderilemedi. Birazdan tekrar dene.", "Değerlendirmeler yakında açılacak.", "Adını yaz, bir puan seç ve yorum yaz.", "En yeni", "En beğenilen", "Beğen"], "ja": ["サイトを評価", "サイトを評価する", "お名前またはニックネーム", "評価", "コメント（250文字まで）。", "評価を送信", "ご評価ありがとうございます！", "すべて", "まだ評価はありません。", "不適切な言葉・個人情報・リンクが含まれています。削除して再度お試しください。", "現在送信できません。しばらくしてからお試しください。", "評価機能は近日公開予定です。", "名前を入力し、評価を選んでコメントを書いてください。", "新着順", "いいね順", "いいね"], "th": ["ให้คะแนนเว็บไซต์", "ให้คะแนนเว็บไซต์", "ชื่อหรือชื่อเล่นของคุณ", "คะแนนของคุณ", "ความคิดเห็น (ไม่เกิน 250 ตัวอักษร)", "ส่งรีวิว", "ขอบคุณสำหรับรีวิว!", "ทั้งหมด", "ยังไม่มีรีวิว", "ข้อความมีคำหยาบ ข้อมูลส่วนตัว หรือลิงก์ กรุณาลบแล้วลองอีกครั้ง", "ส่งไม่ได้ในขณะนี้ โปรดลองใหม่อีกครั้ง", "ระบบรีวิวจะเปิดให้ใช้เร็ว ๆ นี้", "กรอกชื่อ เลือกคะแนน และเขียนความคิดเห็น", "ล่าสุด", "ถูกใจมากที่สุด", "ถูกใจ"], "de": ["Seite bewerten", "Seite bewerten", "Dein Name oder Spitzname", "Deine Bewertung", "Kommentar (max. 250).", "Bewertung senden", "Danke für deine Bewertung!", "Alle", "Noch keine Bewertungen.", "Dein Text enthält Beleidigungen, persönliche Daten oder Links. Entferne sie und versuche es erneut.", "Senden gerade nicht möglich. Versuche es gleich noch einmal.", "Bewertungen werden bald freigeschaltet.", "Gib deinen Namen ein, wähle eine Bewertung und schreibe einen Kommentar.", "Neueste", "Meist gemocht", "Gefällt mir"], "ko": ["사이트 평가", "사이트 평가하기", "이름 또는 닉네임", "별점", "댓글 (최대 250자).", "평가 보내기", "평가해 주셔서 감사합니다!", "전체", "아직 평가가 없습니다.", "욕설, 개인정보 또는 링크가 포함되어 있습니다. 삭제 후 다시 시도하세요.", "지금은 전송할 수 없습니다. 잠시 후 다시 시도하세요.", "평가 기능이 곧 열립니다.", "이름을 입력하고 별점을 선택한 뒤 댓글을 작성하세요.", "최신순", "좋아요순", "좋아요"], "pl": ["Oceń stronę", "Oceń stronę", "Twoje imię lub pseudonim", "Twoja ocena", "Komentarz (maks. 250).", "Wyślij opinię", "Dziękujemy za opinię!", "Wszystkie", "Brak opinii.", "Tekst zawiera wulgaryzmy, dane osobowe lub linki. Usuń je i spróbuj ponownie.", "Nie udało się wysłać. Spróbuj za chwilę.", "Opinie zostaną wkrótce włączone.", "Wpisz imię, wybierz ocenę i napisz komentarz.", "Najnowsze", "Najbardziej lubiane", "Lubię to"], "vi": ["Đánh giá trang", "Đánh giá trang web", "Tên hoặc biệt danh", "Điểm của bạn", "Bình luận (tối đa 250).", "Gửi đánh giá", "Cảm ơn bạn đã đánh giá!", "Tất cả", "Chưa có đánh giá.", "Nội dung có từ xúc phạm, thông tin cá nhân hoặc liên kết. Hãy xóa và thử lại.", "Hiện chưa gửi được. Hãy thử lại sau.", "Đánh giá sẽ sớm được bật.", "Nhập tên, chọn số sao và viết bình luận.", "Mới nhất", "Nhiều thích nhất", "Thích"], "uk": ["Оцінити сайт", "Оцінити сайт", "Ваше ім’я або нік", "Ваша оцінка", "Коментар (до 250).", "Надіслати відгук", "Дякуємо за відгук!", "Усі", "Відгуків поки немає.", "У тексті є образи, особисті дані або посилання. Видаліть їх і спробуйте знову.", "Не вдалося надіслати. Спробуйте трохи пізніше.", "Відгуки скоро запрацюють.", "Введіть ім’я, виберіть оцінку й напишіть коментар.", "Нові", "Найбільше вподобань", "Подобається"], "ar": ["قيّم الموقع", "قيّم الموقع", "اسمك أو لقبك", "تقييمك", "تعليق (حتى 250 حرفًا).", "إرسال التقييم", "شكرًا على تقييمك!", "الكل", "لا توجد تقييمات بعد.", "النص يحتوي على ألفاظ مسيئة أو بيانات شخصية أو روابط. احذفها وحاول مجددًا.", "تعذّر الإرسال الآن. حاول مرة أخرى بعد قليل.", "سيتم تفعيل التقييمات قريبًا.", "اكتب اسمك واختر تقييمًا واكتب تعليقًا.", "الأحدث", "الأكثر إعجابًا", "إعجاب"], "hi": ["साइट रेट करें", "साइट को रेट करें", "आपका नाम या उपनाम", "आपकी रेटिंग", "टिप्पणी (अधिकतम 250)।", "रिव्यू भेजें", "आपके रिव्यू के लिए धन्यवाद!", "सभी", "अभी कोई रिव्यू नहीं है।", "टेक्स्ट में अपशब्द, निजी जानकारी या लिंक हैं। हटाकर फिर कोशिश करें।", "अभी भेजा नहीं जा सका। थोड़ी देर में फिर कोशिश करें।", "रिव्यू जल्द ही चालू होंगे।", "नाम लिखें, रेटिंग चुनें और टिप्पणी लिखें।", "नवीनतम", "सबसे ज़्यादा पसंद", "पसंद"], "nl": ["Site beoordelen", "Beoordeel de site", "Je naam of bijnaam", "Je beoordeling", "Opmerking (max. 250).", "Beoordeling versturen", "Bedankt voor je beoordeling!", "Alle", "Nog geen beoordelingen.", "Je tekst bevat scheldwoorden, persoonlijke gegevens of links. Verwijder ze en probeer opnieuw.", "Verzenden lukt nu niet. Probeer het zo opnieuw.", "Beoordelingen worden binnenkort geactiveerd.", "Vul je naam in, kies een beoordeling en schrijf een opmerking.", "Nieuwste", "Meest gewaardeerd", "Vind ik leuk"]};
 Object.keys(REV_I18N).forEach(c => { if (T[c]) REV_KEYS.forEach((k, i) => { T[c][k] = REV_I18N[c][i]; }); });
 
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc = s => String(s).replace(/[&<>"'`]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'}[c]));
+/* só deixa passar links http/https (bloqueia javascript:, data: etc.) */
+const safeUrl = u => { try { const x = new URL(String(u), location.href); return (x.protocol === "https:" || x.protocol === "http:") ? x.href : "#"; } catch (e) { return "#"; } };
 
 /* Foto do servidor pela API pública de convites do Discord.
    Se falhar (sem internet, convite expirado), fica o ícone padrão. */
@@ -1527,6 +1533,7 @@ async function carregarIcone(code, box){
     if (!r.ok) return;
     const g = (await r.json()).guild;
     if (!g || !g.icon) return;
+    if (!/^\d{5,25}$/.test(String(g.id)) || !/^(a_)?[0-9a-f]{8,64}$/i.test(String(g.icon))) return;
     const ext = g.icon.startsWith("a_") ? "gif" : "png";
     const img = new Image();
     img.alt = "";
@@ -1604,7 +1611,7 @@ function idiomaDoAparelho(){
   return "en";
 }
 let lang = idiomaDoAparelho();
-try { const s = localStorage.getItem("lang"); if (T[s]) lang = s; } catch (e) {}
+try { const s = localStorage.getItem("lang"); if (Object.prototype.hasOwnProperty.call(T, s)) lang = s; } catch (e) {}
 
 const NOMES = { pt: "Português (BR)", en: "English", es: "Español", id: "Bahasa Indonesia", ru: "Русский", it: "Italiano", fr: "Français", zh: "中文 (简体)", tr: "Türkçe", ja: "日本語", th: "ไทย", de: "Deutsch", ko: "한국어", pl: "Polski", vi: "Tiếng Việt", uk: "Українська", ar: "العربية", hi: "हिन्दी", nl: "Nederlands" };
 function bandeiraEN(){
@@ -1674,7 +1681,8 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") { menuIdioma
 
 let irTimer = null;
 function ir(id, rapido){
-  if (!document.getElementById(id)) id = "inicio";
+  const alvo = document.getElementById(id);
+  if (!alvo || !alvo.classList.contains("view")) id = "inicio";
   const novo = document.getElementById(id);
   const views = document.querySelectorAll(".view");
   const velho = document.querySelector(".view.active:not(.saindo)");
@@ -1911,10 +1919,10 @@ function cryRender(){
   const arquivos = r.files.filter(f => cry.arq === "all" || f.arq === cry.arq).map(f => {
     const mb = (f.size / 1048576).toLocaleString(fl, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return '<div class="zl-file"><div class="zl-ftop"><div class="zl-ficon tem-foto">' + cryIco() + '</div><div><div class="zl-fname">' + esc(f.name) + '</div><div class="zl-meta"><span>' + mb + ' MB</span><span>' + f.dl.toLocaleString(fl) + ' ' + esc(t.zlDl) + '</span></div></div></div>'
-      + '<a class="zl-get" href="' + esc(f.url) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
+      + '<a class="zl-get" href="' + esc(safeUrl(f.url)) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
   }).join("") || '<p class="zl-msg">' + esc(t.zlNone) + '</p>';
   const fotos = cry.fotos.length
-    ? '<span class="zl-lab">' + esc(t.cryPhotos) + '</span><div class="st-prev">' + cry.fotos.map(u => '<img src="' + esc(u) + '" alt="" loading="lazy" referrerpolicy="no-referrer">').join("") + '</div>'
+    ? '<span class="zl-lab">' + esc(t.cryPhotos) + '</span><div class="st-prev">' + cry.fotos.map(u => '<img src="' + esc(safeUrl(u)) + '" alt="" loading="lazy" referrerpolicy="no-referrer">').join("") + '</div>'
     : "";
   el.innerHTML =
     '<div class="zl-ver">' + esc(r.tag) + '</div>' +
@@ -2011,12 +2019,12 @@ function stRender(){
   const fl = HTMLLANG[lang];
   const data = r.date ? new Date(r.date).toLocaleDateString(fl, { day: "2-digit", month: "2-digit", year: "numeric" }) : "";
   const menu = st.rels.map(x => '<button type="button" role="option" data-act="pick" data-id="' + esc(x.tag) + '" aria-selected="' + (x.tag === st.sel) + '"><span><b>' + esc(x.nome) + '</b></span>' + (x.tag === st.sel ? IC.ok : "") + '</button>').join("");
-  const imgs = a => a.map(u => '<img src="' + esc(u) + '" alt="" loading="lazy" referrerpolicy="no-referrer">').join("");
+  const imgs = a => a.map(u => '<img src="' + esc(safeUrl(u)) + '" alt="" loading="lazy" referrerpolicy="no-referrer">').join("");
   const prev = (rotulo, a) => '<span class="zl-lab">' + esc(rotulo) + '</span><div class="st-prev">' + (a.length ? imgs(a) : '<span class="zl-msg" style="padding:0">' + esc(t.stNoPrev) + '</span>') + '</div>';
   const arquivos = r.files.map(f => {
     const mb = (f.size / 1048576).toLocaleString(fl, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return '<div class="zl-file"><div class="zl-ftop"><div class="zl-ficon brand"><img src="' + SETAS_IMG + '" alt=""></div><div><div class="zl-fname">' + esc(f.name) + '</div><div class="zl-meta"><span>' + mb + ' MB</span><span>' + f.dl.toLocaleString(fl) + ' ' + esc(t.zlDl) + '</span></div></div></div>'
-      + '<a class="zl-get" href="' + esc(f.url) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
+      + '<a class="zl-get" href="' + esc(safeUrl(f.url)) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
   }).join("");
   el.innerHTML =
     '<div class="zl-ver">' + esc(r.nome) + '</div>' +
@@ -2138,25 +2146,25 @@ function wlRender(){
   const data = r.date ? new Date(r.date).toLocaleDateString(fl, { day: "2-digit", month: "2-digit", year: "numeric" }) : "";
   let prev = "";
   if (r.prev.vids.length){
-    prev = '<video src="' + esc(r.prev.vids[0]) + '" controls autoplay muted loop playsinline preload="metadata"></video>';
+    prev = '<video src="' + esc(safeUrl(r.prev.vids[0])) + '" controls autoplay muted loop playsinline preload="metadata"></video>';
   } else if (r.prev.fotos.length){
-    prev = r.prev.fotos.map(u => '<img src="' + esc(u) + '" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;border-radius:12px;display:block">').join("");
+    prev = r.prev.fotos.map(u => '<img src="' + esc(safeUrl(u)) + '" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;border-radius:12px;display:block">').join("");
   } else if (r.vidAsset){
-    prev = '<video src="' + esc(r.vidAsset) + '" controls muted loop playsinline preload="none"></video>';
+    prev = '<video src="' + esc(safeUrl(r.vidAsset)) + '" controls muted loop playsinline preload="none"></video>';
   } else {
     prev = '<span class="zl-msg">' + esc(t.stNoPrev) + '</span>';
   }
   const arquivos = r.files.map(f => {
     const mb = (f.size / 1048576).toLocaleString(fl, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return '<div class="zl-file"><div class="zl-ftop"><div class="zl-ficon dk"><img src="' + WALL_BTN_IMG + '" alt=""></div><div><div class="zl-fname">' + esc(f.name) + '</div><div class="zl-meta"><span>' + mb + ' MB</span><span>' + f.dl.toLocaleString(fl) + ' ' + esc(t.zlDl) + '</span></div></div></div>'
-      + '<a class="zl-get" href="' + esc(f.url) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
+      + '<a class="zl-get" href="' + esc(safeUrl(f.url)) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
   }).join("");
   el.innerHTML =
     '<div class="zl-ver">' + esc(r.nome) + '</div>' +
     '<div class="zl-date">' + esc(t.zlPub) + ' ' + esc(data) + '</div>' +
     '<span class="zl-lab">' + esc(t.wlPick) + '</span>' +
     '<div class="zl-dd" id="wlDd">' + wlDdHtml(r) + '</div>' +
-    '<span class="zl-lab">' + esc(t.wlPrev) + '</span><div class="wl-prev" data-url="' + esc(r.url) + '">' + prev + '</div>' +
+    '<span class="zl-lab">' + esc(t.wlPrev) + '</span><div class="wl-prev" data-url="' + esc(safeUrl(r.url)) + '">' + prev + '</div>' +
     (r.prev.nota.length ? '<p class="st-note">' + r.prev.nota.map(esc).join("<br>") + '</p>' : '') +
     (arquivos ? '<div class="zl-ftitle">' + IC.down + '<span>' + esc(t.stFiles) + '</span></div>' + arquivos : '');
 }
@@ -2209,7 +2217,7 @@ async function wlCarregar(forcar){
     if (!v || v.tagName !== "VIDEO") return;
     const box = v.closest(".wl-prev"); if (!box) return;
     const t = T[lang];
-    box.innerHTML = '<span class="zl-msg">' + esc(t.wlFail) + ' <a href="' + esc(box.dataset.url || "#") + '" target="_blank" rel="noopener">' + esc(t.wlOpen) + '</a></span>';
+    box.innerHTML = '<span class="zl-msg">' + esc(t.wlFail) + ' <a href="' + esc(safeUrl(box.dataset.url || "#")) + '" target="_blank" rel="noopener">' + esc(t.wlOpen) + '</a></span>';
   }, true);
   document.addEventListener("click", e => {
     if (wl.open && !clicouNoMenu(e, "wlCard")){
@@ -2255,11 +2263,11 @@ function hdRender(){
   }
   const r = hd.rel, fl = HTMLLANG[lang];
   const data = r.date ? new Date(r.date).toLocaleDateString(fl, { day: "2-digit", month: "2-digit", year: "numeric" }) : "";
-  const imgs = r.imgs.map(u => '<img src="' + esc(u) + '" alt="" loading="lazy" referrerpolicy="no-referrer">').join("");
+  const imgs = r.imgs.map(u => '<img src="' + esc(safeUrl(u)) + '" alt="" loading="lazy" referrerpolicy="no-referrer">').join("");
   const arquivos = r.files.map(f => {
     const mb = (f.size / 1048576).toLocaleString(fl, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return '<div class="zl-file"><div class="zl-ftop"><div class="zl-ficon">' + HUD_ICON + '</div><div><div class="zl-fname">' + esc(f.name) + '</div><div class="zl-meta"><span>' + mb + ' MB</span><span>' + f.dl.toLocaleString(fl) + ' ' + esc(t.zlDl) + '</span></div></div></div>'
-      + '<a class="zl-get" href="' + esc(f.url) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
+      + '<a class="zl-get" href="' + esc(safeUrl(f.url)) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
   }).join("");
   el.innerHTML =
     '<div class="zl-ver">' + esc(r.nome) + '</div>' +
@@ -2301,7 +2309,7 @@ const MG_LOGO = "https://avatars.githubusercontent.com/u/203398288?s=128";
 IC.tag = '<svg class="ic" viewBox="0 0 24 24"><path d="M3 12.5V4h8.5L21 13.5 13.5 21z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg>';
 const mg = { rels: null, carregando: false, t: 0, sel: null, open: false, manual: false, foto: "" };
 
-function mgIco(){ return mg.foto ? '<img src="' + esc(mg.foto) + '" alt="">' : "MG"; }
+function mgIco(){ return mg.foto ? '<img src="' + esc(safeUrl(mg.foto)) + '" alt="">' : "MG"; }
 function mgUltima(){ return mg.rels.find(r => !r.pre) || mg.rels[0]; }
 
 function mgRender(){
@@ -2325,7 +2333,7 @@ function mgRender(){
   const arquivos = r.files.map(f => {
     const mb = (f.size / 1048576).toLocaleString(fl, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return '<div class="zl-file"><div class="zl-ftop"><div class="zl-ficon mgf' + (mg.foto ? ' tem-foto' : '') + '">' + mgIco() + '</div><div><div class="zl-fname">' + esc(f.name) + '</div><div class="zl-meta"><span>' + mb + ' MB</span><span>' + Number(f.dl || 0).toLocaleString(fl) + ' ' + esc(t.zlDl) + '</span></div></div></div>'
-      + '<a class="zl-get" href="' + esc(f.url) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
+      + '<a class="zl-get" href="' + esc(safeUrl(f.url)) + '" rel="noopener">' + esc(t.zlGet) + ' ' + IC.ext + '</a></div>';
   }).join("") || '<p class="zl-msg">' + esc(t.zlNone) + '</p>';
   el.innerHTML =
     '<div class="zl-ver">' + esc(r.nome) + '</div>' +
