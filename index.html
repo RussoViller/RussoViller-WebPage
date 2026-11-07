@@ -1946,15 +1946,14 @@ async function cryCarregar(forcar){
     const lista = (await r.json()).filter(x => !x.draft).sort((a, b) => new Date(b.published_at || b.created_at) - new Date(a.published_at || a.created_at));
     if (!lista.length) throw new Error("vazio");
     const ultima = lista.find(x => !x.prerelease) || lista[0];
-    const primeira = lista[lista.length - 1];
     const ehImg = a => /^image\//i.test(a.content_type || "") || /\.(png|jpe?g|webp|gif)$/i.test(a.name);
     let as = ultima.assets || [];
     const semImg = as.filter(a => !ehImg(a));
     if (semImg.length) as = semImg;
     const apks = as.filter(a => /\.apk$/i.test(a.name));
     if (apks.length) as = apks;
-    const pv = stParse(primeira.body);
-    const fotos = [].concat(pv.main, pv.vars, (primeira.assets || []).filter(ehImg).map(a => a.browser_download_url));
+    const pv = stParse(ultima.body);
+    const fotos = [].concat(pv.main, pv.vars, (ultima.assets || []).filter(ehImg).map(a => a.browser_download_url));
     cry.fotos = fotos.filter((u, i) => u && fotos.indexOf(u) === i);
     cry.rel = {
       tag: String(ultima.tag_name || ultima.name || "").replace(/^v/i, ""),
