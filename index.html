@@ -473,6 +473,11 @@ body::after{background:radial-gradient(circle closest-side,rgba(255,106,26,.85),
   .zl-menu button{padding:10px 12px!important}
   .zl-dd.zl-open,.zl-dd:has(.zl-menu){z-index:60}
 }
+
+/* 4) Cabeçalho do topo sempre por cima do conteúdo: nada mais aparece por baixo/atravessando a barra */
+main,.about,.rodape{position:relative;z-index:1}
+header{z-index:20;background:#0e0809!important}
+@media (max-height:560px){header{position:relative;z-index:200}}
 </style>
 </head>
 <body>
