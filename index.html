@@ -345,6 +345,9 @@ h2{background:none;color:var(--text);-webkit-text-fill-color:currentColor;font-s
   animation:giraBorda 3.4s linear infinite}
 @keyframes giraBorda{to{--ang:360deg}}
 .btn.glass:hover{background:rgba(255,255,255,.05);border-color:transparent;box-shadow:none}
+.btn.donate{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#ffb347,#ff5a36 55%,#e5333f);color:#fff;box-shadow:0 6px 22px rgba(255,120,60,.45)}
+.btn.donate svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn.donate:hover{box-shadow:0 10px 30px rgba(255,140,70,.6)}
 .home{padding:10px 20px;font-size:.78rem}
 #zlNotesBtn,#cryNotesBtn{display:block;width:min(100%,420px);margin:24px auto 0;text-align:center;background:linear-gradient(135deg,rgba(229,51,63,.26),rgba(122,15,25,.14));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 0 26px rgba(229,51,63,.2)}
 #zlNotesBtn:hover,#zlNotesBtn[aria-expanded="true"],#cryNotesBtn:hover,#cryNotesBtn[aria-expanded="true"]{background:linear-gradient(135deg,rgba(229,51,63,.38),rgba(122,15,25,.22));box-shadow:0 0 32px rgba(229,51,63,.34)}
@@ -543,6 +546,7 @@ body::after{background:radial-gradient(circle closest-side,rgba(255,106,26,.85),
       <h1>RussoViller WebPage</h1>
       <p data-t="tagline"></p>
       <div class="cta">
+        <button type="button" class="btn donate" id="donateBtn" data-href="https://pixgg.com/russoViller02"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="12" rx="3"/><path d="M5 11.5a7 7 0 0 0 14 0M12 18.5V22M8.5 22h7"/></svg><span data-t="donateBtn"></span></button>
         <button class="btn" data-go="downloads" data-t="downloadsBtn"></button>
         <button class="btn glass" data-go="discord" data-t="discordBtn"></button>
         <button class="btn glass" data-go="social" data-t="socialBtn"></button>
@@ -1486,6 +1490,7 @@ const MEU_TRABALHO = {"pt": "Meu trabalho", "en": "My work", "es": "Mi trabajo",
 Object.keys(MEU_TRABALHO).forEach(c => { if (T[c]) T[c].meuTrabalho = MEU_TRABALHO[c]; });
 const MEU_PATREON = {"pt": "Meu Patreon", "es": "Mi Patreon", "it": "Il mio Patreon", "fr": "Mon Patreon", "de": "Mein Patreon", "nl": "Mijn Patreon", "pl": "Mój Patreon", "ru": "Мой Patreon", "uk": "Мій Patreon", "tr": "Patreon’um", "id": "Patreon saya", "vi": "Patreon của tôi", "zh": "我的 Patreon", "ja": "私の Patreon", "ko": "내 Patreon", "th": "Patreon ของฉัน", "ar": "Patreon الخاص بي", "hi": "मेरा Patreon"};
 Object.keys(T).forEach(c => { T[c].meuPatreon = MEU_PATREON[c] || "My Patreon"; });
+Object.keys(T).forEach(c => { T[c].donateBtn = "Donate com voz"; });
 const ZL_NOTES = {"pt": ["NOTAS DE ATUALIZAÇÃO", "Esta versão não traz notas de atualização."], "en": ["RELEASE NOTES", "This version has no release notes."], "es": ["NOTAS DE ACTUALIZACIÓN", "Esta versión no incluye notas de actualización."], "it": ["NOTE DI AGGIORNAMENTO", "Questa versione non ha note di aggiornamento."], "fr": ["NOTES DE MISE À JOUR", "Cette version n’a pas de notes de mise à jour."], "de": ["UPDATE-NOTIZEN", "Diese Version enthält keine Update-Notizen."], "nl": ["UPDATE-NOTITIES", "Deze versie heeft geen update-notities."], "pl": ["NOTATKI O AKTUALIZACJI", "Ta wersja nie ma notatek o aktualizacji."], "ru": ["ЗАМЕТКИ ОБ ОБНОВЛЕНИИ", "У этой версии нет заметок об обновлении."], "uk": ["ПРИМІТКИ ДО ОНОВЛЕННЯ", "У цієї версії немає приміток до оновлення."], "tr": ["GÜNCELLEME NOTLARI", "Bu sürümün güncelleme notu yok."], "id": ["CATATAN PEMBARUAN", "Versi ini tidak memiliki catatan pembaruan."], "vi": ["GHI CHÚ CẬP NHẬT", "Phiên bản này không có ghi chú cập nhật."], "zh": ["更新说明", "此版本没有更新说明。"], "ja": ["アップデートノート", "このバージョンにはアップデートノートがありません。"], "ko": ["업데이트 노트", "이 버전에는 업데이트 노트가 없습니다."], "th": ["บันทึกการอัปเดต", "เวอร์ชันนี้ไม่มีบันทึกการอัปเดต"], "ar": ["ملاحظات التحديث", "لا تحتوي هذه النسخة على ملاحظات تحديث."], "hi": ["अपडेट नोट्स", "इस संस्करण में कोई अपडेट नोट्स नहीं हैं।"]};
 Object.keys(T).forEach(c => { const n = ZL_NOTES[c] || ZL_NOTES.en; T[c].zlNotes = n[0]; T[c].zlNotesNone = n[1]; });
 const ZL_UI = {"pt": ["TRADUZIR", "VER ORIGINAL", "TRADUZINDO...", "Não foi possível traduzir agora."], "en": ["TRANSLATE", "VIEW ORIGINAL", "TRANSLATING...", "Could not translate right now."], "es": ["TRADUCIR", "VER ORIGINAL", "TRADUCIENDO...", "No se pudo traducir ahora."], "it": ["TRADUCI", "VEDI ORIGINALE", "TRADUZIONE...", "Impossibile tradurre ora."], "fr": ["TRADUIRE", "VOIR L’ORIGINAL", "TRADUCTION...", "Traduction impossible pour le moment."], "de": ["ÜBERSETZEN", "ORIGINAL ANZEIGEN", "WIRD ÜBERSETZT...", "Übersetzung derzeit nicht möglich."], "nl": ["VERTALEN", "ORIGINEEL TONEN", "VERTALEN...", "Vertalen is nu niet mogelijk."], "pl": ["TŁUMACZ", "POKAŻ ORYGINAŁ", "TŁUMACZENIE...", "Nie można teraz przetłumaczyć."], "ru": ["ПЕРЕВЕСТИ", "ПОКАЗАТЬ ОРИГИНАЛ", "ПЕРЕВОД...", "Сейчас не удалось перевести."], "uk": ["ПЕРЕКЛАСТИ", "ПОКАЗАТИ ОРИГІНАЛ", "ПЕРЕКЛАД...", "Зараз не вдалося перекласти."], "tr": ["ÇEVİR", "ORİJİNALİ GÖSTER", "ÇEVRİLİYOR...", "Şu anda çevrilemedi."], "id": ["TERJEMAHKAN", "LIHAT ASLI", "MENERJEMAHKAN...", "Tidak dapat menerjemahkan sekarang."], "vi": ["DỊCH", "XEM BẢN GỐC", "ĐANG DỊCH...", "Hiện không thể dịch."], "zh": ["翻译", "查看原文", "正在翻译...", "暂时无法翻译。"], "ja": ["翻訳", "原文を表示", "翻訳中...", "現在翻訳できません。"], "ko": ["번역", "원문 보기", "번역 중...", "지금은 번역할 수 없습니다."], "th": ["แปล", "ดูต้นฉบับ", "กำลังแปล...", "ไม่สามารถแปลได้ในขณะนี้"], "ar": ["ترجمة", "عرض الأصل", "جارٍ الترجمة...", "تعذّرت الترجمة الآن."], "hi": ["अनुवाद करें", "मूल देखें", "अनुवाद हो रहा है...", "अभी अनुवाद नहीं हो सका।"]};
@@ -1773,6 +1778,9 @@ menuBtn.addEventListener("click", () => { menuIdioma(false); menuLateral(true); 
 document.getElementById("menuClose").addEventListener("click", () => menuLateral(false));
 scrim.addEventListener("click", () => menuLateral(false));
 drawer.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => menuLateral(false)));
+document.getElementById("donateBtn").addEventListener("click", e => {
+  window.open(e.currentTarget.dataset.href, "_blank", "noopener");
+});
 document.getElementById("codigoFonte").addEventListener("click", e => {
   window.open(e.currentTarget.dataset.href, "_blank", "noopener");
   menuLateral(false);
